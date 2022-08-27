@@ -1,0 +1,36 @@
+table {
+  border-collapse: collapse;
+}
+th,
+td {
+  border: 1px solid #c6c7cc;
+  padding: 10px 15px;
+}
+th {
+  font-weight: bold;
+}
+
+.lds-dual-ring {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+}
+.lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 14px;
+  height: 14px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid rgb(153, 80, 80);
+  border-color: rgb(148, 147, 147) transparent rgb(148, 147, 147) transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

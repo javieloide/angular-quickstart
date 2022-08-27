@@ -1,0 +1,29 @@
+<div id="content">
+  <div class="header" style="margin-bottom:100px">
+    <h1>Ejemplo App</h1>
+  </div>
+
+  <table>
+    <caption><h2>Sensor 0</h2></caption>
+    <thead>
+      <th>rx_state</th>
+      <th>wind_speed_hi_last_2_min</th>
+      <th>hum</th>
+      <th>wind_dir_at_hi_speed_last_10_min</th>
+      <th>wind_chill</th>
+      <th>rain_rate_hi_last_15_min_clicks</th>
+
+    </thead>
+    <tbody>
+      <tr>
+        <td><div class="lds-dual-ring" *ngIf="sensor0.rx_state == undefined"></div>{{sensor0?.rx_state}}</td>
+        <td><div class="lds-dual-ring" *ngIf="sensor0.wind_speed_hi_last_2_min == undefined"></div>{{sensor0?.wind_speed_hi_last_2_min}}</td>
+        <td><div class="lds-dual-ring" *ngIf="sensor0.hum == undefined"></div>{{sensor0?.hum}}</td>
+        <td><div class="lds-dual-ring" *ngIf="sensor0.wind_dir_at_hi_speed_last_10_min == undefined"></div>{{sensor0?.wind_dir_at_hi_speed_last_10_min}}</td>
+        <td><div class="lds-dual-ring" *ngIf="sensor0.wind_chill == undefined"></div>{{sensor0?.wind_chill}}</td>
+        <td><div class="lds-dual-ring" *ngIf="sensor0.rain_rate_hi_last_15_min_clicks == undefined"></div>{{sensor0?.rain_rate_hi_last_15_min_clicks}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
