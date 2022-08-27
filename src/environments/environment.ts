@@ -3,10 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  apiUrl: 'https://api.weatherlink.com/v2',
-  apiKey: 'st19echieqzz9locx4sz17rbfvbupnej',
-  secretKey: 'trr8kdnrlzl05ej0hck0wfh1wuqmhldq'
+  production: false
 };
 
 /*
