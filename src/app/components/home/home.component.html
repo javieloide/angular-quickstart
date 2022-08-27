@@ -1,29 +1,36 @@
 <div id="content">
   <div class="header" style="margin-bottom:100px">
-    <h1>Ejemplo App</h1>
+    <h1>Weather App</h1>
   </div>
-
-  <table>
-    <caption><h2>Sensor 0</h2></caption>
-    <thead>
-      <th>rx_state</th>
-      <th>wind_speed_hi_last_2_min</th>
-      <th>hum</th>
-      <th>wind_dir_at_hi_speed_last_10_min</th>
-      <th>wind_chill</th>
-      <th>rain_rate_hi_last_15_min_clicks</th>
-
-    </thead>
-    <tbody>
-      <tr>
-        <td><div class="lds-dual-ring" *ngIf="sensor0.rx_state == undefined"></div>{{sensor0?.rx_state}}</td>
-        <td><div class="lds-dual-ring" *ngIf="sensor0.wind_speed_hi_last_2_min == undefined"></div>{{sensor0?.wind_speed_hi_last_2_min}}</td>
-        <td><div class="lds-dual-ring" *ngIf="sensor0.hum == undefined"></div>{{sensor0?.hum}}</td>
-        <td><div class="lds-dual-ring" *ngIf="sensor0.wind_dir_at_hi_speed_last_10_min == undefined"></div>{{sensor0?.wind_dir_at_hi_speed_last_10_min}}</td>
-        <td><div class="lds-dual-ring" *ngIf="sensor0.wind_chill == undefined"></div>{{sensor0?.wind_chill}}</td>
-        <td><div class="lds-dual-ring" *ngIf="sensor0.rain_rate_hi_last_15_min_clicks == undefined"></div>{{sensor0?.rain_rate_hi_last_15_min_clicks}}</td>
-      </tr>
-    </tbody>
-  </table>
+  <mat-card class="example-card">
+    <mat-card-title>Sensor 0</mat-card-title>
+    <mat-card-content>
+      <mat-list role="list">
+        <mat-list-item role="listitem">
+          <span style="margin-left: 10px"><b>rx_state:</b> {{sensor0?.rx_state}}</span>
+          <mat-spinner style="margin-left: 10px" [diameter]="25" *ngIf="sensor0.rx_state == undefined"></mat-spinner>
+        </mat-list-item>
+        <mat-list-item role="listitem">
+          <span style="margin-left: 10px"><b>wind_speed_hi_last_2_min:</b> {{sensor0?.wind_speed_hi_last_2_min}}</span>
+          <mat-spinner style="margin-left: 10px" [diameter]="25" *ngIf="sensor0.wind_speed_hi_last_2_min == undefined"></mat-spinner>
+        </mat-list-item>
+        <mat-list-item role="listitem">
+          <span style="margin-left: 10px"><b>hum:</b> {{sensor0?.hum}}</span>
+          <mat-spinner style="margin-left: 10px" [diameter]="25" *ngIf="sensor0.hum == undefined"></mat-spinner>
+        </mat-list-item>
+        <mat-list-item role="listitem">
+          <span style="margin-left: 10px"><b>wind_dir_at_hi_speed_last_10_min:</b> {{sensor0?.wind_dir_at_hi_speed_last_10_min}}</span>
+          <mat-spinner style="margin-left: 10px" [diameter]="25" *ngIf="sensor0.wind_dir_at_hi_speed_last_10_min == undefined"></mat-spinner>
+        </mat-list-item>
+        <mat-list-item role="listitem">
+          <span style="margin-left: 10px"><b>wind_chill:</b> {{sensor0?.wind_chill}}</span>
+          <mat-spinner style="margin-left: 10px" [diameter]="25" *ngIf="sensor0.wind_chill == undefined"></mat-spinner>
+        </mat-list-item>
+        <mat-list-item role="listitem">
+          <span style="margin-left: 10px"><b>rain_rate_hi_last_15_min_clicks:</b> {{sensor0?.rain_rate_hi_last_15_min_clicks}}</span>
+          <mat-spinner style="margin-left: 10px" [diameter]="25" *ngIf="sensor0.rain_rate_hi_last_15_min_clicks == undefined"></mat-spinner>
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
 </div>
-

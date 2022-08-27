@@ -44,7 +44,10 @@ export class HomeComponent implements OnInit {
     var signature_str = signature.toString(Crypto.enc.Hex);
 
     // Obtenemos los sensores
-
+    this.sensor0 = {}
+    this.sensor1 = {}
+    this.sensor2 = {}
+    this.sensor3 = {}
     this.weatherService.getData(stationId,apiKey,timestamp,signature_str).subscribe(data => {
       this.sensor0 = data.sensors[0].data[0];
       this.sensor1 = data.sensors[1].data[0];
