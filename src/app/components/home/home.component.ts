@@ -22,9 +22,10 @@ export class HomeComponent implements OnInit {
   constructor(private weatherService: WeatherService) { }
 
   ngOnInit(): void {
+    this.obtenerDatos();
     this.intervalUpdate = setInterval(() => {
       this.obtenerDatos();
-    }, 5000);
+    }, 300000);
   }
   obtenerDatos() {
     // Obtenemos t en unidades unix timestamp
@@ -43,18 +44,20 @@ export class HomeComponent implements OnInit {
     const signature = Crypto.HmacSHA256(preSignature,secretKey)
     var signature_str = signature.toString(Crypto.enc.Hex);
 
-    // Obtenemos los sensores
+    // Inicializamos los sensores
     this.sensor0 = {}
     this.sensor1 = {}
     this.sensor2 = {}
     this.sensor3 = {}
+
+    // Obtenemos los sensores
     this.weatherService.getData(stationId,apiKey,timestamp,signature_str).subscribe(data => {
       this.sensor0 = data.sensors[0].data[0];
       this.sensor1 = data.sensors[1].data[0];
       this.sensor2 = data.sensors[2].data[0];
       this.sensor3 = data.sensors[3].data[0];
+      console.log(this.sensor0);
     })
 
-    console.log(this.sensor0);
   }
 }
