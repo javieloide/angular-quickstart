@@ -1,13 +1,22 @@
 const express = require('express');
 const serverless = require('serverless-http');
+
 const request = require("request");
 const Crypto = require('crypto-js');
-const app = express();
 const cors = require('cors');
-const router = express.Router();
-const http = require("http");
-var port = process.env.PORT || 8888
 
+const app = express();
+const router = express.Router();
+//const http = require("http");
+//var port = process.env.PORT || 8888
+
+// Cors
+const corsOptions = {
+  origin: '*',
+  credentials: true,
+  optionSuccessStatus: 200
+}
+app.use(cors(corsOptions));
 
 
 router.get('/sensors', (req, res) => {
@@ -26,17 +35,17 @@ router.get('/sensors', (req, res) => {
 
   const urlFormada = url + '/current/' + stationId + '?api-key=' + apiKey + '&t=' + timestamp + '&api-signature=' + signature_str
 
-  app.use(cors({
-    origin: ['https://api.weatherlink.com/v2', urlFormada]
-  }));
 
   request.get(urlFormada, (error, response, body) => {
     let json = JSON.parse(body);
     res.json(json);
   });
-})
+});
 
-app.use('/.netlify/functions/api', router)
+app.use('/.netlify/functions/api', router);
 
-app.listen(port)
-console.log('API escuchando en el puerto ' + port)
+
+
+module.exports=app;
+module.exports.handler = serverless(app);
+
