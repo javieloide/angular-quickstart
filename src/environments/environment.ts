@@ -6,7 +6,8 @@ export const environment = {
   production: false,
   apiUrl: 'https://api.weatherlink.com/v2',
   apiKey: 'st19echieqzz9locx4sz17rbfvbupnej',
-  secretKey: 'trr8kdnrlzl05ej0hck0wfh1wuqmhldq'
+  secretKey: 'trr8kdnrlzl05ej0hck0wfh1wuqmhldq',
+  localApi: 'http://localhost:8888/.netlify/functions/api'
 };
 
 /*

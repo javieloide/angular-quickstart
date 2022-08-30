@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { WeatherService } from 'src/app/services/weather.service';
-import { environment } from 'src/environments/environment';
-import * as Crypto from 'crypto-js';
+//import { environment } from 'src/environments/environment';
+//import * as Crypto from 'crypto-js';
 import { Sensor1 } from 'src/app/models/Sensor1';
 import { Sensor0 } from 'src/app/models/Sensor0';
 import { Sensor2 } from 'src/app/models/Sensor2';
@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
   }
   obtenerDatos() {
     // Obtenemos t en unidades unix timestamp
-    const dateTime = Date.now();
+    /*const dateTime = Date.now();
     const timestamp = Math.floor(dateTime / 1000);
 
     const apiKey = environment.apiKey
@@ -42,7 +42,7 @@ export class HomeComponent implements OnInit {
 
     // Convertimos a HMAC SHA256
     const signature = Crypto.HmacSHA256(preSignature,secretKey)
-    var signature_str = signature.toString(Crypto.enc.Hex);
+    var signature_str = signature.toString(Crypto.enc.Hex);*/
 
     // Inicializamos los sensores
     this.sensor0 = {}
@@ -51,7 +51,7 @@ export class HomeComponent implements OnInit {
     this.sensor3 = {}
 
     // Obtenemos los sensores
-    this.weatherService.getData(stationId,apiKey,timestamp,signature_str).subscribe(data => {
+    this.weatherService.getDataCustom().subscribe(data => {
       this.sensor0 = data.sensors[0].data[0];
       this.sensor1 = data.sensors[1].data[0];
       this.sensor2 = data.sensors[2].data[0];
