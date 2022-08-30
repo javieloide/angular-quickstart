@@ -1,5 +1,7 @@
 .example-card {
- width: 80%;
+  width: 80%;
+  margin-right: 3%;
+  margin-left: 3%;
 }
 
 table {
