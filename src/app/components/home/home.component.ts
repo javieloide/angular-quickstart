@@ -179,7 +179,7 @@ export class HomeComponent implements OnInit {
       [
         {
           "name": "Temperatura",
-          "series": this.seriesHum
+          "series": this.seriesTempIn
         },
       ]
       console.log(this.sensor0);
