@@ -30,8 +30,8 @@ export class HomeComponent implements OnInit {
   yAxis: boolean = true;
   showYAxisLabel: boolean = false;
   showXAxisLabel: boolean = false;
-  xAxisLabel: string = 'Year';
-  yAxisLabel: string = 'Population';
+  xAxisLabel: string = 'Time';
+  yAxisLabel: string = 'Value';
   timeline: boolean = true;
 
   colorScheme:any = {
@@ -95,14 +95,8 @@ export class HomeComponent implements OnInit {
     if (query4.matches) { // If media query matches
       this.ancho = 300
       this.alto = 300
-      console.log('this.query2');
     }
-    /*const query1 = window.matchMedia("(max-width: 400px)")
-    if (query1.matches) { // If media query matches
-      this.ancho = 200
-      this.alto = 200
-      console.log('this.query1');
-    }*/
+
     this.obtenerDatos();
     this.intervalUpdate = setInterval(() => {
       this.obtenerDatos();
