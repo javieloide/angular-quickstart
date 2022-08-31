@@ -11,11 +11,14 @@ import {MatCardModule} from '@angular/material/card';
 import {MatListModule} from '@angular/material/list';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import {MatIconModule} from '@angular/material/icon'
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,6 +29,8 @@ import { environment } from '../environments/environment';
     MatProgressSpinnerModule,
     MatCardModule,
     MatListModule,
+    NgxChartsModule,
+    MatIconModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable

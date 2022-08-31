@@ -4,33 +4,54 @@
   </div>
   <mat-card class="example-card">
     <mat-card-title>Sensor 0</mat-card-title>
+    <mat-card-subtitle style="color:red" *ngIf="message"><mat-icon [inline]="true">thumb_down</mat-icon>{{message}}</mat-card-subtitle>
     <mat-card-content>
       <mat-list role="list">
         <mat-list-item role="listitem">
           <span style="margin-left: 10px"><b>rx_state:</b> {{sensor0?.rx_state}}</span>
-          <mat-spinner style="margin-left: 10px" [diameter]="25" *ngIf="sensor0.rx_state == undefined"></mat-spinner>
+          <mat-spinner style="margin-left: 10px" [diameter]="25" *ngIf="sensor0?.rx_state == undefined"></mat-spinner>
         </mat-list-item>
         <mat-list-item role="listitem">
           <span style="margin-left: 10px"><b>wind_speed_hi_last_2_min:</b> {{sensor0?.wind_speed_hi_last_2_min}}</span>
-          <mat-spinner style="margin-left: 10px" [diameter]="25" *ngIf="sensor0.wind_speed_hi_last_2_min == undefined"></mat-spinner>
+          <mat-spinner style="margin-left: 10px" [diameter]="25" *ngIf="sensor0?.wind_speed_hi_last_2_min == undefined"></mat-spinner>
         </mat-list-item>
         <mat-list-item role="listitem">
           <span style="margin-left: 10px"><b>hum:</b> {{sensor0?.hum}}</span>
-          <mat-spinner style="margin-left: 10px" [diameter]="25" *ngIf="sensor0.hum == undefined"></mat-spinner>
+          <mat-spinner style="margin-left: 10px" [diameter]="25" *ngIf="sensor0?.hum == undefined"></mat-spinner>
         </mat-list-item>
         <mat-list-item role="listitem">
           <span style="margin-left: 10px"><b>wind_dir_at_hi_speed_last_10_min:</b> {{sensor0?.wind_dir_at_hi_speed_last_10_min}}</span>
-          <mat-spinner style="margin-left: 10px" [diameter]="25" *ngIf="sensor0.wind_dir_at_hi_speed_last_10_min == undefined"></mat-spinner>
+          <mat-spinner style="margin-left: 10px" [diameter]="25" *ngIf="sensor0?.wind_dir_at_hi_speed_last_10_min == undefined"></mat-spinner>
         </mat-list-item>
         <mat-list-item role="listitem">
           <span style="margin-left: 10px"><b>wind_chill:</b> {{sensor0?.wind_chill}}</span>
-          <mat-spinner style="margin-left: 10px" [diameter]="25" *ngIf="sensor0.wind_chill == undefined"></mat-spinner>
+          <mat-spinner style="margin-left: 10px" [diameter]="25" *ngIf="sensor0?.wind_chill == undefined"></mat-spinner>
         </mat-list-item>
         <mat-list-item role="listitem">
           <span style="margin-left: 10px"><b>rain_rate_hi_last_15_min_clicks:</b> {{sensor0?.rain_rate_hi_last_15_min_clicks}}</span>
-          <mat-spinner style="margin-left: 10px" [diameter]="25" *ngIf="sensor0.rain_rate_hi_last_15_min_clicks == undefined"></mat-spinner>
+          <mat-spinner style="margin-left: 10px" [diameter]="25" *ngIf="sensor0?.rain_rate_hi_last_15_min_clicks == undefined"></mat-spinner>
         </mat-list-item>
       </mat-list>
     </mat-card-content>
+    <div class="wrapper" *ngIf="sensor0?.hum">
+      <ngx-charts-line-chart
+        [view]="[ancho, alto]"
+        [scheme]="colorScheme"
+        [legend]="legend"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [xAxis]="true"
+        [yAxis]="true"
+        [autoScale]="true"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel"
+        [results]="multi"
+        (select)="onSelect($event)"
+        (activate)="onActivate($event)"
+        (deactivate)="onDeactivate($event)"
+        style="fill: #d1d1d1;"
+        [timeline]="true">
+      </ngx-charts-line-chart>
+    </div>
   </mat-card>
 </div>
