@@ -19,10 +19,12 @@ export class HomeComponent implements OnInit {
   sensor3: Sensor3 = {};
 
   seriesHum:any[]=[]
-  seriesRainRate: any[]=[];
+  seriesTempIn: any[]=[];
   ancho:number = 700
   alto:number = 300
   multi:any[] = []
+  multi2:any[] = []
+
   // options
   legend: boolean = false;
   animations: boolean = true;
@@ -35,7 +37,10 @@ export class HomeComponent implements OnInit {
   timeline: boolean = true;
 
   colorScheme:any = {
-    domain:['#006CFF', '#ffd60a', 'red']
+    domain:['#006CFF']
+  }
+  colorScheme2:any = {
+    domain:['red']
   }
   message: any;
   constructor(private weatherService: WeatherService) {
@@ -116,16 +121,16 @@ export class HomeComponent implements OnInit {
     localStorage.setItem('seriesHum', JSON.stringify(a));
   }
 
-  guardarLocalStorageRainRate(serieVal:any){
+  guardarLocalStorageTempIn(serieVal:any){
     var a = []
-    if(localStorage.getItem('seriesRainRate')){
-      a = JSON.parse(localStorage.getItem('seriesRainRate')!)
+    if(localStorage.getItem('seriesTempIn')){
+      a = JSON.parse(localStorage.getItem('seriesTempIn')!)
     }
     while(a.length >= 5){
       a.shift()
     }
     a.push(serieVal);
-    localStorage.setItem('seriesRainRate', JSON.stringify(a));
+    localStorage.setItem('seriesTempIn', JSON.stringify(a));
   }
 
   obtenerDatos() {
@@ -155,24 +160,27 @@ export class HomeComponent implements OnInit {
         "name": date,
         "value": this.sensor0?.hum
       })
-      /*this.guardarLocalStorageRainRate({
+      this.guardarLocalStorageTempIn({
         "name": date,
-        "value": this.sensor0?.rain_rate_hi_mm
-      })*/
+        "value": this.sensor1?.temp_in
+      })
       let seriesJsonLocalStorageHum = JSON.parse(localStorage.getItem('seriesHum')!)
       this.seriesHum = seriesJsonLocalStorageHum
-      //let seriesJsonLocalStorageRainRate = JSON.parse(localStorage.getItem('seriesRainRate')!)
-      //this.seriesRainRate = seriesJsonLocalStorageRainRate
+      let seriesJsonLocalStorageTempIn = JSON.parse(localStorage.getItem('seriesTempIn')!)
+      this.seriesTempIn = seriesJsonLocalStorageTempIn
       this.multi =
       [
         {
           "name": "Humedad",
           "series": this.seriesHum
         },
-        /*{
-          "name": "Ratio de lluvia",
-          "series": this.seriesRainRate
-        }*/
+      ]
+      this.multi2 =
+      [
+        {
+          "name": "Temperatura",
+          "series": this.seriesHum
+        },
       ]
       console.log(this.sensor0);
     })

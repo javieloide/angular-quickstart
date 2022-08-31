@@ -2,10 +2,81 @@
   <div class="header" style="margin-bottom:100px">
     <h1>Weather UEX App</h1>
   </div>
+
   <mat-card class="example-card">
     <mat-card-title>Sensor 0</mat-card-title>
     <mat-card-subtitle style="color:red" *ngIf="message"><mat-icon [inline]="true">thumb_down</mat-icon>{{message}}</mat-card-subtitle>
-    <mat-card-content>
+    <ngx-charts-line-chart
+    [view]="[ancho, alto]"
+    [scheme]="colorScheme"
+    [legend]="legend"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxis]="true"
+    [yAxis]="true"
+    [autoScale]="true"
+    [xAxisLabel]="xAxisLabel"
+    [yAxisLabel]="yAxisLabel"
+    [results]="multi"
+    (select)="onSelect($event)"
+    (activate)="onActivate($event)"
+    (deactivate)="onDeactivate($event)"
+    style="fill: #000000;"
+    [timeline]="true">
+  </ngx-charts-line-chart>
+
+  <span style="margin-left: 10px"><b>rx_state:</b> {{sensor0?.rx_state}}</span>
+  <mat-spinner style="margin-left: 10px" [diameter]="25" *ngIf="sensor0?.rx_state == undefined"></mat-spinner><br>
+
+  <span style="margin-left: 10px"><b>wind_speed_hi_last_2_min:</b> {{sensor0?.wind_speed_hi_last_2_min}}</span>
+  <mat-spinner style="margin-left: 10px" [diameter]="25" *ngIf="sensor0?.wind_speed_hi_last_2_min == undefined"></mat-spinner><br>
+
+  <span style="margin-left: 10px"><b>hum:</b> {{sensor0?.hum}}</span>
+  <mat-spinner style="margin-left: 10px" [diameter]="25" *ngIf="sensor0?.hum == undefined"></mat-spinner><br>
+
+  <span style="margin-left: 10px"><b>wind_dir_at_hi_speed_last_10_min:</b> {{sensor0?.wind_dir_at_hi_speed_last_10_min}}</span>
+  <mat-spinner style="margin-left: 10px" [diameter]="25" *ngIf="sensor0?.wind_dir_at_hi_speed_last_10_min == undefined"></mat-spinner>
+</mat-card>
+
+<mat-card class="example-card" style="margin-top: 50px; margin-bottom: 50px;">
+    <mat-card-title>Sensor 1</mat-card-title>
+    <mat-card-subtitle style="color:red" *ngIf="message"><mat-icon [inline]="true">thumb_down</mat-icon>{{message}}</mat-card-subtitle>
+    <ngx-charts-line-chart
+    [view]="[ancho, alto]"
+    [scheme]="colorScheme2"
+    [legend]="legend"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxis]="true"
+    [yAxis]="true"
+    [autoScale]="true"
+    [xAxisLabel]="xAxisLabel"
+    [yAxisLabel]="yAxisLabel"
+    [results]="multi2"
+    (select)="onSelect($event)"
+    (activate)="onActivate($event)"
+    (deactivate)="onDeactivate($event)"
+    style="fill: #000000;"
+    [timeline]="true">
+  </ngx-charts-line-chart>
+  <div>
+  <span style="margin-left: 10px"><b>temp_in:</b> {{sensor1?.temp_in}}</span>
+  <mat-spinner style="margin-left: 10px" [diameter]="25" *ngIf="sensor1?.temp_in == undefined"></mat-spinner><br>
+
+  <span style="margin-left: 10px"><b>heat_index_in:</b> {{sensor1?.heat_index_in}}</span>
+  <mat-spinner style="margin-left: 10px" [diameter]="25" *ngIf="sensor1?.heat_index_in == undefined"></mat-spinner><br>
+
+  <span style="margin-left: 10px"><b>dew_point_in:</b> {{sensor1?.dew_point_in}}</span>
+  <mat-spinner style="margin-left: 10px" [diameter]="25" *ngIf="sensor1?.dew_point_in == undefined"></mat-spinner><br>
+
+  <span style="margin-left: 10px"><b>hum_in:</b> {{sensor1?.hum_in}}</span>
+  <mat-spinner style="margin-left: 10px" [diameter]="25" *ngIf="sensor1?.hum_in == undefined"></mat-spinner>
+</div>
+</mat-card>
+</div>
+
+<!--
+<mat-card-content>
       <mat-list role="list">
         <mat-list-item role="listitem">
           <span style="margin-left: 10px"><b>rx_state:</b> {{sensor0?.rx_state}}</span>
@@ -32,26 +103,25 @@
           <mat-spinner style="margin-left: 10px" [diameter]="25" *ngIf="sensor0?.rain_rate_hi_last_15_min_clicks == undefined"></mat-spinner>
         </mat-list-item>
       </mat-list>
+      <mat-list-item role="listitem">
+        <ngx-charts-line-chart
+          [view]="[ancho, alto]"
+          [scheme]="colorScheme"
+          [legend]="legend"
+          [showXAxisLabel]="showXAxisLabel"
+          [showYAxisLabel]="showYAxisLabel"
+          [xAxis]="true"
+          [yAxis]="true"
+          [autoScale]="true"
+          [xAxisLabel]="xAxisLabel"
+          [yAxisLabel]="yAxisLabel"
+          [results]="multi"
+          (select)="onSelect($event)"
+          (activate)="onActivate($event)"
+          (deactivate)="onDeactivate($event)"
+          style="fill: #000000;"
+          [timeline]="true">
+        </ngx-charts-line-chart>
+      </mat-list-item>
     </mat-card-content>
-    <div class="wrapper" *ngIf="sensor0?.hum">
-      <ngx-charts-line-chart
-        [view]="[ancho, alto]"
-        [scheme]="colorScheme"
-        [legend]="legend"
-        [showXAxisLabel]="showXAxisLabel"
-        [showYAxisLabel]="showYAxisLabel"
-        [xAxis]="true"
-        [yAxis]="true"
-        [autoScale]="true"
-        [xAxisLabel]="xAxisLabel"
-        [yAxisLabel]="yAxisLabel"
-        [results]="multi"
-        (select)="onSelect($event)"
-        (activate)="onActivate($event)"
-        (deactivate)="onDeactivate($event)"
-        style="fill: #d1d1d1;"
-        [timeline]="true">
-      </ngx-charts-line-chart>
-    </div>
-  </mat-card>
-</div>
+-->
