@@ -310,7 +310,7 @@ export class HomeComponent implements OnInit {
       this.alto = 300
     }
 
-    this.obtenerDatosGraficaLocalStorage();
+    this.obtenerDatos();
     this.intervalUpdate = setInterval(() => {
       this.obtenerDatos();
     }, 300000);
