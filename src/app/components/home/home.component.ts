@@ -462,7 +462,7 @@ export class HomeComponent implements OnInit {
       this.sensor3 = data?.sensors ? data?.sensors[3]?.data[0]: null;
 
       let  date = new Date().toISOString();
-      date = moment(date).format('HH:mm:ss')
+      date = moment(date).format('DD-MM-YYYY HH:mm:ss')
 
 
       this.guardarLocalStorageHum({
