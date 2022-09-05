@@ -50,7 +50,7 @@ export class HomeComponent implements OnInit {
   constructor(private weatherService: WeatherService) {
   }
 
-  ngOnInit(): void {
+  responsiveGraficaAnchoAlto(){
     const query48= window.matchMedia("(max-width: 3600px)")
     if (query48.matches) { // If media query matches
       this.ancho = 2750
@@ -310,6 +310,10 @@ export class HomeComponent implements OnInit {
       this.alto = 300
     }
 
+  }
+
+  ngOnInit(): void {
+    this.responsiveGraficaAnchoAlto();
     this.obtenerDatos();
     this.intervalUpdate = setInterval(() => {
       this.obtenerDatos();
