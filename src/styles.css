@@ -1,5 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
+html, body { height: 100%;  margin: 0px;}
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+mat-toolbar {
+  display:flex;
+  position: fixed;
+  justify-content: space-between;
+  z-index: 9999;
+}
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";

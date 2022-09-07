@@ -1,6 +1,7 @@
 const express = require('express');
 const serverless = require('serverless-http');
-
+const axios = require('axios');
+const cheerio = require('cheerio');
 const request = require("request");
 const Crypto = require('crypto-js');
 const cors = require('cors');
@@ -42,9 +43,53 @@ router.get('/sensors', (req, res) => {
   });
 });
 
+router.get('/scrap', (req, res) => {
+  let url = 'https://www.eltiempo.es/aeropuerto-badajoz-talavera-la-real-bjz.html?v=detallada'
+
+  axios(url)
+    .then(response => {
+      const html = response.data;
+      const $ = cheerio.load(html);
+      const textos = [];
+      const headers = [];
+      const valoresColumna=[]
+      const valoresOtros=[]
+      $('div .m_table_weather_day_date', html).each(function () {
+        const texto = $(this).text().trim();
+        textos.push({
+          texto
+        })
+      })
+
+      $('div .m_table_weather_day_wrapper div .m_table_weather_day_temp_wrapper', html).each(function () {
+        const texto = $(this).text().trim();
+        valoresColumna.push({
+          texto,
+      })
+    })
+    $('div .m_table_weather_day_header div', html).each(function () {
+      const header = $(this).text().trim();
+        headers.push({
+            header,
+          })
+      })
+
+      $('div .m_table_weather_day_child.m_table_weather_day_storm.m_tables_hidden', html).each(function () {
+        const header = $(this).text().trim();
+        valoresOtros.push({
+              header,
+            })
+        })
+      const dato = {headers, valoresColumna, valoresOtros};
+      res.json({textos, dato});
+    }).catch(error => {
+      res.json(error);
+    })
+})
+
+
+
 app.use('/.netlify/functions/api', router);
-
-
 
 module.exports=app;
 module.exports.handler = serverless(app);

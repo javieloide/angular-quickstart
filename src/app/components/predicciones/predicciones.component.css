@@ -1,0 +1,141 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+mat-toolbar {
+  display:flex;
+  position: fixed;
+  justify-content: space-between;
+  z-index: 9999;
+}
+
+.m_table_weather_day {
+  margin-top: 15px;
+  overflow: hidden;
+}
+
+.wrapper {
+  -webkit-text-size-adjust: 100%;
+}
+
+.m_table_weather_day_header {
+  position: relative;
+  z-index: 1;
+  background: var(--S_500);
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+  display: inline-block;
+  width: 12.5%;
+  text-align: center;
+  margin-right: -4px;
+  vertical-align: top;
+  font-weight: 500;
+  font-size: .9375rem;
+  color: black;
+}
+.m_table_weather_day .m_table_weather_day_date {
+  padding: 10px 0;
+}
+
+.m_table_weather_day_header>div {
+  padding: 10px;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-align-items: center;
+  -moz-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+.m_table_weather_day_date {
+  height: 45px;
+}
+
+.hide_vis_desktop {
+  visibility: hidden;
+}
+
+.m_table_weather_day_wrapper, .m_table_weather_day_wrapper>div {
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+  display: inline-block;
+}
+
+.m_table_weather_day_wrapper {
+  transition: transform 1s cubic-bezier(.19,1,.22,1);
+  width: 87.5%;
+  text-align: center;
+  font-size: .8125rem;
+  color: var(--I_500);
+  font-weight: 300;
+  white-space: nowrap;
+}
+
+.m_table_weather_day_wrapper>div {
+  vertical-align: top;
+  margin-right: -2px;
+  width: 14.3%;
+  border-right: solid 1px black;
+}
+
+.m_table_weather_day_wrapper, .m_table_weather_day_wrapper>div {
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+  display: inline-block;
+}
+.m_table_weather_day .m_table_weather_day_date {
+  padding: 10px 0;
+}
+.m_table_weather_day_wrapper>div>div {
+  padding: 10px;
+}
+.m_table_weather_day_date {
+  height: 45px;
+}
+.m_table_weather_day_wrapper>div>div {
+  padding: 10px;
+}
+
+.m_table_weather_day_temp_wrapper {
+  height: 55px;
+  color: black;
+  cursor: pointer;
+}
+
+
+.m_table_weather_day .expander {
+  height: 54px;
+}
+.m_table_weather_day_wrapper>div>div {
+  padding: 10px;
+}
+
+.m_table_weather_day_storm i {
+  font-size: 1.875rem;
+  margin-bottom: 5px;
+}
+.m_table_weather_day_storm i {
+  color: #ffac25;
+}
+
+.icon-thunder-blue {
+  background-image: url(/dist/images/icons/general/svg/thunder-blue.svg);
+}
+
+@media only screen and (min-width: 1024px){
+  .hide_for_desktop, .show_on_mobile, .show_on_tablet {
+    display: none!important;
+  }
+}
+
+.wrapper{
+  text-align: center;
+}
+.wrapper iframe {
+  margin-left: 10px;
+}

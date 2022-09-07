@@ -13,12 +13,19 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import {MatIconModule} from '@angular/material/icon'
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatButtonModule} from '@angular/material/button';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import { PrediccionesComponent } from './components/predicciones/predicciones.component';
+import { FotometrosComponent } from './components/fotometros/fotometros.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
+    PrediccionesComponent,
+    FotometrosComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,6 +38,9 @@ import {MatIconModule} from '@angular/material/icon'
     MatListModule,
     NgxChartsModule,
     MatIconModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable

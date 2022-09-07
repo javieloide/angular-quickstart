@@ -39,14 +39,18 @@ export class HomeComponent implements OnInit {
   colorScheme:any = {
     domain:['blue', 'yellow', 'red', 'green']
   }
-  colorScheme2:any = {
-    domain:['red','yellow', 'blue', 'green']
-  }
+
   message: any;
   seriesWind2Minutes: any;
   seriesWind10Minutes: any;
   seriesHumIn: any;
   seriesDewPointIn: any;
+  multi3:any[]=[]
+  seriesBarAbsolute: any;
+  seriesBarOffset: any;
+  seriesBarSeaLevel: any;
+  seriesBarTrend: any;
+  multi4:any[]=[];
   constructor(private weatherService: WeatherService) {
   }
 
@@ -340,6 +344,17 @@ export class HomeComponent implements OnInit {
     let seriesJsonLocalStorageDewPointIn = JSON.parse(localStorage.getItem('seriesDewPointIn')!)
     this.seriesDewPointIn = seriesJsonLocalStorageDewPointIn
 
+    let seriesJsonLocalStorageBarAbsolute = JSON.parse(localStorage.getItem('seriesBarAbsolute')!)
+    this.seriesBarAbsolute = seriesJsonLocalStorageBarAbsolute
+
+    let seriesJsonLocalStorageBarOffset = JSON.parse(localStorage.getItem('seriesBarOffset')!)
+    this.seriesBarOffset = seriesJsonLocalStorageBarOffset
+
+    let seriesJsonLocalStorageBarSeaLevel = JSON.parse(localStorage.getItem('seriesBarSeaLevel')!)
+    this.seriesBarSeaLevel = seriesJsonLocalStorageBarSeaLevel
+
+    let seriesJsonLocalStorageBarTrend = JSON.parse(localStorage.getItem('seriesBarTrend')!)
+    this.seriesBarTrend = seriesJsonLocalStorageBarTrend
 
     this.multi =
     [
@@ -370,6 +385,46 @@ export class HomeComponent implements OnInit {
         "name": "Punto de rocío",
         "series": this.seriesDewPointIn
       }
+    ]
+
+    this.multi3 =
+    [
+      {
+        "name": "bar_absolute",
+        "series": this.seriesBarAbsolute
+      },
+      {
+        "name": "bar_offset",
+        "series": this.seriesBarOffset
+      },
+      {
+        "name": "bar_sea_level",
+        "series": this.seriesBarSeaLevel
+      },
+      {
+        "name": "bar_trend",
+        "series": this.seriesBarTrend
+      },
+    ]
+
+    this.multi4 =
+    [
+      {
+        "name": "bar_absolute",
+        "series": this.seriesBarAbsolute
+      },
+      {
+        "name": "bar_offset",
+        "series": this.seriesBarOffset
+      },
+      {
+        "name": "bar_sea_level",
+        "series": this.seriesBarSeaLevel
+      },
+      {
+        "name": "bar_trend",
+        "series": this.seriesBarTrend
+      },
     ]
   }
 
@@ -447,6 +502,54 @@ export class HomeComponent implements OnInit {
     localStorage.setItem('seriesDewPointIn', JSON.stringify(a));
   }
 
+  guardarLocalStorageBarAbsolute(serieVal:any) {
+    var a = []
+    if(localStorage.getItem('seriesBarAbsolute')){
+      a = JSON.parse(localStorage.getItem('seriesBarAbsolute')!)
+    }
+    while(a.length >= 5){
+      a.shift()
+    }
+    a.push(serieVal);
+    localStorage.setItem('seriesBarAbsolute', JSON.stringify(a));
+  }
+
+  guardarLocalStorageBarOffset(serieVal:any) {
+    var a = []
+    if(localStorage.getItem('seriesBarOffset')){
+      a = JSON.parse(localStorage.getItem('seriesBarOffset')!)
+    }
+    while(a.length >= 5){
+      a.shift()
+    }
+    a.push(serieVal);
+    localStorage.setItem('seriesBarOffset', JSON.stringify(a));
+  }
+
+  guardarLocalStorageBarSeaLevel(serieVal:any) {
+    var a = []
+    if(localStorage.getItem('seriesBarSeaLevel')){
+      a = JSON.parse(localStorage.getItem('seriesBarSeaLevel')!)
+    }
+    while(a.length >= 5){
+      a.shift()
+    }
+    a.push(serieVal);
+    localStorage.setItem('seriesBarSeaLevel', JSON.stringify(a));
+  }
+
+  guardarLocalStorageBarTrend(serieVal:any){
+    var a = []
+    if(localStorage.getItem('seriesBarTrend')){
+      a = JSON.parse(localStorage.getItem('seriesBarTrend')!)
+    }
+    while(a.length >= 5){
+      a.shift()
+    }
+    a.push(serieVal);
+    localStorage.setItem('seriesBarTrend', JSON.stringify(a));
+  }
+
   obtenerDatos() {
     // Inicializamos los sensores
     this.sensor0 = {}
@@ -464,6 +567,9 @@ export class HomeComponent implements OnInit {
       this.sensor1 = data?.sensors ? data?.sensors[1]?.data[0]: null;
       this.sensor2 = data?.sensors ? data?.sensors[2]?.data[0]: null;
       this.sensor3 = data?.sensors ? data?.sensors[3]?.data[0]: null;
+
+
+      console.log(this.sensor2);
 
       let  date = new Date().toISOString();
       date = moment(date).format('DD-MM-YYYY HH:mm:ss')
@@ -498,10 +604,29 @@ export class HomeComponent implements OnInit {
         "value": this.sensor1?.dew_point_in
       })
 
+      this.guardarLocalStorageBarAbsolute({
+        "name": date,
+        "value": this.sensor2?.bar_absolute
+      })
+      this.guardarLocalStorageBarOffset({
+        "name": date,
+        "value": this.sensor2?.bar_offset
+      })
+      this.guardarLocalStorageBarSeaLevel({
+        "name": date,
+        "value": this.sensor2?.bar_sea_level
+      })
+
+      this.guardarLocalStorageBarTrend({
+        "name": date,
+        "value": this.sensor2?.bar_trend
+      })
+
       this.obtenerDatosGraficaLocalStorage();
       //console.log(this.sensor0);
     })
   }
+
 
   onSelect(data:any): void {
     //console.log('Item clicked', JSON.parse(JSON.stringify(data)));
