@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
   sensor1: Sensor1 = {};
   sensor2: Sensor2 = {};
   sensor3: Sensor3 = {};
-
+  query4:any;
   seriesHum:any[]=[]
   seriesTempIn: any[]=[];
   ancho:number = 2450
@@ -51,6 +51,9 @@ export class HomeComponent implements OnInit {
   seriesBarSeaLevel: any;
   seriesBarTrend: any;
   multi4:any[]=[];
+  query2:any;
+  query9:any;
+  query8:any;
   constructor(private weatherService: WeatherService) {
   }
 
@@ -291,25 +294,26 @@ export class HomeComponent implements OnInit {
       this.alto = 300
     }
 
-    const query8 = window.matchMedia("(max-width: 540px)")
-    if (query8.matches) { // If media query matches
+    this.query8 = window.matchMedia("(max-width: 540px)")
+    if (this.query8.matches) { // If media query matches
       this.ancho = 400
       this.alto = 300
     }
 
-    const query9 = window.matchMedia("(max-width: 480px)")
-    if (query9.matches) { // If media query matches
+    this.query9 = window.matchMedia("(max-width: 480px)")
+    if (this.query9.matches) { // If media query matches
       this.ancho = 350
       this.alto = 300
     }
-    const query2 = window.matchMedia("(max-width: 414px)")
-    if (query2.matches) { // If media query matches
+
+    this.query2 = window.matchMedia("(max-width: 414px)")
+    if (this.query2.matches) { // If media query matches
       this.ancho = 300
       this.alto = 300
     }
 
-    const query4 = window.matchMedia("(max-width: 375px)")
-    if (query4.matches) { // If media query matches
+    this.query4 = window.matchMedia("(max-width: 375px)")
+    if (this.query4.matches) { // If media query matches
       this.ancho = 300
       this.alto = 300
     }
@@ -569,8 +573,6 @@ export class HomeComponent implements OnInit {
       this.sensor3 = data?.sensors ? data?.sensors[3]?.data[0]: null;
 
 
-      console.log(this.sensor2);
-
       let  date = new Date().toISOString();
       date = moment(date).format('DD-MM-YYYY HH:mm:ss')
 
@@ -623,7 +625,6 @@ export class HomeComponent implements OnInit {
       })
 
       this.obtenerDatosGraficaLocalStorage();
-      //console.log(this.sensor0);
     })
   }
 

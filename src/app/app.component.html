@@ -1,4 +1,4 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" *ngIf="!this.query4.matches && !this.query2.matches && !this.query9.matches && !this.query8.matches; else movilToolbar">
   <div fxShow="true" fxHide.gt-sm="true">
     <button mat-icon-button>
       <mat-icon>menu</mat-icon>
@@ -14,6 +14,14 @@
     <a mat-button routerLink="/predicciones">Predicciones</a>
     <a mat-button routerLink="/fotometros">Fotómetros</a>
   </div>
+
 </mat-toolbar>
+<ng-template #movilToolbar>
+  <div style="background: #3f51b5; width:100%; text-align: center; margin-top:0px"><h3 style="color: #fff">Weather Uex App</h3>
+    <button style="margin-bottom: 15px;" mat-raised-button routerLink="/predicciones" color="primary">Predicciones</button>
+    <button mat-raised-button routerLink="/fotometros" color="primary">Fotómetros</button>
+    <button style="margin-bottom: 15px;" mat-raised-button routerLink="/sensors" color="primary">E. Meteorológicas</button>
+  </div>
+</ng-template>
 <router-outlet></router-outlet>
 
