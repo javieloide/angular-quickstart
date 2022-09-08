@@ -1,57 +1,145 @@
-<div style="margin-top: 120px;" class="wrapper">
-  <!--Atalaya-->
-  <iframe src="https://www.tutiempo.net/s-widget/app/?LocId=7401" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:300px; height:411px;" allowtransparency="true"></iframe>
 
-  <!--Acedera-->
-  <iframe src="https://www.tutiempo.net/s-widget/app/?LocId=7413" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:300px; height:411px;" allowtransparency="true"></iframe>
+<div class="wrapper">
 
-  <!--Aceuchal-->
-  <iframe src="https://www.tutiempo.net/s-widget/app/?LocId=7412" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:300px; height:411px;" allowtransparency="true"></iframe>
+  <mat-form-field appearance="fill" style="margin-top: 120px; width:85%">
+    <mat-label>Elije un pueblo</mat-label>
+    <mat-select>
+      <mat-option value="option1" (click)="onOpenIFrameZarzaMayor()">Zarza la mayor</mat-option>
+      <mat-option value="option2" (click)="onOpenIFramePiedrasAlbas()">Piedras albas</mat-option>
+      <mat-option value="option3" (click)="onOpenIFrameAlcantara()">Alcántara</mat-option>
+      <mat-option value="option4" (click)="onOpenIFrameBrozas()">Brozas</mat-option>
+      <mat-option value="option5" (click)="onOpenIFrameHerreruela()">Herreruela</mat-option>
+      <mat-option value="option6" (click)="onOpenIFrameSalorino()">Salorino</mat-option>
+      <mat-option value="option7" (click)="onOpenIFrameMembrio()">Membrio</mat-option>
+      <mat-option value="option8" (click)="onOpenIFrameValenciaAlcantara()">Valencia de Alcántara</mat-option>
+      <mat-option value="option9" (click)="onOpenIFrameSantiagoAlcantara()">Santiago de Alcántara</mat-option>
+      <mat-option value="option10" (click)="onOpenIFrameHerreraAlcantara()">Herrera de Alcántara</mat-option>
+      <mat-option value="option11" (click)="onOpenIFrameCedillo()">Cedillo</mat-option>
 
-  <!--Agua del Pilar-->
-  <iframe src="https://www.tutiempo.net/s-widget/app/?LocId=12060" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:300px; height:411px;" allowtransparency="true"></iframe>
+    </mat-select>
+  </mat-form-field>
+  </div>
+  <div class="wrapper">
 
-  <!--Ahillones-->
-  <iframe src="https://www.tutiempo.net/s-widget/app/?LocId=7411" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:300px; height:411px;" allowtransparency="true"></iframe>
+  <!--Zarza la mayor-->
+  <iframe
+    *ngIf="displayIframeZarzaMayor"
+    [src]="zarzaMayorIframeUrl"
+    scrolling="no"
+    frameborder="0"
+    style="border:none; overflow:hidden; width:85%; height:500px;"
+    allowTransparency="true"
+  ></iframe>
 
-  <!--Alange-->
-  <iframe src="https://www.tutiempo.net/s-widget/app/?LocId=7410" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:300px; height:411px;" allowtransparency="true"></iframe>
+  <!--Piedras albas-->
+  <iframe
+    *ngIf="displayIframePiedrasAlbas"
+    [src]="piedrasAlbasIframeUrl"
+    scrolling="no"
+    frameborder="0"
+    style="border:none; overflow:hidden; width:85%; height:500px;"
+    allowTransparency="true"
+  ></iframe>
 
-  <!--Alburquerque-->
-  <iframe src="https://www.tutiempo.net/s-widget/app/?LocId=7408" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:300px; height:411px;" allowtransparency="true"></iframe>
+  <!--Alcántara-->
+  <iframe
+    *ngIf="displayIframeAlcantara"
+    [src]="alcantaraIframeUrl"
+    scrolling="no"
+    frameborder="0"
+    style="border:none; overflow:hidden; width:85%; height:500px;"
+    allowTransparency="true"
+  ></iframe>
 
-  <!--Alcobaza-->
-  <iframe src="https://www.tutiempo.net/s-widget/app/?LocId=12032" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:300px; height:411px;" allowtransparency="true"></iframe>
+  <!--Brozas-->
+  <iframe
+    *ngIf="displayIframeBrozas"
+    [src]="brozasIframeUrl"
+    scrolling="no"
+    frameborder="0"
+    style="border:none; overflow:hidden; width:85%; height:500px;"
+    allowTransparency="true"
+  ></iframe>
 
-  <!--Alconchel-->
-  <iframe src="https://www.tutiempo.net/s-widget/app/?LocId=7407" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:300px; height:411px;" allowtransparency="true"></iframe>
+  <!--Herreruela-->
+  <iframe
+    *ngIf="displayIframeHerreruela"
+    [src]="herreruelaIframeUrl"
+    scrolling="no"
+    frameborder="0"
+    style="border:none; overflow:hidden; width:85%; height:500px;"
+    allowTransparency="true"
+  ></iframe>
 
-  <!--Alconera-->
-  <iframe src="https://www.tutiempo.net/s-widget/app/?LocId=7406" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:300px; height:411px;" allowtransparency="true"></iframe>
+  <!--Salorino-->
+  <iframe
+    *ngIf="displayIframeSalorino"
+    [src]="salorinoIframeUrl"
+    scrolling="no"
+    frameborder="0"
+    style="border:none; overflow:hidden; width:85%; height:500px;"
+    allowTransparency="true"
+  ></iframe>
 
-  <!--Aljucén-->
-  <iframe src="https://www.tutiempo.net/s-widget/app/?LocId=7405" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:300px; height:411px;" allowtransparency="true"></iframe>
+  <!--Membrio-->
+  <iframe
+    *ngIf="displayIframeMembrio"
+    [src]="membrioIframeUrl"
+    scrolling="no"
+    frameborder="0"
+    style="border:none; overflow:hidden; width:85%; height:500px;"
+    allowTransparency="true"
+  ></iframe>
 
-  <!--Almansa-->
-  <iframe src="https://www.tutiempo.net/s-widget/app/?LocId=11997" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:300px; height:411px;" allowtransparency="true"></iframe>
+  <!--Valencia de Alcántara-->
+  <iframe
+    *ngIf="displayIframeValenciaAlcantara"
+    [src]="valenciaAlcantaraIframeUrl"
+    scrolling="no"
+    frameborder="0"
+    style="border:none; overflow:hidden; width:85%; height:500px;"
+    allowTransparency="true"
+  ></iframe>
 
-  <!--Almendral-->
-  <iframe src="https://www.tutiempo.net/s-widget/app/?LocId=7404" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:300px; height:411px;" allowtransparency="true"></iframe>
+  <!--Santiago de Alcántara-->
+  <iframe
+    *ngIf="displayIframeSantiagoAlcantara"
+    [src]="santiagoAlcantaraIframeUrl"
+    scrolling="no"
+    frameborder="0"
+    style="border:none; overflow:hidden; width:85%; height:500px;"
+    allowTransparency="true"
+  ></iframe>
 
-  <!--Almendralejo-->
-  <iframe src="https://www.tutiempo.net/s-widget/app/?LocId=7403" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:300px; height:411px;" allowtransparency="true"></iframe>
+  <!--Carbajo-->
+  <iframe
+    *ngIf="displayIframeCarbajo"
+    [src]="carbajoIframeUrl"
+    scrolling="no"
+    frameborder="0"
+    style="border:none; overflow:hidden; width:85%; height:500px;"
+    allowTransparency="true"
+  ></iframe>
 
-  <!--Almonchón-->
-  <iframe src="https://www.tutiempo.net/s-widget/app/?LocId=11985" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:300px; height:411px;" allowtransparency="true"></iframe>
+  <!--Herrera de Alcántara-->
+  <iframe
+    *ngIf="displayIframeHerreraAlcantara"
+    [src]="herreraAlcantaraIframeUrl"
+    scrolling="no"
+    frameborder="0"
+    style="border:none; overflow:hidden; width:85%; height:500px;"
+    allowTransparency="true"
+  ></iframe>
 
-  <!--Ardila-->
-  <iframe src="https://www.tutiempo.net/s-widget/app/?LocId=11965" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:300px; height:411px;" allowtransparency="true"></iframe>
-
-  <!--Badajoz-->
-  <iframe src="https://www.tutiempo.net/s-widget/app/?LocId=7414" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:300px; height:411px;" allowtransparency="true"></iframe>
-
-  <!--Calamonte-->
-  <iframe src="https://www.tutiempo.net/s-widget/app/?LocId=7390" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:300px; height:411px;" allowtransparency="true"></iframe>
+  <!--Cedillo-->
+  <iframe
+    *ngIf="displayIframeCedillo"
+    [src]="cedilloIframeUrl"
+    scrolling="no"
+    frameborder="0"
+    style="border:none; overflow:hidden; width:85%; height:500px;"
+    allowTransparency="true"
+  ></iframe>
 
   <!--<table>
     <thead>

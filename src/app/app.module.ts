@@ -18,6 +18,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { PrediccionesComponent } from './components/predicciones/predicciones.component';
 import { FotometrosComponent } from './components/fotometros/fotometros.component';
+import {MatSelectModule} from '@angular/material/select';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { FotometrosComponent } from './components/fotometros/fotometros.componen
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,
+    MatSelectModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable
