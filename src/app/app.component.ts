@@ -22,9 +22,9 @@ export class AppComponent implements OnInit {
     if(this.query2.matches || this.query4.matches || this.query9.matches || this.query8.matches){
       this.movilToolbar = true
     } 
-    var options = {
-      'damping': 0.05
-    }
-    Scrollbar.init(document.querySelector('#my-scrollbar')!, options);
+    //var options = {
+    // 'damping': 0.05
+    //}
+    //Scrollbar.init(document.querySelector('#my-scrollbar')!, options);
   }
 }
