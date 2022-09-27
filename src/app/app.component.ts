@@ -21,10 +21,8 @@ export class AppComponent implements OnInit {
     this.query4 = window.matchMedia("(max-width: 375px)")
     if(this.query2.matches || this.query4.matches || this.query9.matches || this.query8.matches){
       this.movilToolbar = true
-    } 
-    //var options = {
-    // 'damping': 0.05
-    //}
-    //Scrollbar.init(document.querySelector('#my-scrollbar')!, options);
+    }
+
+    Scrollbar.init(document.querySelector('#my-scrollbar')!);
   }
 }
