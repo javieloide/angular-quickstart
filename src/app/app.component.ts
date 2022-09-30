@@ -8,7 +8,7 @@ import Scrollbar from 'smooth-scrollbar';
 })
 export class AppComponent implements OnInit {
 
-  title = 'angular-quickstart';
+  title = 'Weather UEX App';
   query4:any;
   query2:any;
   query9:any;

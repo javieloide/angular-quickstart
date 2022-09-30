@@ -1,10 +1,70 @@
 
 
-<div id="content">
-  <mat-card class="example-card" style="margin-top: 120px;">
-    <mat-card-title>Estación Meteorológica 0</mat-card-title>
+  <div class="wrapper">
+    <mat-form-field appearance="fill" style="margin-top: 120px; width:85%">
+    <mat-label>Elije una estación</mat-label>
+      <mat-select [(ngModel)]="selectedValue">
+        <mat-option value="zarza"     (click)="onChangeEstacion()">Zona A (Zarza La Mayor, Piedras Albas, Alcántara y Brozas)</mat-option>
+        <mat-option value="valenciaA" (click)="onChangeEstacion()">Zona B (Herreruela, Salorino, Membrío y Valencia de Alcántara)</mat-option>
+        <mat-option value="cedillo"   (click)="onChangeEstacion()">Zona C (Santiago de Alcántara, Cedillo, Herrera de Alcántara y Carbajo)</mat-option>
+        <mat-option value="badajoz"   (click)="onChangeEstacion()">Badajoz</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+   <!-- <mat-card class="example-card" style="margin-top: 120px;">
+      <mat-card-title>Estación Meteorológica 0</mat-card-title>
+      <mat-card-subtitle style="color:red" *ngIf="message"><mat-icon [inline]="true">thumb_down</mat-icon>{{message}}</mat-card-subtitle>
+      <ngx-charts-line-chart *ngIf="multi && seriesHum && seriesWind2Minutes && seriesWind10Minutes"
+      [view]="[ancho, alto]"
+      [scheme]="colorScheme"
+      [legend]="legend"
+      [showXAxisLabel]="showXAxisLabel"
+      [showYAxisLabel]="showYAxisLabel"
+      [xAxis]="true"
+      [yAxis]="true"
+      [autoScale]="true"
+      [xAxisLabel]="xAxisLabel"
+      [yAxisLabel]="yAxisLabel"
+      [results]="multi"
+      [legendTitle]="''"
+      [legendPosition]="null!"
+      (select)="onSelect($event)"
+      (activate)="onActivate($event)"
+      (deactivate)="onDeactivate($event)"
+      style="fill: #000000;"
+      [timeline]="true">
+    </ngx-charts-line-chart>
+    <mat-spinner  [diameter]="100" *ngIf="!multi || !seriesHum || !seriesWind2Minutes || !seriesWind10Minutes"></mat-spinner><br>
+  </mat-card>-->
+  <mat-card class="example-card" style="margin-top: 50px; margin-bottom: 50px;">
+      <mat-card-title>Temperatura</mat-card-title>
+      <mat-card-subtitle style="color:red" *ngIf="message"><mat-icon [inline]="true">thumb_down</mat-icon>{{message}}</mat-card-subtitle>
+      <ngx-charts-line-chart *ngIf="multi2 && (seriesTempInBadajoz || seriesTempInZarza)"
+      [view]="[ancho, alto]"
+      [scheme]="colorScheme"
+      [legend]="legend"
+      [showXAxisLabel]="showXAxisLabel"
+      [showYAxisLabel]="showYAxisLabel"
+      [xAxis]="true"
+      [yAxis]="true"
+      [autoScale]="true"
+      [xAxisLabel]="xAxisLabel"
+      [yAxisLabel]="yAxisLabel"
+      [results]="multi2"
+      [legendTitle]="''"
+      [legendPosition]="null!"
+      (select)="onSelect($event)"
+      (activate)="onActivate($event)"
+      (deactivate)="onDeactivate($event)"
+      style="fill: #000000;"
+      [timeline]="true">
+    </ngx-charts-line-chart>
+    <mat-spinner  [diameter]="100" *ngIf="!multi2 || !(seriesTempInBadajoz || seriesTempInZarza)"></mat-spinner><br>
+  </mat-card>
+<!--<mat-card class="example-card" style="margin-top: 50px; margin-bottom: 50px;">
+    <mat-card-title>Estación Meteorológica 2</mat-card-title>
     <mat-card-subtitle style="color:red" *ngIf="message"><mat-icon [inline]="true">thumb_down</mat-icon>{{message}}</mat-card-subtitle>
-    <ngx-charts-line-chart *ngIf="multi && seriesHum && seriesWind2Minutes && seriesWind10Minutes"
+    <ngx-charts-line-chart *ngIf="multi3 && seriesBarAbsolute"
     [view]="[ancho, alto]"
     [scheme]="colorScheme"
     [legend]="legend"
@@ -15,7 +75,7 @@
     [autoScale]="true"
     [xAxisLabel]="xAxisLabel"
     [yAxisLabel]="yAxisLabel"
-    [results]="multi"
+    [results]="multi3"
     [legendTitle]="''"
     [legendPosition]="null!"
     (select)="onSelect($event)"
@@ -24,64 +84,7 @@
     style="fill: #000000;"
     [timeline]="true">
   </ngx-charts-line-chart>
-  <mat-spinner  [diameter]="100" *ngIf="!multi || !seriesHum || !seriesWind2Minutes || !seriesWind10Minutes"></mat-spinner><br>
-</mat-card>
+  <mat-spinner  [diameter]="100" *ngIf="!multi3 || !seriesBarAbsolute"></mat-spinner><br>
+</mat-card>-->
 
-<mat-card class="example-card" style="margin-top: 50px; margin-bottom: 50px;">
-    <mat-card-title>Estación Meteorológica 1</mat-card-title>
-    <mat-card-subtitle style="color:red" *ngIf="message"><mat-icon [inline]="true">thumb_down</mat-icon>{{message}}</mat-card-subtitle>
-    <ngx-charts-line-chart *ngIf="multi2 && seriesTempIn && seriesHumIn && seriesDewPointIn"
-    [view]="[ancho, alto]"
-    [scheme]="colorScheme"
-    [legend]="legend"
-    [showXAxisLabel]="showXAxisLabel"
-    [showYAxisLabel]="showYAxisLabel"
-    [xAxis]="true"
-    [yAxis]="true"
-    [autoScale]="true"
-    [xAxisLabel]="xAxisLabel"
-    [yAxisLabel]="yAxisLabel"
-    [results]="multi2"
-    [legendTitle]="''"
-    [legendPosition]="null!"
-    (select)="onSelect($event)"
-    (activate)="onActivate($event)"
-    (deactivate)="onDeactivate($event)"
-    style="fill: #000000;"
-    [timeline]="true">
-  </ngx-charts-line-chart>
-  <mat-spinner  [diameter]="100" *ngIf="!multi2 || !seriesTempIn || !seriesHumIn || !seriesDewPointIn"></mat-spinner><br>
-  <div>
-</div>
-</mat-card>
-
-
-<mat-card class="example-card" style="margin-top: 50px; margin-bottom: 50px;">
-  <mat-card-title>Estación Meteorológica 2</mat-card-title>
-  <mat-card-subtitle style="color:red" *ngIf="message"><mat-icon [inline]="true">thumb_down</mat-icon>{{message}}</mat-card-subtitle>
-  <ngx-charts-line-chart *ngIf="multi3 && seriesBarAbsolute"
-  [view]="[ancho, alto]"
-  [scheme]="colorScheme"
-  [legend]="legend"
-  [showXAxisLabel]="showXAxisLabel"
-  [showYAxisLabel]="showYAxisLabel"
-  [xAxis]="true"
-  [yAxis]="true"
-  [autoScale]="true"
-  [xAxisLabel]="xAxisLabel"
-  [yAxisLabel]="yAxisLabel"
-  [results]="multi3"
-  [legendTitle]="''"
-  [legendPosition]="null!"
-  (select)="onSelect($event)"
-  (activate)="onActivate($event)"
-  (deactivate)="onDeactivate($event)"
-  style="fill: #000000;"
-  [timeline]="true">
-</ngx-charts-line-chart>
-<mat-spinner  [diameter]="100" *ngIf="!multi3 || !seriesBarAbsolute"></mat-spinner><br>
-<div>
-</div>
-</mat-card>
-</div>
 

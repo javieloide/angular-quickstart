@@ -14,7 +14,7 @@ export class WeatherService {
 
   }
 
-  getDataCustom(){
+  getEstacionBadajoz(){
     const httpOptions = {
  	  	headers: new HttpHeaders()
 	  }
@@ -22,7 +22,38 @@ export class WeatherService {
     httpOptions.headers.append('Access-Control-Allow-Origin', '*');
     httpOptions.headers.append('Content-Type', 'application/json');
 
-    return this.http.get<any>(this.localApi+ '/sensors', httpOptions);
+    return this.http.get<any>(this.localApi+ '/sensors-badajoz', httpOptions);
+  }
+  getEstacionZarzaLaMayor(){
+    const httpOptions = {
+ 	  	headers: new HttpHeaders()
+	  }
+
+    httpOptions.headers.append('Access-Control-Allow-Origin', '*');
+    httpOptions.headers.append('Content-Type', 'application/json');
+
+    return this.http.get<any>(this.localApi+ '/sensors-zarza', httpOptions);
+  }
+  getEstacionCedillo(){
+    const httpOptions = {
+ 	  	headers: new HttpHeaders()
+	  }
+
+    httpOptions.headers.append('Access-Control-Allow-Origin', '*');
+    httpOptions.headers.append('Content-Type', 'application/json');
+
+    return this.http.get<any>(this.localApi+ '/sensors-cedillo', httpOptions);
+  }
+
+  getValenciaAlcantara(){
+    const httpOptions = {
+ 	  	headers: new HttpHeaders()
+	  }
+
+    httpOptions.headers.append('Access-Control-Allow-Origin', '*');
+    httpOptions.headers.append('Content-Type', 'application/json');
+
+    return this.http.get<any>(this.localApi+ '/sensors-valenciaA', httpOptions);
   }
 
 

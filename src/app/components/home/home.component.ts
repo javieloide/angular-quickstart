@@ -1,25 +1,65 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { WeatherService } from 'src/app/services/weather.service';
 import { Sensor1 } from 'src/app/models/Sensor1';
 import { Sensor0 } from 'src/app/models/Sensor0';
 import { Sensor2 } from 'src/app/models/Sensor2';
 import { Sensor3 } from 'src/app/models/Sensor3';
 import * as moment from 'moment';
+import { EstacionBadajoz } from 'src/app/models/EstacionBadajoz';
+import { EstacionZarzaLaMayor } from 'src/app/models/EstacionZarzaLaMayor';
+import { EstacionValenciaA } from 'src/app/models/EstacionValenciaA';
+import { EstacionCedillo } from 'src/app/models/EstacionCedillo';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
-  intervalUpdate: any = null;
+export class HomeComponent implements OnInit,OnDestroy {
+  intervalBadajoz: any = null;
+  intervalZarzaLaMayor: any = null;
+  intervalCedillo: any = null;
+  intervalValenciaA: any = null;
+
+  estacionBadajoz: EstacionBadajoz = {
+    sensor0: {},
+    sensor1: {},
+    sensor2: {},
+    sensor3: {},
+  };
+
+  estacionZarzaLaMayor: EstacionZarzaLaMayor = {
+    sensor0: {},
+    sensor1: {},
+    sensor2: {},
+    sensor3: {},
+  };
+
+  estacionValenciaA: EstacionValenciaA = {
+    sensor0: {},
+    sensor1: {},
+    sensor2: {},
+    sensor3: {},
+  }
+
+  estacionCedillo: EstacionCedillo = {
+    sensor0: {},
+    sensor1: {},
+    sensor2: {},
+    sensor3: {},
+  }
+
   sensor0: Sensor0 = {};
   sensor1: Sensor1 = {};
   sensor2: Sensor2 = {};
   sensor3: Sensor3 = {};
   query4:any;
   seriesHum:any[]=[]
-  seriesTempIn: any[]=[];
+  seriesTempInBadajoz: any[]=[];
+  seriesTempInZarza: any[]=[];
+  seriesTempInCedillo: any[]=[];
+  seriesTempInValenciaA: any[]=[];
+
   ancho:number = 2450
   alto:number = 450
   multi:any[] = []
@@ -37,7 +77,7 @@ export class HomeComponent implements OnInit {
   timeline: boolean = true;
 
   colorScheme:any = {
-    domain:['blue', 'yellow', 'red', 'green']
+    domain:['red', 'yellow', 'blue', 'green']
   }
 
   message: any;
@@ -54,7 +94,16 @@ export class HomeComponent implements OnInit {
   query2:any;
   query9:any;
   query8:any;
+
+  selectedValue:any = 'badajoz';
   constructor(private weatherService: WeatherService) {
+  }
+
+  ngOnDestroy(): void {
+    if(this.intervalBadajoz){clearInterval(this.intervalBadajoz)}
+    if(this.intervalZarzaLaMayor){clearInterval(this.intervalZarzaLaMayor)}
+    if(this.intervalCedillo){clearInterval(this.intervalCedillo)}
+    if(this.intervalValenciaA) clearInterval(this.intervalValenciaA);
   }
 
   responsiveGraficaAnchoAlto(){
@@ -321,119 +370,61 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.responsiveGraficaAnchoAlto();
-    this.obtenerDatos();
-    this.intervalUpdate = setInterval(() => {
-      this.obtenerDatos();
-    }, 300000);
+    this.onChangeEstacion();
   }
 
 
-  obtenerDatosGraficaLocalStorage(){
-    let seriesJsonLocalStorageHum = JSON.parse(localStorage.getItem('seriesHum')!)
-    this.seriesHum = seriesJsonLocalStorageHum
+  obtenerDatosGraficaLocalStorageBadajoz(){
+    let seriesJsonLocalStorageTempIn = JSON.parse(localStorage.getItem('seriesTempInBadajoz')!)
+    this.seriesTempInBadajoz = seriesJsonLocalStorageTempIn
 
-    let seriesJsonLocalStorageWind2Minutes = JSON.parse(localStorage.getItem('seriesWind2Minutes')!)
-    this.seriesWind2Minutes = seriesJsonLocalStorageWind2Minutes
-
-    let seriesJsonLocalStorageWind10Minutes = JSON.parse(localStorage.getItem('seriesWind10Minutes')!)
-    this.seriesWind10Minutes = seriesJsonLocalStorageWind10Minutes
-
-    let seriesJsonLocalStorageTempIn = JSON.parse(localStorage.getItem('seriesTempIn')!)
-    this.seriesTempIn = seriesJsonLocalStorageTempIn
-
-    let seriesJsonLocalStorageHumIn = JSON.parse(localStorage.getItem('seriesHumIn')!)
-    this.seriesHumIn = seriesJsonLocalStorageHumIn
-
-    let seriesJsonLocalStorageDewPointIn = JSON.parse(localStorage.getItem('seriesDewPointIn')!)
-    this.seriesDewPointIn = seriesJsonLocalStorageDewPointIn
-
-    let seriesJsonLocalStorageBarAbsolute = JSON.parse(localStorage.getItem('seriesBarAbsolute')!)
-    this.seriesBarAbsolute = seriesJsonLocalStorageBarAbsolute
-
-    let seriesJsonLocalStorageBarOffset = JSON.parse(localStorage.getItem('seriesBarOffset')!)
-    this.seriesBarOffset = seriesJsonLocalStorageBarOffset
-
-    let seriesJsonLocalStorageBarSeaLevel = JSON.parse(localStorage.getItem('seriesBarSeaLevel')!)
-    this.seriesBarSeaLevel = seriesJsonLocalStorageBarSeaLevel
-
-    let seriesJsonLocalStorageBarTrend = JSON.parse(localStorage.getItem('seriesBarTrend')!)
-    this.seriesBarTrend = seriesJsonLocalStorageBarTrend
-
-    this.multi =
-    [
-      {
-        "name": "Humedad",
-        "series": this.seriesHum
-      },
-      {
-        "name": "Viento 2 min",
-        "series": this.seriesWind2Minutes
-      },
-      {
-        "name": "Viento 10 min",
-        "series": this.seriesWind10Minutes
-      },
-    ]
     this.multi2 =
     [
       {
         "name": "Temperatura",
-        "series": this.seriesTempIn
-      },
-      {
-        "name": "Humedad",
-        "series": this.seriesHumIn
-      },
-      {
-        "name": "Punto de rocío",
-        "series": this.seriesDewPointIn
+        "series": this.seriesTempInBadajoz
       }
     ]
+  }
+  obtenerDatosGraficaLocalStorageZarza(){
+    let seriesJsonLocalStorageTempIn = JSON.parse(localStorage.getItem('seriesTempInZarza')!)
+    this.seriesTempInZarza = seriesJsonLocalStorageTempIn
 
-    this.multi3 =
+    this.multi2 =
     [
       {
-        "name": "bar_absolute",
-        "series": this.seriesBarAbsolute
-      },
-      {
-        "name": "bar_offset",
-        "series": this.seriesBarOffset
-      },
-      {
-        "name": "bar_sea_level",
-        "series": this.seriesBarSeaLevel
-      },
-      {
-        "name": "bar_trend",
-        "series": this.seriesBarTrend
-      },
+        "name": "Temperatura",
+        "series": this.seriesTempInZarza
+      }
     ]
+  }
+  obtenerDatosGraficaLocalStorageValenciaA(){
+    let seriesJsonLocalStorageTempIn = JSON.parse(localStorage.getItem('seriesTempInValenciaA')!)
+    this.seriesTempInValenciaA = seriesJsonLocalStorageTempIn
 
-    this.multi4 =
+    this.multi2 =
     [
       {
-        "name": "bar_absolute",
-        "series": this.seriesBarAbsolute
-      },
-      {
-        "name": "bar_offset",
-        "series": this.seriesBarOffset
-      },
-      {
-        "name": "bar_sea_level",
-        "series": this.seriesBarSeaLevel
-      },
-      {
-        "name": "bar_trend",
-        "series": this.seriesBarTrend
-      },
+        "name": "Temperatura",
+        "series": this.seriesTempInValenciaA
+      }
     ]
   }
 
+  obtenerDatosGraficaLocalStorageCedillo(){
+    let seriesJsonLocalStorageTempIn = JSON.parse(localStorage.getItem('seriesTempInCedillo')!)
+    this.seriesTempInCedillo = seriesJsonLocalStorageTempIn
 
-  guardarLocalStorageHum(serieVal:any){
+    this.multi2 =
+    [
+      {
+        "name": "Temperatura",
+        "series": this.seriesTempInCedillo
+      }
+    ]
+  }
+
+  /*guardarLocalStorageHum(serieVal:any){
     var a = []
     if(localStorage.getItem('seriesHum')){
       a = JSON.parse(localStorage.getItem('seriesHum')!)
@@ -467,22 +458,55 @@ export class HomeComponent implements OnInit {
     }
     a.push(serieVal);
     localStorage.setItem('seriesWind10Minutes', JSON.stringify(a));
-  }
+  }*/
 
 
-  guardarLocalStorageTempIn(serieVal:any){
+  guardarLocalStorageTempInBadajoz(serieVal:any){
     var a = []
-    if(localStorage.getItem('seriesTempIn')){
-      a = JSON.parse(localStorage.getItem('seriesTempIn')!)
+    if(localStorage.getItem('seriesTempInBadajoz')){
+      a = JSON.parse(localStorage.getItem('seriesTempInBadajoz')!)
     }
     while(a.length >= 5){
       a.shift()
     }
     a.push(serieVal);
-    localStorage.setItem('seriesTempIn', JSON.stringify(a));
+    localStorage.setItem('seriesTempInBadajoz', JSON.stringify(a));
+  }
+  guardarLocalStorageTempInZarza(serieVal:any){
+    var a = []
+    if(localStorage.getItem('seriesTempInZarza')){
+      a = JSON.parse(localStorage.getItem('seriesTempInZarza')!)
+    }
+    while(a.length >= 5){
+      a.shift()
+    }
+    a.push(serieVal);
+    localStorage.setItem('seriesTempInZarza', JSON.stringify(a));
+  }
+  guardarLocalStorageTempInValenciaA(serieVal:any){
+    var a = []
+    if(localStorage.getItem('seriesTempInValenciaA')){
+      a = JSON.parse(localStorage.getItem('seriesTempInValenciaA')!)
+    }
+    while(a.length >= 5){
+      a.shift()
+    }
+    a.push(serieVal);
+    localStorage.setItem('seriesTempInValenciaA', JSON.stringify(a));
   }
 
-  guardarLocalStorageHumIn(serieVal:any){
+  guardarLocalStorageTempInCedillo(serieVal:any){
+    var a = []
+    if(localStorage.getItem('seriesTempInCedillo')){
+      a = JSON.parse(localStorage.getItem('seriesTempInCedillo')!)
+    }
+    while(a.length >= 5){
+      a.shift()
+    }
+    a.push(serieVal);
+    localStorage.setItem('seriesTempInCedillo', JSON.stringify(a));
+  }
+  /*guardarLocalStorageHumIn(serieVal:any){
     var a = []
     if(localStorage.getItem('seriesHumIn')){
       a = JSON.parse(localStorage.getItem('seriesHumIn')!)
@@ -552,9 +576,11 @@ export class HomeComponent implements OnInit {
     }
     a.push(serieVal);
     localStorage.setItem('seriesBarTrend', JSON.stringify(a));
-  }
+  }*/
 
-  obtenerDatos() {
+  obtenerBadajozDatos() {
+    console.log('obtenerBadajozDatos');
+
     // Inicializamos los sensores
     this.sensor0 = {}
     this.sensor1 = {}
@@ -563,72 +589,123 @@ export class HomeComponent implements OnInit {
 
 
     // Obtenemos los sensores
-    this.weatherService.getDataCustom().subscribe(data => {
+    this.weatherService.getEstacionBadajoz().subscribe(data => {
       if(data.message){
         this.message = data.message
       }
-      this.sensor0 = data?.sensors ? data?.sensors[0]?.data[0]: null;
-      this.sensor1 = data?.sensors ? data?.sensors[1]?.data[0]: null;
-      this.sensor2 = data?.sensors ? data?.sensors[2]?.data[0]: null;
-      this.sensor3 = data?.sensors ? data?.sensors[3]?.data[0]: null;
+      this.estacionBadajoz.sensor0 = data?.sensors ? data?.sensors[0]?.data[0]: null;
+      this.estacionBadajoz.sensor1 = data?.sensors ? data?.sensors[1]?.data[0]: null;
+      this.estacionBadajoz.sensor2 = data?.sensors ? data?.sensors[2]?.data[0]: null;
+      this.estacionBadajoz.sensor3 = data?.sensors ? data?.sensors[3]?.data[0]: null;
 
+      let  date = new Date().toISOString();
+      date = moment(date).format('DD-MM-YYYY HH:mm:ss')
+
+      this.guardarLocalStorageTempInBadajoz({
+        "name": date,
+        "value": this.estacionBadajoz.sensor1?.temp_in ?? 0
+      })
+
+      this.obtenerDatosGraficaLocalStorageBadajoz();
+    })
+  }
+
+  obtenerZarzaDatos() {
+    console.log('obtenerZarzaDatos');
+
+    // Inicializamos los sensores
+    this.sensor0 = {}
+    this.sensor1 = {}
+    this.sensor2 = {}
+    this.sensor3 = {}
+
+
+    // Obtenemos los sensores
+    this.weatherService.getEstacionZarzaLaMayor().subscribe(data => {
+      if(data.message){
+        this.message = data.message
+      }
+      this.estacionZarzaLaMayor.sensor0 = data?.sensors ? data?.sensors[3]?.data[0]: null;
+      this.estacionZarzaLaMayor.sensor1 = data?.sensors ? data?.sensors[2]?.data[0]: null;
+      this.estacionZarzaLaMayor.sensor2 = data?.sensors ? data?.sensors[1]?.data[0]: null;
+      this.estacionZarzaLaMayor.sensor3 = data?.sensors ? data?.sensors[0]?.data[0]: null;
+
+      let  date = new Date().toISOString();
+      date = moment(date).format('DD-MM-YYYY HH:mm:ss')
+
+      this.guardarLocalStorageTempInZarza({
+        "name": date,
+        "value": this.estacionZarzaLaMayor.sensor1.temp_in ?? 0
+      })
+
+      this.obtenerDatosGraficaLocalStorageZarza();
+    })
+  }
+  obtenerValenciaADatos() {
+
+    console.log('obtenerValenciaADatos');
+
+    // Inicializamos los sensores
+    this.sensor0 = {}
+    this.sensor1 = {}
+    this.sensor2 = {}
+    this.sensor3 = {}
+
+
+    // Obtenemos los sensores
+    this.weatherService.getValenciaAlcantara().subscribe(data => {
+      if(data.message){
+        this.message = data.message
+      }
+      this.estacionValenciaA.sensor0 = data?.sensors ? data?.sensors[3]?.data[0]: null;
+      this.estacionValenciaA.sensor1 = data?.sensors ? data?.sensors[2]?.data[0]: null;
+      this.estacionValenciaA.sensor2 = data?.sensors ? data?.sensors[1]?.data[0]: null;
+      this.estacionValenciaA.sensor3 = data?.sensors ? data?.sensors[0]?.data[0]: null;
 
       let  date = new Date().toISOString();
       date = moment(date).format('DD-MM-YYYY HH:mm:ss')
 
 
-      this.guardarLocalStorageHum({
+      this.guardarLocalStorageTempInValenciaA({
         "name": date,
-        "value": this.sensor0?.hum
+        "value": this.estacionValenciaA.sensor1.temp_in ?? 0
       })
 
-      this.guardarLocalStorageWind2Minutes({
-        "name": date,
-        "value": this.sensor0?.wind_speed_avg_last_2_min
-      })
-
-      this.guardarLocalStorageWind10Minutes({
-        "name": date,
-        "value": this.sensor0?.wind_speed_avg_last_10_min
-      })
-
-      this.guardarLocalStorageTempIn({
-        "name": date,
-        "value": this.sensor1?.temp_in
-      })
-      this.guardarLocalStorageHumIn({
-        "name": date,
-        "value": this.sensor1?.hum_in
-      })
-
-      this.guardarLocalStorageDewPointIn({
-        "name": date,
-        "value": this.sensor1?.dew_point_in
-      })
-
-      this.guardarLocalStorageBarAbsolute({
-        "name": date,
-        "value": this.sensor2?.bar_absolute
-      })
-      this.guardarLocalStorageBarOffset({
-        "name": date,
-        "value": this.sensor2?.bar_offset
-      })
-      this.guardarLocalStorageBarSeaLevel({
-        "name": date,
-        "value": this.sensor2?.bar_sea_level
-      })
-
-      this.guardarLocalStorageBarTrend({
-        "name": date,
-        "value": this.sensor2?.bar_trend
-      })
-
-      this.obtenerDatosGraficaLocalStorage();
+      this.obtenerDatosGraficaLocalStorageValenciaA();
     })
   }
+  obtenerCedilloDatos() {
+    console.log('obtenerCedilloDatos');
+
+    // Inicializamos los sensores
+    this.sensor0 = {}
+    this.sensor1 = {}
+    this.sensor2 = {}
+    this.sensor3 = {}
 
 
+    // Obtenemos los sensores
+    this.weatherService.getEstacionCedillo().subscribe(data => {
+      if(data.message){
+        this.message = data.message
+      }
+      this.estacionCedillo.sensor0 = data?.sensors ? data?.sensors[3]?.data[0]: null;
+      this.estacionCedillo.sensor1 = data?.sensors ? data?.sensors[2]?.data[0]: null;
+      this.estacionCedillo.sensor2 = data?.sensors ? data?.sensors[1]?.data[0]: null;
+      this.estacionCedillo.sensor3 = data?.sensors ? data?.sensors[0]?.data[0]: null;
+
+      let  date = new Date().toISOString();
+      date = moment(date).format('DD-MM-YYYY HH:mm:ss')
+
+
+      this.guardarLocalStorageTempInCedillo({
+        "name": date,
+        "value": this.estacionCedillo.sensor1.temp_in ?? 0
+      })
+
+      this.obtenerDatosGraficaLocalStorageCedillo();
+    })
+  }
   onSelect(data:any): void {
     //console.log('Item clicked', JSON.parse(JSON.stringify(data)));
   }
@@ -639,5 +716,76 @@ export class HomeComponent implements OnInit {
 
   onDeactivate(data:any): void {
     //console.log('Deactivate', JSON.parse(JSON.stringify(data)));
+  }
+
+  hiloBadajoz(){
+    this.responsiveGraficaAnchoAlto();
+    this.obtenerBadajozDatos();
+    this.intervalBadajoz = setInterval(() => {
+      this.obtenerBadajozDatos();
+    }, 5000);
+  }
+
+  hiloZarzaLaMayor(){
+    this.responsiveGraficaAnchoAlto();
+    this.obtenerZarzaDatos();
+    this.intervalZarzaLaMayor = setInterval(() => {
+      this.obtenerZarzaDatos();
+    }, 5000);
+  }
+
+  hiloValenciaA(){
+    this.responsiveGraficaAnchoAlto();
+    this.obtenerValenciaADatos();
+    this.intervalValenciaA = setInterval(() => {
+      this.obtenerValenciaADatos();
+    }, 5000);
+  }
+
+  hiloCedillo(){
+    this.responsiveGraficaAnchoAlto();
+    this.obtenerCedilloDatos();
+    this.intervalCedillo = setInterval(() => {
+      this.obtenerCedilloDatos();
+    }, 5000);
+  }
+
+  onChangeEstacion(){
+    if(this.selectedValue){
+    switch(this.selectedValue){
+      case 'zarza':
+        if(this.intervalBadajoz){clearInterval(this.intervalBadajoz)}
+        if(this.intervalZarzaLaMayor){clearInterval(this.intervalZarzaLaMayor)}
+        if(this.intervalCedillo){clearInterval(this.intervalCedillo)}
+        if(this.intervalValenciaA) clearInterval(this.intervalValenciaA);
+        this.hiloZarzaLaMayor();
+        break;
+      case 'valenciaA':
+        if(this.intervalBadajoz){clearInterval(this.intervalBadajoz)}
+        if(this.intervalZarzaLaMayor){clearInterval(this.intervalZarzaLaMayor)}
+        if(this.intervalCedillo){clearInterval(this.intervalCedillo)}
+        if(this.intervalValenciaA) clearInterval(this.intervalValenciaA);
+
+        this.hiloValenciaA();
+        break;
+      case 'cedillo':
+        if(this.intervalBadajoz){clearInterval(this.intervalBadajoz)}
+        if(this.intervalZarzaLaMayor){clearInterval(this.intervalZarzaLaMayor)}
+        if(this.intervalCedillo){clearInterval(this.intervalCedillo)}
+        if(this.intervalValenciaA) clearInterval(this.intervalValenciaA);
+
+        this.hiloCedillo();
+        break;
+      case 'badajoz':
+        if(this.intervalBadajoz){clearInterval(this.intervalBadajoz)}
+        if(this.intervalZarzaLaMayor){clearInterval(this.intervalZarzaLaMayor)}
+        if(this.intervalCedillo){clearInterval(this.intervalCedillo)}
+        if(this.intervalValenciaA) clearInterval(this.intervalValenciaA);
+        this.hiloBadajoz();
+        break;
+      default:
+        break;
+      }
+    }
   }
 }
