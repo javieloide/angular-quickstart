@@ -21,6 +21,8 @@ import { FotometrosComponent } from './components/fotometros/fotometros.componen
 import {MatSelectModule} from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { GraficaBarrasComponent } from './components/grafica-barras/grafica-barras.component';
+import { GraficaLinearComponent } from './components/grafica-linear/grafica-linear.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     HomeComponent,
     PrediccionesComponent,
     FotometrosComponent,
+    GraficaBarrasComponent,
+    GraficaLinearComponent,
   ],
   imports: [
     BrowserModule,

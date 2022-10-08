@@ -1,9 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { WeatherService } from 'src/app/services/weather.service';
-import { Sensor1 } from 'src/app/models/Sensor1';
-import { Sensor0 } from 'src/app/models/Sensor0';
-import { Sensor2 } from 'src/app/models/Sensor2';
-import { Sensor3 } from 'src/app/models/Sensor3';
 import * as moment from 'moment';
 import { EstacionBadajoz } from 'src/app/models/EstacionBadajoz';
 import { EstacionZarzaLaMayor } from 'src/app/models/EstacionZarzaLaMayor';
@@ -27,21 +23,18 @@ export class HomeComponent implements OnInit,OnDestroy {
     sensor2: {},
     sensor3: {},
   };
-
   estacionZarzaLaMayor: EstacionZarzaLaMayor = {
     sensor0: {},
     sensor1: {},
     sensor2: {},
     sensor3: {},
   };
-
   estacionValenciaA: EstacionValenciaA = {
     sensor0: {},
     sensor1: {},
     sensor2: {},
     sensor3: {},
   }
-
   estacionCedillo: EstacionCedillo = {
     sensor0: {},
     sensor1: {},
@@ -49,53 +42,51 @@ export class HomeComponent implements OnInit,OnDestroy {
     sensor3: {},
   }
 
-  sensor0: Sensor0 = {};
-  sensor1: Sensor1 = {};
-  sensor2: Sensor2 = {};
-  sensor3: Sensor3 = {};
-  query4:any;
-  seriesHum:any[]=[]
   seriesTempInBadajoz: any[]=[];
+  seriesHumInBadajoz: any[]=[];
+  seriesBarBadajoz: any[]=[];
+  seriesTempBadajoz: any[]=[];
+  seriesWindChillBadajoz:any[]=[];
+  seriesHeatIndexBadajoz:any[]=[];
+  seriesDewPointBadajoz: any[]=[];
+  seriesWetBulbBadajoz: any[]=[];
+
   seriesTempInZarza: any[]=[];
+  seriesHumInZarza: any[]=[];
+  seriesBarZarza: any[]=[];
+  seriesTempZarza: any[]=[];
+  seriesWindChillZarza:any[]=[];
+  seriesHeatIndexZarza:any[]=[];
+  seriesDewPointZarza: any[]=[];
+  seriesWetBulbZarza: any[]=[];
+
   seriesTempInCedillo: any[]=[];
+  seriesHumInCedillo: any[]=[];
+  seriesBarCedillo: any[]=[];
+  seriesTempCedillo: any[]=[];
+  seriesWindChillCedillo:any[]=[];
+  seriesHeatIndexCedillo:any[]=[];
+  seriesDewPointCedillo: any[]=[];
+  seriesWetBulbCedillo: any[]=[];
+
   seriesTempInValenciaA: any[]=[];
+  seriesHumInValenciaA: any[]=[];
+  seriesBarValenciaA: any[]=[];
+  seriesTempValenciaA: any[]=[];
+  seriesWindChillValenciaA:any[]=[];
+  seriesHeatIndexValenciaA:any[]=[];
+  seriesDewPointValenciaA: any[]=[];
+  seriesWetBulbValenciaA: any[]=[];
 
-  ancho:number = 2450
-  alto:number = 450
-  multi:any[] = []
-  multi2:any[] = []
+  datosGrafica:any[] = []
+  datosGraficaBar:any[] = []
 
-  // options
-  legend: boolean = true;
-  animations: boolean = true;
-  xAxis: boolean = true;
-  yAxis: boolean = true;
-  showYAxisLabel: boolean = false;
-  showXAxisLabel: boolean = false;
-  xAxisLabel: string = 'Time';
-  yAxisLabel: string = 'Value';
-  timeline: boolean = true;
-
-  colorScheme:any = {
-    domain:['red', 'yellow', 'blue', 'green']
-  }
-
+  datosGraficaBarChart:any[]=[];
+  datosGraficaBarChart2:any[]=[];
   message: any;
-  seriesWind2Minutes: any;
-  seriesWind10Minutes: any;
-  seriesHumIn: any;
-  seriesDewPointIn: any;
-  multi3:any[]=[]
-  seriesBarAbsolute: any;
-  seriesBarOffset: any;
-  seriesBarSeaLevel: any;
-  seriesBarTrend: any;
-  multi4:any[]=[];
-  query2:any;
-  query9:any;
-  query8:any;
 
   selectedValue:any = 'badajoz';
+
   constructor(private weatherService: WeatherService) {
   }
 
@@ -104,269 +95,6 @@ export class HomeComponent implements OnInit,OnDestroy {
     if(this.intervalZarzaLaMayor){clearInterval(this.intervalZarzaLaMayor)}
     if(this.intervalCedillo){clearInterval(this.intervalCedillo)}
     if(this.intervalValenciaA) clearInterval(this.intervalValenciaA);
-  }
-
-  responsiveGraficaAnchoAlto(){
-    const query48= window.matchMedia("(max-width: 3600px)")
-    if (query48.matches) { // If media query matches
-      this.ancho = 2750
-      this.alto = 550
-    }
-    const query47= window.matchMedia("(max-width: 3500px)")
-    if (query47.matches) { // If media query matches
-      this.ancho = 2750
-      this.alto = 550
-    }
-    const query46= window.matchMedia("(max-width: 3400px)")
-    if (query46.matches) { // If media query matches
-      this.ancho = 2750
-      this.alto = 450
-    }
-    const query45= window.matchMedia("(max-width: 3300px)")
-    if (query45.matches) { // If media query matches
-      this.ancho = 2650
-      this.alto = 450
-    }
-    const query44= window.matchMedia("(max-width: 3200px)")
-    if (query44.matches) { // If media query matches
-      this.ancho = 2550
-      this.alto = 450
-    }
-    const query43= window.matchMedia("(max-width: 3100px)")
-    if (query43.matches) { // If media query matches
-      this.ancho = 2450
-      this.alto = 450
-    }
-    const query42 = window.matchMedia("(max-width: 3000px)")
-    if (query42.matches) { // If media query matches
-      this.ancho = 2400
-      this.alto = 450
-    }
-    const query41 = window.matchMedia("(max-width: 2900px)")
-    if (query41.matches) { // If media query matches
-      this.ancho = 2300
-      this.alto = 450
-    }
-    const query40 = window.matchMedia("(max-width: 2800px)")
-    if (query40.matches) { // If media query matches
-      this.ancho = 2200
-      this.alto = 450
-    }
-    const query39 = window.matchMedia("(max-width: 2700px)")
-    if (query39.matches) { // If media query matches
-      this.ancho = 2150
-      this.alto = 450
-    }
-    const query38 = window.matchMedia("(max-width: 2600px)")
-    if (query38.matches) { // If media query matches
-      this.ancho = 2100
-      this.alto = 450
-    }
-
-    const query37 = window.matchMedia("(max-width: 2500px)")
-    if (query37.matches) { // If media query matches
-      this.ancho = 2000
-      this.alto = 450
-    }
-
-    const query36 = window.matchMedia("(max-width: 2400px)")
-    if (query36.matches) { // If media query matches
-      this.ancho = 1900
-      this.alto = 450
-    }
-    const query35 = window.matchMedia("(max-width: 2300px)")
-    if (query35.matches) { // If media query matches
-      this.ancho = 1800
-      this.alto = 450
-    }
-
-    const query34 = window.matchMedia("(max-width: 2200px)")
-    if (query34.matches) { // If media query matches
-      this.ancho = 1750
-      this.alto = 450
-    }
-
-    const query33 = window.matchMedia("(max-width: 2100px)")
-    if (query33.matches) { // If media query matches
-      this.ancho = 1650
-      this.alto = 450
-    }
-    const query32 = window.matchMedia("(max-width: 2000px)")
-    if (query32.matches) { // If media query matches
-      this.ancho = 1550
-      this.alto = 450
-    }
-
-    const query31 = window.matchMedia("(max-width: 1950px)")
-    if (query31.matches) { // If media query matches
-      this.ancho = 1500
-      this.alto = 450
-    }
-    const query30 = window.matchMedia("(max-width: 1900px)")
-    if (query30.matches) { // If media query matches
-      this.ancho = 1450
-      this.alto = 450
-    }
-    const query29 = window.matchMedia("(max-width: 1850px)")
-    if (query29.matches) { // If media query matches
-      this.ancho = 1450
-      this.alto = 350
-    }
-
-    const query28 = window.matchMedia("(max-width: 1800px)")
-    if (query28.matches) { // If media query matches
-      this.ancho = 1400
-      this.alto = 450
-    }
-
-    const query27 = window.matchMedia("(max-width: 1750px)")
-    if (query27.matches) { // If media query matches
-      this.ancho = 1350
-      this.alto = 450
-    }
-
-    const query26 = window.matchMedia("(max-width: 1700px)")
-    if (query26.matches) { // If media query matches
-      this.ancho = 1350
-      this.alto = 450
-    }
-
-    const query25 = window.matchMedia("(max-width: 1650px)")
-    if (query25.matches) { // If media query matches
-      this.ancho = 1350
-      this.alto = 450
-    }
-    const query24 = window.matchMedia("(max-width: 1600px)")
-    if (query24.matches) { // If media query matches
-      this.ancho = 1300
-      this.alto = 350
-    }
-    const query23 = window.matchMedia("(max-width: 1550px)")
-    if (query23.matches) { // If media query matches
-      this.ancho = 1250
-      this.alto = 350
-    }
-    const query22 = window.matchMedia("(max-width: 1500px)")
-    if (query22.matches) { // If media query matches
-      this.ancho = 1200
-      this.alto = 350
-    }
-    const query21 = window.matchMedia("(max-width: 1450px)")
-    if (query21.matches) { // If media query matches
-      this.ancho = 1150
-      this.alto = 300
-    }
-    const query20 = window.matchMedia("(max-width: 1400px)")
-    if (query20.matches) { // If media query matches
-      this.ancho = 1100
-      this.alto = 300
-    }
-    const query19 = window.matchMedia("(max-width: 1350px)")
-    if (query19.matches) { // If media query matches
-      this.ancho = 1080
-      this.alto = 300
-    }
-    const query18 = window.matchMedia("(max-width: 1300px)")
-    if (query18.matches) { // If media query matches
-      this.ancho = 1000
-      this.alto = 300
-    }
-    const query17 = window.matchMedia("(max-width: 1250px)")
-    if (query17.matches) { // If media query matches
-      this.ancho = 970
-      this.alto = 300
-    }
-    const query16 = window.matchMedia("(max-width: 1200px)")
-    if (query16.matches) { // If media query matches
-      this.ancho = 950
-      this.alto = 300
-    }
-    const query15 = window.matchMedia("(max-width: 1150px)")
-    if (query15.matches) { // If media query matches
-      this.ancho = 900
-      this.alto = 300
-    }
-    const query14 = window.matchMedia("(max-width: 1100px)")
-    if (query14.matches) { // If media query matches
-      this.ancho = 900
-      this.alto = 300
-    }
-    const query13 = window.matchMedia("(max-width: 1050px)")
-    if (query13.matches) { // If media query matches
-      this.ancho = 900
-      this.alto = 300
-    }
-    const query12 = window.matchMedia("(max-width: 1050px)")
-    if (query12.matches) { // If media query matches
-      this.ancho = 800
-      this.alto = 300
-    }
-    const query11 = window.matchMedia("(max-width: 1000px)")
-    if (query11.matches) { // If media query matches
-      this.ancho = 770
-      this.alto = 300
-    }
-    const query10 = window.matchMedia("(max-width: 950px)")
-    if (query10.matches) { // If media query matches
-      this.ancho = 750
-      this.alto = 300
-    }
-    const query3 = window.matchMedia("(max-width: 912px)")
-    if (query3.matches) { // If media query matches
-      this.ancho = 700
-      this.alto = 300
-    }
-    const query0 = window.matchMedia("(max-width: 820px)")
-    if (query0.matches) { // If media query matches
-      this.ancho = 630
-      this.alto = 300
-    }
-    const query1 = window.matchMedia("(max-width: 768px)")
-    if (query1.matches) { // If media query matches
-      this.ancho = 600
-      this.alto = 300
-    }
-    const query5 = window.matchMedia("(max-width: 720px)")
-    if (query5.matches) { // If media query matches
-      this.ancho = 550
-      this.alto = 300
-    }
-    const query6 = window.matchMedia("(max-width: 660px)")
-    if (query6.matches) { // If media query matches
-      this.ancho = 500
-      this.alto = 300
-    }
-
-    const query7 = window.matchMedia("(max-width: 610px)")
-    if (query7.matches) { // If media query matches
-      this.ancho = 450
-      this.alto = 300
-    }
-
-    this.query8 = window.matchMedia("(max-width: 540px)")
-    if (this.query8.matches) { // If media query matches
-      this.ancho = 400
-      this.alto = 300
-    }
-
-    this.query9 = window.matchMedia("(max-width: 480px)")
-    if (this.query9.matches) { // If media query matches
-      this.ancho = 350
-      this.alto = 300
-    }
-
-    this.query2 = window.matchMedia("(max-width: 414px)")
-    if (this.query2.matches) { // If media query matches
-      this.ancho = 300
-      this.alto = 300
-    }
-
-    this.query4 = window.matchMedia("(max-width: 375px)")
-    if (this.query4.matches) { // If media query matches
-      this.ancho = 300
-      this.alto = 300
-    }
-
   }
 
   ngOnInit(): void {
@@ -378,11 +106,22 @@ export class HomeComponent implements OnInit,OnDestroy {
     let seriesJsonLocalStorageTempIn = JSON.parse(localStorage.getItem('seriesTempInBadajoz')!)
     this.seriesTempInBadajoz = seriesJsonLocalStorageTempIn
 
-    this.multi2 =
+    let seriesJsonLocalStorageBar = JSON.parse(localStorage.getItem('seriesBarBadajoz')!)
+    this.seriesBarBadajoz = seriesJsonLocalStorageBar
+
+    this.datosGrafica =
     [
       {
         "name": "Temperatura",
         "series": this.seriesTempInBadajoz
+      }
+    ]
+
+    this.datosGraficaBar =
+    [
+      {
+        "name": "Barometro",
+        "series": this.seriesBarBadajoz
       }
     ]
   }
@@ -390,11 +129,21 @@ export class HomeComponent implements OnInit,OnDestroy {
     let seriesJsonLocalStorageTempIn = JSON.parse(localStorage.getItem('seriesTempInZarza')!)
     this.seriesTempInZarza = seriesJsonLocalStorageTempIn
 
-    this.multi2 =
+    let seriesJsonLocalStorageBar = JSON.parse(localStorage.getItem('seriesBarZarza')!)
+    this.seriesBarZarza = seriesJsonLocalStorageBar
+
+    this.datosGrafica =
     [
       {
         "name": "Temperatura",
         "series": this.seriesTempInZarza
+      }
+    ]
+    this.datosGraficaBar =
+    [
+      {
+        "name": "Barometro",
+        "series": this.seriesBarZarza
       }
     ]
   }
@@ -402,20 +151,239 @@ export class HomeComponent implements OnInit,OnDestroy {
     let seriesJsonLocalStorageTempIn = JSON.parse(localStorage.getItem('seriesTempInValenciaA')!)
     this.seriesTempInValenciaA = seriesJsonLocalStorageTempIn
 
-    this.multi2 =
+    let seriesJsonLocalStorageBar = JSON.parse(localStorage.getItem('seriesBarValenciaA')!)
+    this.seriesBarValenciaA = seriesJsonLocalStorageBar
+
+    this.datosGrafica =
     [
       {
         "name": "Temperatura",
         "series": this.seriesTempInValenciaA
       }
     ]
+
+    this.datosGraficaBar =
+    [
+      {
+        "name": "Barometro",
+        "series": this.seriesBarValenciaA
+      }
+    ]
   }
 
+  convertirFaToCentigrados(faValue: number): number{
+      if(faValue){
+        return (faValue - 32) * 5/7
+      } else {
+        return -32 * 5/7
+      }
+   }
+
+  obtenerDatosToGraficaBarrasValenciaA(){
+    let seriesJsonLocalStorageTempIn = JSON.parse(localStorage.getItem('seriesTempInValenciaA')!)
+    this.seriesTempInValenciaA = seriesJsonLocalStorageTempIn
+
+    let seriesJsonLocalStorageHumIn = JSON.parse(localStorage.getItem('seriesHumInValenciaA')!)
+    this.seriesHumInValenciaA = seriesJsonLocalStorageHumIn
+
+    let seriesJsonLocalStorageTemp = JSON.parse(localStorage.getItem('seriesTempValenciaA')!)
+    this.seriesTempValenciaA = seriesJsonLocalStorageTemp
+
+    let seriesJsonLocalStorageWindChill = JSON.parse(localStorage.getItem('seriesWindChillValenciaA')!)
+    this.seriesWindChillValenciaA = seriesJsonLocalStorageWindChill
+
+    let seriesJsonLocalStorageHeatIndex= JSON.parse(localStorage.getItem('seriesHeatIndexValenciaA')!)
+    this.seriesHeatIndexValenciaA = seriesJsonLocalStorageHeatIndex
+
+    let seriesJsonLocalStorageDewPoint= JSON.parse(localStorage.getItem('seriesDewPointValenciaA')!)
+    this.seriesDewPointValenciaA = seriesJsonLocalStorageDewPoint
+
+    this.datosGraficaBarChart =
+    [
+      {
+        "name": "",
+        "series": [
+          {
+            "name": "Temperatura Cº interior (" + this.convertirFaToCentigrados(this.seriesTempInValenciaA[this.seriesTempInValenciaA?.length - 1]?.value) + ")" ,
+            "value": this.convertirFaToCentigrados(this.seriesTempInValenciaA[this.seriesTempInValenciaA?.length - 1]?.value)
+          },
+          {
+            "name": "Humedad % interior ("+this.seriesHumInValenciaA[this.seriesHumInValenciaA?.length - 1]?.value+")",
+            "value": this.seriesHumInValenciaA[this.seriesHumInValenciaA?.length - 1]?.value
+          }
+        ]
+      },
+    ]
+
+    this.datosGraficaBarChart2 =
+    [
+      {
+        "name": "",
+        "series": [
+          {
+            "name": "Temperatura exterior Cº (" + this.convertirFaToCentigrados(this.seriesTempValenciaA[this.seriesTempValenciaA?.length - 1]?.value) + ")" ,
+            "value": this.convertirFaToCentigrados(this.seriesTempValenciaA[this.seriesTempValenciaA?.length - 1]?.value)
+          },
+          {
+            "name": "Viento frío ("+this.seriesWindChillValenciaA[this.seriesWindChillValenciaA?.length - 1]?.value+")",
+            "value": this.seriesWindChillValenciaA[this.seriesWindChillValenciaA?.length - 1]?.value
+          },
+          {
+            "name": "Índice Calorífico ("+this.seriesHeatIndexValenciaA[this.seriesHeatIndexValenciaA?.length - 1]?.value+")",
+            "value": this.seriesHeatIndexValenciaA[this.seriesHeatIndexValenciaA?.length - 1]?.value
+          },
+          {
+            "name": "Punto de rocío ("+this.seriesDewPointValenciaA[this.seriesDewPointValenciaA?.length - 1]?.value+")",
+            "value": this.seriesDewPointValenciaA[this.seriesDewPointValenciaA?.length - 1]?.value
+          },
+          {
+            "name": "Bulbo húmedo ("+this.seriesWetBulbValenciaA[this.seriesWetBulbValenciaA?.length - 1]?.value+")",
+            "value": this.seriesWetBulbValenciaA[this.seriesWetBulbValenciaA?.length - 1]?.value
+          },
+        ]
+      },
+    ]
+  }
+  obtenerDatosToGraficaBarrasBadajoz(){
+    let seriesJsonLocalStorageTempIn = JSON.parse(localStorage.getItem('seriesTempInBadajoz')!)
+    let seriesJsonLocalStorageHumIn = JSON.parse(localStorage.getItem('seriesHumInBadajoz')!)
+    this.seriesTempInBadajoz= seriesJsonLocalStorageTempIn
+    this.seriesHumInBadajoz = seriesJsonLocalStorageHumIn
+
+    let seriesJsonLocalStorageTemp = JSON.parse(localStorage.getItem('seriesTempBadajoz')!)
+    this.seriesTempBadajoz = seriesJsonLocalStorageTemp
+
+    let seriesJsonLocalStorageWindChill = JSON.parse(localStorage.getItem('seriesWindChillBadajoz')!)
+    this.seriesWindChillBadajoz = seriesJsonLocalStorageWindChill
+
+    let seriesJsonLocalStorageHeatIndex= JSON.parse(localStorage.getItem('seriesHeatIndexBadajoz')!)
+    this.seriesHeatIndexBadajoz = seriesJsonLocalStorageHeatIndex
+
+    let seriesJsonLocalStorageDewPoint= JSON.parse(localStorage.getItem('seriesDewPointBadajoz')!)
+    this.seriesDewPointBadajoz = seriesJsonLocalStorageDewPoint
+
+    let seriesJsonLocalStorageWetBulb= JSON.parse(localStorage.getItem('seriesWetBulbBadajoz')!)
+    this.seriesWetBulbBadajoz = seriesJsonLocalStorageWetBulb
+
+    this.datosGraficaBarChart =
+    [
+      {
+        "name": "",
+        "series": [
+          {
+            "name": "Temperatura Cº interior (" + this.convertirFaToCentigrados(this.seriesTempInBadajoz[this.seriesTempInBadajoz?.length - 1]?.value)+")",
+            "value": this.convertirFaToCentigrados(this.seriesTempInBadajoz[this.seriesTempInBadajoz?.length - 1]?.value)
+          },
+          {
+            "name": "Humedad % interior (" + this.seriesHumInBadajoz[this.seriesHumInBadajoz?.length - 1]?.value+")",
+            "value": this.seriesHumInBadajoz[this.seriesHumInBadajoz?.length - 1]?.value
+          }
+        ]
+      },
+    ]
+
+    this.datosGraficaBarChart2 =
+    [
+      {
+        "name": "",
+        "series": [
+          {
+            "name": "Temperatura exterior Cº (" + this.convertirFaToCentigrados(this.seriesTempBadajoz[this.seriesTempBadajoz?.length - 1]?.value) + ")" ,
+            "value": this.convertirFaToCentigrados(this.seriesTempBadajoz[this.seriesTempBadajoz?.length - 1]?.value)
+          },
+          {
+            "name": "Viento frío ("+this.seriesWindChillBadajoz[this.seriesWindChillBadajoz?.length - 1]?.value+")",
+            "value": this.seriesWindChillBadajoz[this.seriesWindChillBadajoz?.length - 1]?.value
+          },
+          {
+            "name": "Índice Calorífico ("+this.seriesHeatIndexBadajoz[this.seriesHeatIndexBadajoz?.length - 1]?.value+")",
+            "value": this.seriesHeatIndexBadajoz[this.seriesHeatIndexBadajoz?.length - 1]?.value
+          },
+          {
+            "name": "Punto de rocío ("+this.seriesDewPointBadajoz[this.seriesDewPointBadajoz?.length - 1]?.value+")",
+            "value": this.seriesDewPointBadajoz[this.seriesDewPointBadajoz?.length - 1]?.value
+          },
+          {
+            "name": "Bulbo húmedo ("+this.seriesWetBulbBadajoz[this.seriesWetBulbBadajoz?.length - 1]?.value+")",
+            "value": this.seriesWetBulbBadajoz[this.seriesWetBulbBadajoz?.length - 1]?.value
+          },
+        ]
+      },
+    ]
+  }
+
+  obtenerDatosToGraficaBarrasZarza(){
+    let seriesJsonLocalStorageTempIn = JSON.parse(localStorage.getItem('seriesTempInZarza')!)
+    let seriesJsonLocalStorageHumIn = JSON.parse(localStorage.getItem('seriesHumInZarza')!)
+    this.seriesTempInZarza= seriesJsonLocalStorageTempIn
+    this.seriesHumInZarza = seriesJsonLocalStorageHumIn
+
+    let seriesJsonLocalStorageTemp = JSON.parse(localStorage.getItem('seriesTempZarza')!)
+    this.seriesTempZarza = seriesJsonLocalStorageTemp
+
+    let seriesJsonLocalStorageWindChill = JSON.parse(localStorage.getItem('seriesWindChillZarza')!)
+    this.seriesWindChillZarza = seriesJsonLocalStorageWindChill
+
+    let seriesJsonLocalStorageHeatIndex= JSON.parse(localStorage.getItem('seriesHeatIndexZarza')!)
+    this.seriesHeatIndexZarza = seriesJsonLocalStorageHeatIndex
+
+    let seriesJsonLocalStorageDewPoint= JSON.parse(localStorage.getItem('seriesDewPointZarza')!)
+    this.seriesDewPointZarza = seriesJsonLocalStorageDewPoint
+
+    let seriesJsonLocalStorageWetBulb= JSON.parse(localStorage.getItem('seriesWetBulbZarza')!)
+    this.seriesWetBulbZarza = seriesJsonLocalStorageWetBulb
+
+    this.datosGraficaBarChart =
+    [
+      {
+        "name": "",
+        "series": [
+          {
+            "name": "Temperatura Cº interior ("+this.convertirFaToCentigrados(this.seriesTempInZarza[this.seriesTempInZarza?.length - 1]?.value)+")",
+            "value": this.convertirFaToCentigrados(this.seriesTempInZarza[this.seriesTempInZarza?.length - 1]?.value)
+          },
+          {
+            "name": "Humedad % interior (" + this.seriesHumInZarza[this.seriesHumInZarza?.length - 1]?.value+")",
+            "value": this.seriesHumInZarza[this.seriesHumInZarza?.length - 1]?.value
+          }
+        ]
+      },
+    ]
+
+    this.datosGraficaBarChart2 =
+    [
+      {
+        "name": "",
+        "series": [
+          {
+            "name": "Temperatura exterior Cº (" + this.convertirFaToCentigrados(this.seriesTempZarza[this.seriesTempZarza?.length - 1]?.value) + ")" ,
+            "value": this.convertirFaToCentigrados(this.seriesTempZarza[this.seriesTempZarza?.length - 1]?.value)
+          },
+          {
+            "name": "Viento frío ("+this.seriesWindChillZarza[this.seriesWindChillZarza?.length - 1]?.value+")",
+            "value": this.seriesWindChillZarza[this.seriesWindChillZarza?.length - 1]?.value
+          },
+          {
+            "name": "Índice Calorífico ("+this.seriesHeatIndexZarza[this.seriesHeatIndexZarza?.length - 1]?.value+")",
+            "value": this.seriesHeatIndexZarza[this.seriesHeatIndexZarza?.length - 1]?.value
+          },
+          {
+            "name": "Punto de rocío ("+this.seriesDewPointZarza[this.seriesDewPointZarza?.length - 1]?.value+")",
+            "value": this.seriesDewPointZarza[this.seriesDewPointZarza?.length - 1]?.value
+          },
+          {
+            "name": "Bulbo húmedo ("+this.seriesWetBulbZarza[this.seriesWetBulbZarza?.length - 1]?.value+")",
+            "value": this.seriesWetBulbZarza[this.seriesWetBulbZarza?.length - 1]?.value
+          },
+        ]
+      },
+    ]
+  }
   obtenerDatosGraficaLocalStorageCedillo(){
     let seriesJsonLocalStorageTempIn = JSON.parse(localStorage.getItem('seriesTempInCedillo')!)
     this.seriesTempInCedillo = seriesJsonLocalStorageTempIn
 
-    this.multi2 =
+    this.datosGrafica =
     [
       {
         "name": "Temperatura",
@@ -424,42 +392,73 @@ export class HomeComponent implements OnInit,OnDestroy {
     ]
   }
 
-  /*guardarLocalStorageHum(serieVal:any){
-    var a = []
-    if(localStorage.getItem('seriesHum')){
-      a = JSON.parse(localStorage.getItem('seriesHum')!)
-    }
-    while(a.length >= 5){
-      a.shift()
-    }
-    a.push(serieVal);
-    localStorage.setItem('seriesHum', JSON.stringify(a));
+  obtenerDatosToGraficaBarrasCedillo(){
+    let seriesJsonLocalStorageTempIn = JSON.parse(localStorage.getItem('seriesTempInCedillo')!)
+    let seriesJsonLocalStorageHumIn = JSON.parse(localStorage.getItem('seriesHumInCedillo')!)
+    this.seriesTempInCedillo= seriesJsonLocalStorageTempIn
+    this.seriesHumInCedillo = seriesJsonLocalStorageHumIn
+
+    let seriesJsonLocalStorageTemp = JSON.parse(localStorage.getItem('seriesTempCedillo')!)
+    this.seriesTempCedillo = seriesJsonLocalStorageTemp
+
+    let seriesJsonLocalStorageWindChill = JSON.parse(localStorage.getItem('seriesWindChillCedillo')!)
+    this.seriesWindChillCedillo = seriesJsonLocalStorageWindChill
+
+    let seriesJsonLocalStorageHeatIndex= JSON.parse(localStorage.getItem('seriesHeatIndexCedillo')!)
+    this.seriesHeatIndexCedillo = seriesJsonLocalStorageHeatIndex
+
+    let seriesJsonLocalStorageDewPoint= JSON.parse(localStorage.getItem('seriesDewPointCedillo')!)
+    this.seriesDewPointCedillo = seriesJsonLocalStorageDewPoint
+
+    let seriesJsonLocalStorageWetBulb= JSON.parse(localStorage.getItem('seriesWetBulbCedillo')!)
+    this.seriesWetBulbCedillo = seriesJsonLocalStorageWetBulb
+
+    this.datosGraficaBarChart =
+    [
+      {
+        "name": "",
+        "series": [
+          {
+            "name": "Temperatura Cº interior (" + this.convertirFaToCentigrados(this.seriesTempInCedillo[this.seriesTempInCedillo?.length - 1]?.value)+")",
+            "value": this.convertirFaToCentigrados(this.seriesTempInCedillo[this.seriesTempInCedillo?.length - 1]?.value)
+          },
+          {
+            "name": "Humedad % interior(" + this.seriesHumInCedillo[this.seriesHumInCedillo?.length - 1]?.value + ")",
+            "value": this.seriesHumInCedillo[this.seriesHumInCedillo?.length - 1]?.value
+          }
+        ]
+      },
+    ]
+
+    this.datosGraficaBarChart2 =
+    [
+      {
+        "name": "",
+        "series": [
+          {
+            "name": "Temperatura exterior Cº (" + this.convertirFaToCentigrados(this.seriesTempZarza[this.seriesTempZarza?.length - 1]?.value) + ")" ,
+            "value": this.convertirFaToCentigrados(this.seriesTempCedillo[this.seriesTempZarza?.length - 1]?.value)
+          },
+          {
+            "name": "Viento frío ("+this.seriesWindChillCedillo[this.seriesWindChillCedillo?.length - 1]?.value+")",
+            "value": this.seriesWindChillCedillo[this.seriesWindChillCedillo?.length - 1]?.value
+          },
+          {
+            "name": "Índice Calorífico ("+this.seriesHeatIndexCedillo[this.seriesHeatIndexCedillo?.length - 1]?.value+")",
+            "value": this.seriesHeatIndexCedillo[this.seriesHeatIndexCedillo?.length - 1]?.value
+          },
+          {
+            "name": "Punto de rocío ("+this.seriesDewPointCedillo[this.seriesDewPointCedillo?.length - 1]?.value+")",
+            "value": this.seriesDewPointCedillo[this.seriesDewPointCedillo?.length - 1]?.value
+          },
+          {
+            "name": "Bulbo húmedo ("+this.seriesWetBulbCedillo[this.seriesWetBulbCedillo?.length - 1]?.value+")",
+            "value": this.seriesWetBulbCedillo[this.seriesWetBulbCedillo?.length - 1]?.value
+          },
+        ]
+      },
+    ]
   }
-
-  guardarLocalStorageWind2Minutes(serieVal:any){
-    var a = []
-    if(localStorage.getItem('seriesWind2Minutes')){
-      a = JSON.parse(localStorage.getItem('seriesWind2Minutes')!)
-    }
-    while(a.length >= 5){
-      a.shift()
-    }
-    a.push(serieVal);
-    localStorage.setItem('seriesWind2Minutes', JSON.stringify(a));
-  }
-
-  guardarLocalStorageWind10Minutes(serieVal:any){
-    var a = []
-    if(localStorage.getItem('seriesWind10Minutes')){
-      a = JSON.parse(localStorage.getItem('seriesWind10Minutes')!)
-    }
-    while(a.length >= 5){
-      a.shift()
-    }
-    a.push(serieVal);
-    localStorage.setItem('seriesWind10Minutes', JSON.stringify(a));
-  }*/
-
 
   guardarLocalStorageTempInBadajoz(serieVal:any){
     var a = []
@@ -472,6 +471,89 @@ export class HomeComponent implements OnInit,OnDestroy {
     a.push(serieVal);
     localStorage.setItem('seriesTempInBadajoz', JSON.stringify(a));
   }
+
+  guardarLocalStorageTempBadajoz(serieVal:any){
+    var a = []
+    if(localStorage.getItem('seriesTempBadajoz')){
+      a = JSON.parse(localStorage.getItem('seriesTempBadajoz')!)
+    }
+    while(a.length >= 5){
+      a.shift()
+    }
+    a.push(serieVal);
+    localStorage.setItem('seriesTempBadajoz', JSON.stringify(a));
+  }
+  guardarLocalStorageWindChillBadajoz(serieVal:any){
+    var a = []
+    if(localStorage.getItem('seriesWindChillBadajoz')){
+      a = JSON.parse(localStorage.getItem('seriesWindChillBadajoz')!)
+    }
+    while(a.length >= 5){
+      a.shift()
+    }
+    a.push(serieVal);
+    localStorage.setItem('seriesWindChillBadajoz', JSON.stringify(a));
+  }
+  guardarLocalStorageHeatIndexBadajoz(serieVal:any){
+    var a = []
+    if(localStorage.getItem('seriesHeatIndexBadajoz')){
+      a = JSON.parse(localStorage.getItem('seriesHeatIndexBadajoz')!)
+    }
+    while(a.length >= 5){
+      a.shift()
+    }
+    a.push(serieVal);
+    localStorage.setItem('seriesHeatIndexBadajoz', JSON.stringify(a));
+  }
+
+  guardarLocalStorageDewPointBadajoz(serieVal:any){
+    var a = []
+    if(localStorage.getItem('seriesDewPointBadajoz')){
+      a = JSON.parse(localStorage.getItem('seriesDewPointBadajoz')!)
+    }
+    while(a.length >= 5){
+      a.shift()
+    }
+    a.push(serieVal);
+    localStorage.setItem('seriesDewPointBadajoz', JSON.stringify(a));
+  }
+
+  guardarLocalStorageWetBulbBadajoz(serieVal:any){
+    var a = []
+    if(localStorage.getItem('seriesWetBulbBadajoz')){
+      a = JSON.parse(localStorage.getItem('seriesWetBulbBadajoz')!)
+    }
+    while(a.length >= 5){
+      a.shift()
+    }
+    a.push(serieVal);
+    localStorage.setItem('seriesWetBulbBadajoz', JSON.stringify(a));
+  }
+
+  guardarLocalStorageHumInBadajoz(serieVal:any){
+    var a = []
+    if(localStorage.getItem('seriesHumInBadajoz')){
+      a = JSON.parse(localStorage.getItem('seriesHumInBadajoz')!)
+    }
+    while(a.length >= 5){
+      a.shift()
+    }
+    a.push(serieVal);
+    localStorage.setItem('seriesHumInBadajoz', JSON.stringify(a));
+  }
+
+  guardarLocalStorageBarBadajoz(serieVal:any){
+    var a = []
+    if(localStorage.getItem('seriesBarBadajoz')){
+      a = JSON.parse(localStorage.getItem('seriesBarBadajoz')!)
+    }
+    while(a.length >= 5){
+      a.shift()
+    }
+    a.push(serieVal);
+    localStorage.setItem('seriesBarBadajoz', JSON.stringify(a));
+  }
+
   guardarLocalStorageTempInZarza(serieVal:any){
     var a = []
     if(localStorage.getItem('seriesTempInZarza')){
@@ -483,6 +565,89 @@ export class HomeComponent implements OnInit,OnDestroy {
     a.push(serieVal);
     localStorage.setItem('seriesTempInZarza', JSON.stringify(a));
   }
+
+  guardarLocalStorageTempZarza(serieVal:any){
+    var a = []
+    if(localStorage.getItem('seriesTempZarza')){
+      a = JSON.parse(localStorage.getItem('seriesTempZarza')!)
+    }
+    while(a.length >= 5){
+      a.shift()
+    }
+    a.push(serieVal);
+    localStorage.setItem('seriesTempZarza', JSON.stringify(a));
+  }
+  guardarLocalStorageWindChillZarza(serieVal:any){
+    var a = []
+    if(localStorage.getItem('seriesWindChillZarza')){
+      a = JSON.parse(localStorage.getItem('seriesWindChillZarza')!)
+    }
+    while(a.length >= 5){
+      a.shift()
+    }
+    a.push(serieVal);
+    localStorage.setItem('seriesWindChillZarza', JSON.stringify(a));
+  }
+  guardarLocalStorageHeatIndexZarza(serieVal:any){
+    var a = []
+    if(localStorage.getItem('seriesHeatIndexZarza')){
+      a = JSON.parse(localStorage.getItem('seriesHeatIndexZarza')!)
+    }
+    while(a.length >= 5){
+      a.shift()
+    }
+    a.push(serieVal);
+    localStorage.setItem('seriesHeatIndexZarza', JSON.stringify(a));
+  }
+
+  guardarLocalStorageDewPointZarza(serieVal:any){
+    var a = []
+    if(localStorage.getItem('seriesDewPointZarza')){
+      a = JSON.parse(localStorage.getItem('seriesDewPointZarza')!)
+    }
+    while(a.length >= 5){
+      a.shift()
+    }
+    a.push(serieVal);
+    localStorage.setItem('seriesDewPointZarza', JSON.stringify(a));
+  }
+
+  guardarLocalStorageWetBulbZarza(serieVal:any){
+    var a = []
+    if(localStorage.getItem('seriesWetBulbZarza')){
+      a = JSON.parse(localStorage.getItem('seriesWetBulbZarza')!)
+    }
+    while(a.length >= 5){
+      a.shift()
+    }
+    a.push(serieVal);
+    localStorage.setItem('seriesWetBulbZarza', JSON.stringify(a));
+  }
+
+  guardarLocalStorageHumInZarza(serieVal:any){
+    var a = []
+    if(localStorage.getItem('seriesHumInZarza')){
+      a = JSON.parse(localStorage.getItem('seriesHumInZarza')!)
+    }
+    while(a.length >= 5){
+      a.shift()
+    }
+    a.push(serieVal);
+    localStorage.setItem('seriesHumInZarza', JSON.stringify(a));
+  }
+
+  guardarLocalStorageBarZarza(serieVal:any){
+    var a = []
+    if(localStorage.getItem('seriesBarZarza')){
+      a = JSON.parse(localStorage.getItem('seriesBarZarza')!)
+    }
+    while(a.length >= 5){
+      a.shift()
+    }
+    a.push(serieVal);
+    localStorage.setItem('seriesBarZarza', JSON.stringify(a));
+  }
+
   guardarLocalStorageTempInValenciaA(serieVal:any){
     var a = []
     if(localStorage.getItem('seriesTempInValenciaA')){
@@ -493,6 +658,88 @@ export class HomeComponent implements OnInit,OnDestroy {
     }
     a.push(serieVal);
     localStorage.setItem('seriesTempInValenciaA', JSON.stringify(a));
+  }
+
+  guardarLocalStorageTempValenciaA(serieVal:any){
+    var a = []
+    if(localStorage.getItem('seriesTempValenciaA')){
+      a = JSON.parse(localStorage.getItem('seriesTempValenciaA')!)
+    }
+    while(a.length >= 5){
+      a.shift()
+    }
+    a.push(serieVal);
+    localStorage.setItem('seriesTempValenciaA', JSON.stringify(a));
+  }
+  guardarLocalStorageWindChillValenciaA(serieVal:any){
+    var a = []
+    if(localStorage.getItem('seriesWindChillValenciaA')){
+      a = JSON.parse(localStorage.getItem('seriesWindChillValenciaA')!)
+    }
+    while(a.length >= 5){
+      a.shift()
+    }
+    a.push(serieVal);
+    localStorage.setItem('seriesWindChillValenciaA', JSON.stringify(a));
+  }
+  guardarLocalStorageHeatIndexValenciaA(serieVal:any){
+    var a = []
+    if(localStorage.getItem('seriesHeatIndexValenciaA')){
+      a = JSON.parse(localStorage.getItem('seriesHeatIndexValenciaA')!)
+    }
+    while(a.length >= 5){
+      a.shift()
+    }
+    a.push(serieVal);
+    localStorage.setItem('seriesHeatIndexValenciaA', JSON.stringify(a));
+  }
+
+  guardarLocalStorageDewPointValenciaA(serieVal:any){
+    var a = []
+    if(localStorage.getItem('seriesDewPointValenciaA')){
+      a = JSON.parse(localStorage.getItem('seriesDewPointValenciaA')!)
+    }
+    while(a.length >= 5){
+      a.shift()
+    }
+    a.push(serieVal);
+    localStorage.setItem('seriesDewPointValenciaA', JSON.stringify(a));
+  }
+
+  guardarLocalStorageWetBulbValenciaA(serieVal:any){
+    var a = []
+    if(localStorage.getItem('seriesWetBulbValenciaA')){
+      a = JSON.parse(localStorage.getItem('seriesWetBulbValenciaA')!)
+    }
+    while(a.length >= 5){
+      a.shift()
+    }
+    a.push(serieVal);
+    localStorage.setItem('seriesWetBulbValenciaA', JSON.stringify(a));
+  }
+
+  guardarLocalStorageBarValenciaA(serieVal:any){
+    var a = []
+    if(localStorage.getItem('seriesBarValenciaA')){
+      a = JSON.parse(localStorage.getItem('seriesBarValenciaA')!)
+    }
+    while(a.length >= 5){
+      a.shift()
+    }
+    a.push(serieVal);
+    localStorage.setItem('seriesBarValenciaA', JSON.stringify(a));
+  }
+
+  guardarLocalStorageHumInValenciaA(serieVal:any){
+    var a = []
+    if(localStorage.getItem('seriesHumInValenciaA')){
+      a = JSON.parse(localStorage.getItem('seriesHumInValenciaA')!)
+    }
+    while(a.length >= 5){
+      a.shift()
+    }
+    a.push(serieVal);
+    localStorage.setItem('seriesHumInValenciaA', JSON.stringify(a));
   }
 
   guardarLocalStorageTempInCedillo(serieVal:any){
@@ -506,87 +753,90 @@ export class HomeComponent implements OnInit,OnDestroy {
     a.push(serieVal);
     localStorage.setItem('seriesTempInCedillo', JSON.stringify(a));
   }
-  /*guardarLocalStorageHumIn(serieVal:any){
+
+  guardarLocalStorageTempCedillo(serieVal:any){
     var a = []
-    if(localStorage.getItem('seriesHumIn')){
-      a = JSON.parse(localStorage.getItem('seriesHumIn')!)
+    if(localStorage.getItem('seriesTempCedillo')){
+      a = JSON.parse(localStorage.getItem('seriesTempCedillo')!)
     }
     while(a.length >= 5){
       a.shift()
     }
     a.push(serieVal);
-    localStorage.setItem('seriesHumIn', JSON.stringify(a));
+    localStorage.setItem('seriesTempCedillo', JSON.stringify(a));
+  }
+  guardarLocalStorageWindChillCedillo(serieVal:any){
+    var a = []
+    if(localStorage.getItem('seriesWindChillCedillo')){
+      a = JSON.parse(localStorage.getItem('seriesWindChillCedillo')!)
+    }
+    while(a.length >= 5){
+      a.shift()
+    }
+    a.push(serieVal);
+    localStorage.setItem('seriesWindChillCedillo', JSON.stringify(a));
+  }
+  guardarLocalStorageHeatIndexCedillo(serieVal:any){
+    var a = []
+    if(localStorage.getItem('seriesHeatIndexCedillo')){
+      a = JSON.parse(localStorage.getItem('seriesHeatIndexCedillo')!)
+    }
+    while(a.length >= 5){
+      a.shift()
+    }
+    a.push(serieVal);
+    localStorage.setItem('seriesHeatIndexCedillo', JSON.stringify(a));
   }
 
-  guardarLocalStorageDewPointIn(serieVal:any){
+  guardarLocalStorageDewPointCedillo(serieVal:any){
     var a = []
-    if(localStorage.getItem('seriesDewPointIn')){
-      a = JSON.parse(localStorage.getItem('seriesDewPointIn')!)
+    if(localStorage.getItem('seriesDewPointCedillo')){
+      a = JSON.parse(localStorage.getItem('seriesDewPointCedillo')!)
     }
     while(a.length >= 5){
       a.shift()
     }
     a.push(serieVal);
-    localStorage.setItem('seriesDewPointIn', JSON.stringify(a));
+    localStorage.setItem('seriesDewPointCedillo', JSON.stringify(a));
   }
 
-  guardarLocalStorageBarAbsolute(serieVal:any) {
+  guardarLocalStorageWetBulbCedillo(serieVal:any){
     var a = []
-    if(localStorage.getItem('seriesBarAbsolute')){
-      a = JSON.parse(localStorage.getItem('seriesBarAbsolute')!)
+    if(localStorage.getItem('seriesWetBulbCedillo')){
+      a = JSON.parse(localStorage.getItem('seriesWetBulbCedillo')!)
     }
     while(a.length >= 5){
       a.shift()
     }
     a.push(serieVal);
-    localStorage.setItem('seriesBarAbsolute', JSON.stringify(a));
+    localStorage.setItem('seriesWetBulbCedillo', JSON.stringify(a));
   }
 
-  guardarLocalStorageBarOffset(serieVal:any) {
+  guardarLocalStorageHumInCedillo(serieVal:any){
     var a = []
-    if(localStorage.getItem('seriesBarOffset')){
-      a = JSON.parse(localStorage.getItem('seriesBarOffset')!)
+    if(localStorage.getItem('seriesHumInCedillo')){
+      a = JSON.parse(localStorage.getItem('seriesHumInCedillo')!)
     }
     while(a.length >= 5){
       a.shift()
     }
     a.push(serieVal);
-    localStorage.setItem('seriesBarOffset', JSON.stringify(a));
+    localStorage.setItem('seriesHumInCedillo', JSON.stringify(a));
   }
-
-  guardarLocalStorageBarSeaLevel(serieVal:any) {
+  guardarLocalStorageBarCedillo(serieVal:any){
     var a = []
-    if(localStorage.getItem('seriesBarSeaLevel')){
-      a = JSON.parse(localStorage.getItem('seriesBarSeaLevel')!)
+    if(localStorage.getItem('seriesBarCedillo')){
+      a = JSON.parse(localStorage.getItem('seriesBarCedillo')!)
     }
     while(a.length >= 5){
       a.shift()
     }
     a.push(serieVal);
-    localStorage.setItem('seriesBarSeaLevel', JSON.stringify(a));
+    localStorage.setItem('seriesBarCedillo', JSON.stringify(a));
   }
-
-  guardarLocalStorageBarTrend(serieVal:any){
-    var a = []
-    if(localStorage.getItem('seriesBarTrend')){
-      a = JSON.parse(localStorage.getItem('seriesBarTrend')!)
-    }
-    while(a.length >= 5){
-      a.shift()
-    }
-    a.push(serieVal);
-    localStorage.setItem('seriesBarTrend', JSON.stringify(a));
-  }*/
 
   obtenerBadajozDatos() {
     console.log('obtenerBadajozDatos');
-
-    // Inicializamos los sensores
-    this.sensor0 = {}
-    this.sensor1 = {}
-    this.sensor2 = {}
-    this.sensor3 = {}
-
 
     // Obtenemos los sensores
     this.weatherService.getEstacionBadajoz().subscribe(data => {
@@ -599,26 +849,50 @@ export class HomeComponent implements OnInit,OnDestroy {
       this.estacionBadajoz.sensor3 = data?.sensors ? data?.sensors[3]?.data[0]: null;
 
       let  date = new Date().toISOString();
-      date = moment(date).format('DD-MM-YYYY HH:mm:ss')
+      date = moment(date).format('HH:mm:ss')
 
       this.guardarLocalStorageTempInBadajoz({
         "name": date,
         "value": this.estacionBadajoz.sensor1?.temp_in ?? 0
       })
+      this.guardarLocalStorageTempBadajoz({
+        "name": date,
+        "value": this.estacionBadajoz.sensor0?.temp ?? 0
+      })
+      this.guardarLocalStorageWindChillBadajoz({
+        "name": date,
+        "value": this.estacionBadajoz.sensor0?.wind_chill ?? 0
+      })
+      this.guardarLocalStorageHeatIndexBadajoz({
+        "name": date,
+        "value": this.estacionBadajoz.sensor0?.heat_index ?? 0
+      })
+      this.guardarLocalStorageDewPointBadajoz({
+        "name": date,
+        "value": this.estacionBadajoz.sensor0?.dew_point ?? 0
+      })
+      this.guardarLocalStorageWetBulbBadajoz({
+        "name": date,
+        "value": this.estacionBadajoz.sensor0?.wet_bulb ?? 0
+      })
+      this.guardarLocalStorageHumInBadajoz({
+        "name": date,
+        "value": this.estacionBadajoz.sensor1?.hum_in ?? 0
+      })
+    console.log('this.estacionBadajoz', this.estacionBadajoz);
+
+      this.guardarLocalStorageBarBadajoz({
+        "name": date,
+        "value": this.estacionBadajoz.sensor2?.bar_absolute ?? 0
+      })
 
       this.obtenerDatosGraficaLocalStorageBadajoz();
+      this.obtenerDatosToGraficaBarrasBadajoz();
     })
   }
 
   obtenerZarzaDatos() {
     console.log('obtenerZarzaDatos');
-
-    // Inicializamos los sensores
-    this.sensor0 = {}
-    this.sensor1 = {}
-    this.sensor2 = {}
-    this.sensor3 = {}
-
 
     // Obtenemos los sensores
     this.weatherService.getEstacionZarzaLaMayor().subscribe(data => {
@@ -631,26 +905,48 @@ export class HomeComponent implements OnInit,OnDestroy {
       this.estacionZarzaLaMayor.sensor3 = data?.sensors ? data?.sensors[0]?.data[0]: null;
 
       let  date = new Date().toISOString();
-      date = moment(date).format('DD-MM-YYYY HH:mm:ss')
+      date = moment(date).format('HH:mm:ss')
 
       this.guardarLocalStorageTempInZarza({
         "name": date,
         "value": this.estacionZarzaLaMayor.sensor1.temp_in ?? 0
       })
+      this.guardarLocalStorageTempZarza({
+        "name": date,
+        "value": this.estacionZarzaLaMayor.sensor0?.temp ?? 0
+      })
+      this.guardarLocalStorageWindChillZarza({
+        "name": date,
+        "value": this.estacionZarzaLaMayor.sensor0?.wind_chill ?? 0
+      })
+      this.guardarLocalStorageHeatIndexZarza({
+        "name": date,
+        "value": this.estacionZarzaLaMayor.sensor0?.heat_index ?? 0
+      })
+      this.guardarLocalStorageDewPointZarza({
+        "name": date,
+        "value": this.estacionZarzaLaMayor.sensor0?.dew_point ?? 0
+      })
+      this.guardarLocalStorageWetBulbZarza({
+        "name": date,
+        "value": this.estacionZarzaLaMayor.sensor0?.wet_bulb ?? 0
+      })
+      this.guardarLocalStorageHumInZarza({
+        "name": date,
+        "value": this.estacionZarzaLaMayor.sensor1.hum_in ?? 0
+      })
+      this.guardarLocalStorageBarZarza({
+        "name": date,
+        "value": this.estacionZarzaLaMayor.sensor2?.bar_absolute ?? 0
+      })
 
       this.obtenerDatosGraficaLocalStorageZarza();
+      this.obtenerDatosToGraficaBarrasZarza()
     })
   }
   obtenerValenciaADatos() {
 
     console.log('obtenerValenciaADatos');
-
-    // Inicializamos los sensores
-    this.sensor0 = {}
-    this.sensor1 = {}
-    this.sensor2 = {}
-    this.sensor3 = {}
-
 
     // Obtenemos los sensores
     this.weatherService.getValenciaAlcantara().subscribe(data => {
@@ -663,26 +959,48 @@ export class HomeComponent implements OnInit,OnDestroy {
       this.estacionValenciaA.sensor3 = data?.sensors ? data?.sensors[0]?.data[0]: null;
 
       let  date = new Date().toISOString();
-      date = moment(date).format('DD-MM-YYYY HH:mm:ss')
+      date = moment(date).format('HH:mm:ss')
 
 
       this.guardarLocalStorageTempInValenciaA({
         "name": date,
         "value": this.estacionValenciaA.sensor1.temp_in ?? 0
       })
+      this.guardarLocalStorageTempValenciaA({
+        "name": date,
+        "value": this.estacionValenciaA.sensor0?.temp ?? 0
+      })
+      this.guardarLocalStorageWindChillValenciaA({
+        "name": date,
+        "value": this.estacionValenciaA.sensor0?.wind_chill ?? 0
+      })
+      this.guardarLocalStorageHeatIndexValenciaA({
+        "name": date,
+        "value": this.estacionValenciaA.sensor0?.heat_index ?? 0
+      })
+      this.guardarLocalStorageDewPointValenciaA({
+        "name": date,
+        "value": this.estacionValenciaA.sensor0?.dew_point ?? 0
+      })
+      this.guardarLocalStorageWetBulbValenciaA({
+        "name": date,
+        "value": this.estacionValenciaA.sensor0?.wet_bulb ?? 0
+      })
+      this.guardarLocalStorageHumInValenciaA({
+        "name": date,
+        "value": this.estacionValenciaA.sensor1.hum_in ?? 0
+      })
+      this.guardarLocalStorageBarValenciaA({
+        "name": date,
+        "value": this.estacionValenciaA.sensor2?.bar_absolute ?? 0
+      })
 
       this.obtenerDatosGraficaLocalStorageValenciaA();
+      this.obtenerDatosToGraficaBarrasValenciaA();
     })
   }
   obtenerCedilloDatos() {
     console.log('obtenerCedilloDatos');
-
-    // Inicializamos los sensores
-    this.sensor0 = {}
-    this.sensor1 = {}
-    this.sensor2 = {}
-    this.sensor3 = {}
-
 
     // Obtenemos los sensores
     this.weatherService.getEstacionCedillo().subscribe(data => {
@@ -695,31 +1013,50 @@ export class HomeComponent implements OnInit,OnDestroy {
       this.estacionCedillo.sensor3 = data?.sensors ? data?.sensors[0]?.data[0]: null;
 
       let  date = new Date().toISOString();
-      date = moment(date).format('DD-MM-YYYY HH:mm:ss')
+      date = moment(date).format('HH:mm:ss')
 
 
       this.guardarLocalStorageTempInCedillo({
         "name": date,
         "value": this.estacionCedillo.sensor1.temp_in ?? 0
       })
+      this.guardarLocalStorageTempCedillo({
+        "name": date,
+        "value": this.estacionCedillo.sensor0?.temp ?? 0
+      })
+      this.guardarLocalStorageWindChillCedillo({
+        "name": date,
+        "value": this.estacionCedillo.sensor0?.wind_chill ?? 0
+      })
+      this.guardarLocalStorageHeatIndexCedillo({
+        "name": date,
+        "value": this.estacionCedillo.sensor0?.heat_index ?? 0
+      })
+
+      this.guardarLocalStorageDewPointCedillo({
+        "name": date,
+        "value": this.estacionCedillo.sensor0?.dew_point ?? 0
+      })
+
+      this.guardarLocalStorageWetBulbCedillo({
+        "name": date,
+        "value": this.estacionCedillo.sensor0?.wet_bulb ?? 0
+      })
+      this.guardarLocalStorageHumInCedillo({
+        "name": date,
+        "value": this.estacionCedillo.sensor1.hum_in ?? 0
+      })
+      this.guardarLocalStorageBarCedillo({
+        "name": date,
+        "value": this.estacionCedillo.sensor2?.bar_absolute ?? 0
+      })
 
       this.obtenerDatosGraficaLocalStorageCedillo();
+      this.obtenerDatosToGraficaBarrasCedillo();
     })
-  }
-  onSelect(data:any): void {
-    //console.log('Item clicked', JSON.parse(JSON.stringify(data)));
-  }
-
-  onActivate(data:any): void {
-    //console.log('Activate', JSON.parse(JSON.stringify(data)));
-  }
-
-  onDeactivate(data:any): void {
-    //console.log('Deactivate', JSON.parse(JSON.stringify(data)));
   }
 
   hiloBadajoz(){
-    this.responsiveGraficaAnchoAlto();
     this.obtenerBadajozDatos();
     this.intervalBadajoz = setInterval(() => {
       this.obtenerBadajozDatos();
@@ -727,7 +1064,6 @@ export class HomeComponent implements OnInit,OnDestroy {
   }
 
   hiloZarzaLaMayor(){
-    this.responsiveGraficaAnchoAlto();
     this.obtenerZarzaDatos();
     this.intervalZarzaLaMayor = setInterval(() => {
       this.obtenerZarzaDatos();
@@ -735,7 +1071,6 @@ export class HomeComponent implements OnInit,OnDestroy {
   }
 
   hiloValenciaA(){
-    this.responsiveGraficaAnchoAlto();
     this.obtenerValenciaADatos();
     this.intervalValenciaA = setInterval(() => {
       this.obtenerValenciaADatos();
@@ -743,7 +1078,6 @@ export class HomeComponent implements OnInit,OnDestroy {
   }
 
   hiloCedillo(){
-    this.responsiveGraficaAnchoAlto();
     this.obtenerCedilloDatos();
     this.intervalCedillo = setInterval(() => {
       this.obtenerCedilloDatos();
