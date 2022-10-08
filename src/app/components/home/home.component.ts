@@ -173,9 +173,9 @@ export class HomeComponent implements OnInit,OnDestroy {
 
   convertirFaToCentigrados(faValue: number): number{
       if(faValue){
-        return (faValue - 32) * 5/7
+        return Number(((faValue - 32) * 5/7).toFixed(2))
       } else {
-        return -32 * 5/7
+        return Number((-32 * 5/7).toFixed(2))
       }
    }
 
@@ -197,6 +197,9 @@ export class HomeComponent implements OnInit,OnDestroy {
 
     let seriesJsonLocalStorageDewPoint= JSON.parse(localStorage.getItem('seriesDewPointValenciaA')!)
     this.seriesDewPointValenciaA = seriesJsonLocalStorageDewPoint
+
+    let seriesJsonLocalStorageWetBulb= JSON.parse(localStorage.getItem('seriesWetBulbValenciaA')!)
+    this.seriesWetBulbValenciaA = seriesJsonLocalStorageWetBulb
 
     this.datosGraficaBarChart =
     [
@@ -225,24 +228,26 @@ export class HomeComponent implements OnInit,OnDestroy {
             "value": this.convertirFaToCentigrados(this.seriesTempValenciaA[this.seriesTempValenciaA?.length - 1]?.value)
           },
           {
-            "name": "Viento frío ("+this.seriesWindChillValenciaA[this.seriesWindChillValenciaA?.length - 1]?.value+")",
-            "value": this.seriesWindChillValenciaA[this.seriesWindChillValenciaA?.length - 1]?.value
+            "name": "Viento frío ("+this.convertirFaToCentigrados(this.seriesWindChillValenciaA[this.seriesWindChillValenciaA?.length - 1]?.value)+")",
+            "value": this.convertirFaToCentigrados(this.seriesWindChillValenciaA[this.seriesWindChillValenciaA?.length - 1]?.value)
           },
           {
-            "name": "Índice Calorífico ("+this.seriesHeatIndexValenciaA[this.seriesHeatIndexValenciaA?.length - 1]?.value+")",
-            "value": this.seriesHeatIndexValenciaA[this.seriesHeatIndexValenciaA?.length - 1]?.value
+            "name": "Índice Calorífico ("+this.convertirFaToCentigrados(this.seriesHeatIndexValenciaA[this.seriesHeatIndexValenciaA?.length - 1]?.value)+")",
+            "value": this.convertirFaToCentigrados(this.seriesHeatIndexValenciaA[this.seriesHeatIndexValenciaA?.length - 1]?.value)
           },
           {
-            "name": "Punto de rocío ("+this.seriesDewPointValenciaA[this.seriesDewPointValenciaA?.length - 1]?.value+")",
-            "value": this.seriesDewPointValenciaA[this.seriesDewPointValenciaA?.length - 1]?.value
+            "name": "Punto de rocío ("+this.convertirFaToCentigrados(this.seriesDewPointValenciaA[this.seriesDewPointValenciaA?.length - 1]?.value)+")",
+            "value": this.convertirFaToCentigrados(this.seriesDewPointValenciaA[this.seriesDewPointValenciaA?.length - 1]?.value)
           },
           {
-            "name": "Bulbo húmedo ("+this.seriesWetBulbValenciaA[this.seriesWetBulbValenciaA?.length - 1]?.value+")",
-            "value": this.seriesWetBulbValenciaA[this.seriesWetBulbValenciaA?.length - 1]?.value
+            "name": "Bulbo húmedo ("+this.convertirFaToCentigrados(this.seriesWetBulbValenciaA[this.seriesWetBulbValenciaA?.length - 1]?.value)+")",
+            "value": this.convertirFaToCentigrados(this.seriesWetBulbValenciaA[this.seriesWetBulbValenciaA?.length - 1]?.value)
           },
         ]
       },
     ]
+    console.log('this.seriesWetBulbValenciaA', this.seriesWetBulbValenciaA);
+
   }
   obtenerDatosToGraficaBarrasBadajoz(){
     let seriesJsonLocalStorageTempIn = JSON.parse(localStorage.getItem('seriesTempInBadajoz')!)
@@ -292,20 +297,20 @@ export class HomeComponent implements OnInit,OnDestroy {
             "value": this.convertirFaToCentigrados(this.seriesTempBadajoz[this.seriesTempBadajoz?.length - 1]?.value)
           },
           {
-            "name": "Viento frío ("+this.seriesWindChillBadajoz[this.seriesWindChillBadajoz?.length - 1]?.value+")",
-            "value": this.seriesWindChillBadajoz[this.seriesWindChillBadajoz?.length - 1]?.value
+            "name": "Viento frío ("+this.convertirFaToCentigrados(this.seriesWindChillBadajoz[this.seriesWindChillBadajoz?.length - 1]?.value)+")",
+            "value": this.convertirFaToCentigrados(this.seriesWindChillBadajoz[this.seriesWindChillBadajoz?.length - 1]?.value)
           },
           {
-            "name": "Índice Calorífico ("+this.seriesHeatIndexBadajoz[this.seriesHeatIndexBadajoz?.length - 1]?.value+")",
-            "value": this.seriesHeatIndexBadajoz[this.seriesHeatIndexBadajoz?.length - 1]?.value
+            "name": "Índice Calorífico ("+this.convertirFaToCentigrados(this.seriesHeatIndexBadajoz[this.seriesHeatIndexBadajoz?.length - 1]?.value)+")",
+            "value": this.convertirFaToCentigrados(this.seriesHeatIndexBadajoz[this.seriesHeatIndexBadajoz?.length - 1]?.value)
           },
           {
-            "name": "Punto de rocío ("+this.seriesDewPointBadajoz[this.seriesDewPointBadajoz?.length - 1]?.value+")",
-            "value": this.seriesDewPointBadajoz[this.seriesDewPointBadajoz?.length - 1]?.value
+            "name": "Punto de rocío ("+this.convertirFaToCentigrados(this.seriesDewPointBadajoz[this.seriesDewPointBadajoz?.length - 1]?.value)+")",
+            "value": this.convertirFaToCentigrados(this.seriesDewPointBadajoz[this.seriesDewPointBadajoz?.length - 1]?.value)
           },
           {
-            "name": "Bulbo húmedo ("+this.seriesWetBulbBadajoz[this.seriesWetBulbBadajoz?.length - 1]?.value+")",
-            "value": this.seriesWetBulbBadajoz[this.seriesWetBulbBadajoz?.length - 1]?.value
+            "name": "Bulbo húmedo ("+this.convertirFaToCentigrados(this.seriesWetBulbBadajoz[this.seriesWetBulbBadajoz?.length - 1]?.value)+")",
+            "value": this.convertirFaToCentigrados(this.seriesWetBulbBadajoz[this.seriesWetBulbBadajoz?.length - 1]?.value)
           },
         ]
       },
@@ -360,20 +365,20 @@ export class HomeComponent implements OnInit,OnDestroy {
             "value": this.convertirFaToCentigrados(this.seriesTempZarza[this.seriesTempZarza?.length - 1]?.value)
           },
           {
-            "name": "Viento frío ("+this.seriesWindChillZarza[this.seriesWindChillZarza?.length - 1]?.value+")",
-            "value": this.seriesWindChillZarza[this.seriesWindChillZarza?.length - 1]?.value
+            "name": "Viento frío ("+this.convertirFaToCentigrados(this.seriesWindChillZarza[this.seriesWindChillZarza?.length - 1]?.value)+")",
+            "value": this.convertirFaToCentigrados(this.seriesWindChillZarza[this.seriesWindChillZarza?.length - 1]?.value)
           },
           {
-            "name": "Índice Calorífico ("+this.seriesHeatIndexZarza[this.seriesHeatIndexZarza?.length - 1]?.value+")",
-            "value": this.seriesHeatIndexZarza[this.seriesHeatIndexZarza?.length - 1]?.value
+            "name": "Índice Calorífico ("+this.convertirFaToCentigrados(this.seriesHeatIndexZarza[this.seriesHeatIndexZarza?.length - 1]?.value)+")",
+            "value": this.convertirFaToCentigrados(this.seriesHeatIndexZarza[this.seriesHeatIndexZarza?.length - 1]?.value)
           },
           {
-            "name": "Punto de rocío ("+this.seriesDewPointZarza[this.seriesDewPointZarza?.length - 1]?.value+")",
-            "value": this.seriesDewPointZarza[this.seriesDewPointZarza?.length - 1]?.value
+            "name": "Punto de rocío ("+this.convertirFaToCentigrados(this.seriesDewPointZarza[this.seriesDewPointZarza?.length - 1]?.value)+")",
+            "value": this.convertirFaToCentigrados(this.seriesDewPointZarza[this.seriesDewPointZarza?.length - 1]?.value)
           },
           {
-            "name": "Bulbo húmedo ("+this.seriesWetBulbZarza[this.seriesWetBulbZarza?.length - 1]?.value+")",
-            "value": this.seriesWetBulbZarza[this.seriesWetBulbZarza?.length - 1]?.value
+            "name": "Bulbo húmedo ("+this.convertirFaToCentigrados(this.seriesWetBulbZarza[this.seriesWetBulbZarza?.length - 1]?.value)+")",
+            "value": this.convertirFaToCentigrados(this.seriesWetBulbZarza[this.seriesWetBulbZarza?.length - 1]?.value)
           },
         ]
       },
@@ -440,20 +445,20 @@ export class HomeComponent implements OnInit,OnDestroy {
             "value": this.convertirFaToCentigrados(this.seriesTempCedillo[this.seriesTempZarza?.length - 1]?.value)
           },
           {
-            "name": "Viento frío ("+this.seriesWindChillCedillo[this.seriesWindChillCedillo?.length - 1]?.value+")",
-            "value": this.seriesWindChillCedillo[this.seriesWindChillCedillo?.length - 1]?.value
+            "name": "Viento frío ("+this.convertirFaToCentigrados(this.seriesWindChillCedillo[this.seriesWindChillCedillo?.length - 1]?.value)+")",
+            "value": this.convertirFaToCentigrados(this.seriesWindChillCedillo[this.seriesWindChillCedillo?.length - 1]?.value)
           },
           {
-            "name": "Índice Calorífico ("+this.seriesHeatIndexCedillo[this.seriesHeatIndexCedillo?.length - 1]?.value+")",
-            "value": this.seriesHeatIndexCedillo[this.seriesHeatIndexCedillo?.length - 1]?.value
+            "name": "Índice Calorífico ("+this.convertirFaToCentigrados(this.seriesHeatIndexCedillo[this.seriesHeatIndexCedillo?.length - 1]?.value)+")",
+            "value": this.convertirFaToCentigrados(this.seriesHeatIndexCedillo[this.seriesHeatIndexCedillo?.length - 1]?.value)
           },
           {
-            "name": "Punto de rocío ("+this.seriesDewPointCedillo[this.seriesDewPointCedillo?.length - 1]?.value+")",
-            "value": this.seriesDewPointCedillo[this.seriesDewPointCedillo?.length - 1]?.value
+            "name": "Punto de rocío ("+this.convertirFaToCentigrados(this.seriesDewPointCedillo[this.seriesDewPointCedillo?.length - 1]?.value)+")",
+            "value": this.convertirFaToCentigrados(this.seriesDewPointCedillo[this.seriesDewPointCedillo?.length - 1]?.value)
           },
           {
-            "name": "Bulbo húmedo ("+this.seriesWetBulbCedillo[this.seriesWetBulbCedillo?.length - 1]?.value+")",
-            "value": this.seriesWetBulbCedillo[this.seriesWetBulbCedillo?.length - 1]?.value
+            "name": "Bulbo húmedo ("+this.convertirFaToCentigrados(this.seriesWetBulbCedillo[this.seriesWetBulbCedillo?.length - 1]?.value)+")",
+            "value": this.convertirFaToCentigrados(this.seriesWetBulbCedillo[this.seriesWetBulbCedillo?.length - 1]?.value)
           },
         ]
       },
