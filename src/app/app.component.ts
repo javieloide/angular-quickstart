@@ -23,6 +23,6 @@ export class AppComponent implements OnInit {
       this.movilToolbar = true
     }
 
-    Scrollbar.init(document.querySelector('#my-scrollbar')!);
+    //Scrollbar.init(document.querySelector('#my-scrollbar')!);
   }
 }
