@@ -14,8 +14,8 @@
   <mat-card class="example-card" style="margin-top: 50px; margin-bottom: 50px;">
     <mat-card-title>Temperatura</mat-card-title>
     <mat-card-subtitle style="color:red" *ngIf="message"><mat-icon [inline]="true">thumb_down</mat-icon>{{message}}</mat-card-subtitle>
-    <grafica-barras [datosGrafica]="datosGraficaBarChart2" *ngIf="datosGraficaBarChart2"></grafica-barras>
-    <mat-spinner [diameter]="200" *ngIf="!datosGraficaBarChart"></mat-spinner><br>
+    <grafica-barras [datosGrafica]="datosGraficaBarChart2" *ngIf="datosGraficaBarChart2 && seriesTempBadajoz && seriesTempBadajoz.length > 0"></grafica-barras>
+    <mat-spinner [diameter]="200" *ngIf="!datosGraficaBarChart2 || !seriesTempBadajoz || !(seriesTempBadajoz.length > 0)" ></mat-spinner><br>
   </mat-card>
 
   <mat-card class="example-card" style="margin-top: 50px; margin-bottom: 50px;">

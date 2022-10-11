@@ -120,7 +120,7 @@ export class HomeComponent implements OnInit,OnDestroy {
     this.datosGraficaBar =
     [
       {
-        "name": "Barometro",
+        "name": "Barometro (" + this.seriesBarBadajoz[this.seriesBarBadajoz.length-1].value + " hPa)",
         "series": this.seriesBarBadajoz
       }
     ]
@@ -142,7 +142,7 @@ export class HomeComponent implements OnInit,OnDestroy {
     this.datosGraficaBar =
     [
       {
-        "name": "Barometro",
+        "name": "Barometro (" + this.seriesBarZarza[this.seriesBarZarza.length-1].value + " hPa)",
         "series": this.seriesBarZarza
       }
     ]
@@ -165,7 +165,7 @@ export class HomeComponent implements OnInit,OnDestroy {
     this.datosGraficaBar =
     [
       {
-        "name": "Barometro",
+        "name": "Barometro (" + this.seriesBarValenciaA[this.seriesBarValenciaA.length-1].value + " hPa)",
         "series": this.seriesBarValenciaA
       }
     ]
@@ -173,9 +173,9 @@ export class HomeComponent implements OnInit,OnDestroy {
 
   convertirFaToCentigrados(faValue: number): number{
       if(faValue){
-        return Number(((faValue - 32) * 5/7).toFixed(2))
+        return Number(((faValue - 32) * 5/9).toFixed(2))
       } else {
-        return Number((-32 * 5/7).toFixed(2))
+        return Number((-32 * 5/9).toFixed(2))
       }
    }
 
@@ -888,7 +888,7 @@ export class HomeComponent implements OnInit,OnDestroy {
 
       this.guardarLocalStorageBarBadajoz({
         "name": date,
-        "value": this.estacionBadajoz.sensor2?.bar_absolute ?? 0
+        "value": this.convertirPulgadasMercurioToHPa(this.estacionBadajoz.sensor2?.bar_absolute) ?? 0
       })
 
       this.obtenerDatosGraficaLocalStorageBadajoz();
@@ -942,13 +942,18 @@ export class HomeComponent implements OnInit,OnDestroy {
       })
       this.guardarLocalStorageBarZarza({
         "name": date,
-        "value": this.estacionZarzaLaMayor.sensor2?.bar_absolute ?? 0
+        "value": this.convertirPulgadasMercurioToHPa(this.estacionZarzaLaMayor.sensor2?.bar_absolute) ?? 0
       })
 
       this.obtenerDatosGraficaLocalStorageZarza();
       this.obtenerDatosToGraficaBarrasZarza()
     })
   }
+
+  convertirPulgadasMercurioToHPa(pulgadasMercurio: number):number {
+    return Number((pulgadasMercurio * 33.86).toFixed(2));
+  }
+
   obtenerValenciaADatos() {
 
     console.log('obtenerValenciaADatos');
@@ -997,7 +1002,7 @@ export class HomeComponent implements OnInit,OnDestroy {
       })
       this.guardarLocalStorageBarValenciaA({
         "name": date,
-        "value": this.estacionValenciaA.sensor2?.bar_absolute ?? 0
+        "value": this.convertirPulgadasMercurioToHPa(this.estacionValenciaA.sensor2?.bar_absolute) ?? 0
       })
 
       this.obtenerDatosGraficaLocalStorageValenciaA();
@@ -1053,7 +1058,7 @@ export class HomeComponent implements OnInit,OnDestroy {
       })
       this.guardarLocalStorageBarCedillo({
         "name": date,
-        "value": this.estacionCedillo.sensor2?.bar_absolute ?? 0
+        "value": this.convertirPulgadasMercurioToHPa(this.estacionCedillo.sensor2?.bar_absolute) ?? 0
       })
 
       this.obtenerDatosGraficaLocalStorageCedillo();
