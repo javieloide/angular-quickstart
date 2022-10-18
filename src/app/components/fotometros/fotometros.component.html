@@ -1,1 +1,20 @@
-
+<div class="wrapper">
+  <mat-form-field appearance="fill" style="margin-top: 120px; width:85%">
+  <mat-label>Elije una estación</mat-label>
+    <mat-select [(ngModel)]="selectedValue">
+      <mat-option value="zarza"     (click)="onChangeFotometro()">Zarza La Mayor</mat-option>
+      <mat-option value="alcantara" (click)="onChangeFotometro()">Alcántara</mat-option>
+      <mat-option value="brozas"   (click)="onChangeFotometro()">Brozas</mat-option>
+      <mat-option value="herreruela"   (click)="onChangeFotometro()">Herreruela</mat-option>
+      <mat-option value="salorino"   (click)="onChangeFotometro()">Salorino</mat-option>
+      <mat-option value="membrio"   (click)="onChangeFotometro()">Membrío</mat-option>
+      <mat-option value="valenciaA"   (click)="onChangeFotometro()">Valencia de Alcántara</mat-option>
+      <mat-option value="carbajo"   (click)="onChangeFotometro()">Carbajo</mat-option>
+      <mat-option value="santiagoA"   (click)="onChangeFotometro()">Santiago de Alcántara</mat-option>
+      <mat-option value="herreraA"   (click)="onChangeFotometro()">Herrera de Alcántara</mat-option>
+      <mat-option value="cedillo"   (click)="onChangeFotometro()">Cedillo</mat-option>
+      <mat-option value="pampilhosa"   (click)="onChangeFotometro()">Pampilhosa Da Serra, Fajão</mat-option>
+      <mat-option value="badajoz"   (click)="onChangeFotometro()">Escuela de Ingenierías Industriales, Badajoz</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
