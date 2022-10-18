@@ -2,7 +2,7 @@
 
 :root {
   --main-family: 'Poppins', sans-serif;
-  --color-bg: linear-gradient(180deg, #FFFFFF 0%, #AEC6DC 100%);
+  --color-bg: linear-gradient(180deg, #3257fea7 0%, #3257fea7 100%);
 
   /* Controls the blob blur gradient colors within the main tag's svg */
   --top-right-blur-1: #20C6B7;

@@ -1,7 +1,7 @@
 
 
   <div class="wrapper">
-    <mat-form-field appearance="fill" style="margin-top: 120px; width:85%">
+  <mat-form-field appearance="fill" style="margin-top: 120px; width:85%">
     <mat-label>Elije una estación</mat-label>
       <mat-select [(ngModel)]="selectedValue">
         <mat-option value="zarza"     (click)="onChangeEstacion()">Zona A (Zarza La Mayor, Piedras Albas, Alcántara y Brozas)</mat-option>
@@ -30,6 +30,8 @@
   <mat-card-subtitle style="color:red" *ngIf="message"><mat-icon [inline]="true">thumb_down</mat-icon>{{message}}</mat-card-subtitle>
   <grafica-barras [datosGrafica]="datosGraficaBarChart" *ngIf="datosGraficaBarChart && seriesTempInBadajoz && seriesTempInBadajoz.length > 0"></grafica-barras>
   <mat-spinner [diameter]="200" *ngIf="!datosGraficaBarChart || !seriesTempInBadajoz || !(seriesTempInBadajoz.length > 0)"></mat-spinner><br>
+</mat-card>
+<mat-card class="example-card" style="margin-top: 150px; visibility: hidden">
 </mat-card>
 
 </div>
