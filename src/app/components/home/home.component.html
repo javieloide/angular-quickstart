@@ -31,7 +31,6 @@
   <grafica-barras [datosGrafica]="datosGraficaBarChart" *ngIf="datosGraficaBarChart && seriesTempInBadajoz && seriesTempInBadajoz.length > 0"></grafica-barras>
   <mat-spinner [diameter]="200" *ngIf="!datosGraficaBarChart || !seriesTempInBadajoz || !(seriesTempInBadajoz.length > 0)"></mat-spinner><br>
 </mat-card>
-<mat-card class="example-card" style="margin-top: 150px; visibility: hidden">
-</mat-card>
+<mat-card class="example-card" style="margin-top: 150px; visibility: hidden"></mat-card>
 
 </div>

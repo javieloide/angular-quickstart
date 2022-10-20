@@ -17,10 +17,10 @@
       <mat-option value="badajoz"   (click)="onChangeFotometro()">Escuela de Ingenierías Industriales, Badajoz</mat-option>
     </mat-select>
   </mat-form-field>
-</div>
 
-  <div class="example-container mat-elevation-z8" *ngIf="disponible; else noDisponible">
-      <mat-table mat-table [dataSource]="dataSource" *ngIf="fotometroSelected.length > 0; else noData">
+  <div class="example-container mat-elevation-z8" style="width:90%; margin-left:5%;text-align:center" *ngIf="disponible; else noDisponible">
+      <mat-card class="example-card">
+        <mat-table mat-table [dataSource]="dataSource" *ngIf="fotometroSelected.length > 0; else noData">
 
         <!-- Position Column -->
         <ng-container matColumnDef="time">
@@ -98,8 +98,15 @@
                     showFirstLastButtons
                     aria-label="Select page of periodic elements">
       </mat-paginator>
+    </mat-card>
   </div>
-
+  <div class="mat-elevation-z8" style="width:90%; margin-left:5%; text-align: center; margin-top:50px">
+    <mat-card class="example-card">
+      <h2>Magnitud</h2>
+      <mat-spinner [diameter]="150" [ngStyle]="{'margin-left': '45%'}" *ngIf="itemsGrafica.length==0"></mat-spinner>
+      <grafica-linear [datosGrafica]="datosGrafica" *ngIf="itemsGrafica.length>0"></grafica-linear>
+  </mat-card>
+  </div>
 <ng-template #noDisponible>
   <div class="mat-elevation-z8" style="width:90%; margin-left:5%; text-align: center;">
     <mat-card class="example-card">
@@ -109,3 +116,4 @@
 </ng-template>
 
 <mat-card class="example-card" style="margin-top: 100px; visibility: hidden"></mat-card>
+</div>
