@@ -24,6 +24,7 @@ export class WeatherService {
 
     return this.http.get<any>(this.localApi+ '/sensors-badajoz', httpOptions);
   }
+
   getEstacionZarzaLaMayor(){
     const httpOptions = {
  	  	headers: new HttpHeaders()
@@ -34,6 +35,62 @@ export class WeatherService {
 
     return this.http.get<any>(this.localApi+ '/sensors-zarza', httpOptions);
   }
+
+  getFotometroZarzaLaMayor(){
+    const httpOptions = {
+ 	  	headers: new HttpHeaders()
+	  }
+
+    httpOptions.headers.append('Access-Control-Allow-Origin', '*');
+    httpOptions.headers.append('Content-Type', 'application/json');
+
+    return this.http.get<any>(this.localApi+ '/fotometro-zarza', httpOptions);
+  }
+
+  getFotometroHerreruela(){
+    const httpOptions = {
+ 	  	headers: new HttpHeaders()
+	  }
+
+    httpOptions.headers.append('Access-Control-Allow-Origin', '*');
+    httpOptions.headers.append('Content-Type', 'application/json');
+
+    return this.http.get<any>(this.localApi+ '/fotometro-herreruela', httpOptions);
+  }
+  getFotometroValenciaAlcantara(){
+    const httpOptions = {
+ 	  	headers: new HttpHeaders()
+	  }
+
+    httpOptions.headers.append('Access-Control-Allow-Origin', '*');
+    httpOptions.headers.append('Content-Type', 'application/json');
+
+    return this.http.get<any>(this.localApi+ '/fotometro-valenciaA', httpOptions);
+  }
+
+  getFotometroSantiagoAlcantara(){
+    const httpOptions = {
+ 	  	headers: new HttpHeaders()
+	  }
+
+    httpOptions.headers.append('Access-Control-Allow-Origin', '*');
+    httpOptions.headers.append('Content-Type', 'application/json');
+
+    return this.http.get<any>(this.localApi+ '/fotometro-santiagoA', httpOptions);
+  }
+
+  getFotometroBadajoz(){
+    const httpOptions = {
+ 	  	headers: new HttpHeaders()
+	  }
+
+    httpOptions.headers.append('Access-Control-Allow-Origin', '*');
+    httpOptions.headers.append('Content-Type', 'application/json');
+
+    return this.http.get<any>(this.localApi+ '/fotometro-badajoz', httpOptions);
+  }
+
+
   getEstacionCedillo(){
     const httpOptions = {
  	  	headers: new HttpHeaders()

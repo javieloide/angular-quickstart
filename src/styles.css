@@ -104,7 +104,7 @@ p {
 @media (max-width: 768px) {
   .waves {
     height:15px;
-    min-height:40px;
+    min-height:100px;
   }
   .content {
     height:5vh;

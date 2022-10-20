@@ -23,6 +23,8 @@ import { FormsModule } from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { GraficaBarrasComponent } from './components/grafica-barras/grafica-barras.component';
 import { GraficaLinearComponent } from './components/grafica-linear/grafica-linear.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -50,6 +52,8 @@ import { GraficaLinearComponent } from './components/grafica-linear/grafica-line
     MatSelectModule,
     FormsModule,
     MatFormFieldModule,
+    MatPaginatorModule,
+    MatSortModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable

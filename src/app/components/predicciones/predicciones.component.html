@@ -3,7 +3,7 @@
 
   <mat-form-field appearance="fill" style="margin-top: 120px; width:85%">
     <mat-label>Elije un pueblo</mat-label>
-    <mat-select>
+    <mat-select [(value)]="selectedValue">
       <mat-option value="option1" (click)="onOpenIFrameZarzaMayor()">Zarza la mayor</mat-option>
       <mat-option value="option2" (click)="onOpenIFramePiedrasAlbas()">Piedras albas</mat-option>
       <mat-option value="option3" (click)="onOpenIFrameAlcantara()">Alcántara</mat-option>

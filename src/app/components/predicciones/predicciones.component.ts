@@ -12,6 +12,7 @@ export class PrediccionesComponent implements OnInit {
   tbodyTable: any;
   fechasTable: any;
   valoresColumnaTable:any;
+  selectedValue:any = 'option1';
 
   zarzaMayorIframeUrl:SafeResourceUrl | undefined;
   displayIframeZarzaMayor = false;
@@ -55,9 +56,7 @@ export class PrediccionesComponent implements OnInit {
 
   ngOnInit(): void {
     //this.getScrappingData();
-    document.onload = () => {
-      console.log(document.querySelector('.info'))
-    }
+    this.onOpenIFrameZarzaMayor();
   }
 
   onOpenIFrameZarzaMayor(){

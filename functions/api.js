@@ -109,6 +109,70 @@ router.get('/sensors-valenciaA', (req, res) => {
   });
 });
 
+router.get('/fotometro-zarza', (req, res) => {
+  const device = 'LPL16_001';
+  const url = 'https://data.eelabs.eu';
+  const query = '/api/devices/'+device+'/data?interval=24h';
+
+  const urlFormada = url + query;
+
+  request.get(urlFormada, (error, response, body) => {
+    let json = JSON.parse(body);
+    res.json(json);
+  });
+});
+
+router.get('/fotometro-herreruela', (req, res) => {
+  const device = 'LPL16_003';
+  const url = 'https://data.eelabs.eu';
+  const query = '/api/devices/'+device+'/data?interval=24h';
+
+  const urlFormada = url + query;
+
+  request.get(urlFormada, (error, response, body) => {
+    let json = JSON.parse(body);
+    res.json(json);
+  });
+});
+
+router.get('/fotometro-valenciaA', (req, res) => {
+  const device = 'LPL15_015';
+  const url = 'https://data.eelabs.eu';
+  const query = '/api/devices/'+device+'/data?interval=24h';
+
+  const urlFormada = url + query;
+
+  request.get(urlFormada, (error, response, body) => {
+    let json = JSON.parse(body);
+    res.json(json);
+  });
+});
+
+router.get('/fotometro-santiagoA', (req, res) => {
+  const device = 'LPL15_004';
+  const url = 'https://data.eelabs.eu';
+  const query = '/api/devices/'+device+'/data?interval=24h';
+
+  const urlFormada = url + query;
+
+  request.get(urlFormada, (error, response, body) => {
+    let json = JSON.parse(body);
+    res.json(json);
+  });
+});
+
+router.get('/fotometro-badajoz', (req, res) => {
+  const device = 'UEX1_001';
+  const url = 'https://data.eelabs.eu';
+  const query = '/api/devices/'+device+'/data?interval=24h';
+
+  const urlFormada = url + query;
+
+  request.get(urlFormada, (error, response, body) => {
+    let json = JSON.parse(body);
+    res.json(json);
+  });
+});
 
 router.get('/scrap', (req, res) => {
   let url = 'https://www.eltiempo.es/aeropuerto-badajoz-talavera-la-real-bjz.html?v=detallada'

@@ -17,4 +17,98 @@
       <mat-option value="badajoz"   (click)="onChangeFotometro()">Escuela de Ingenierías Industriales, Badajoz</mat-option>
     </mat-select>
   </mat-form-field>
+  <div class="mat-elevation-z8" style="width:90%; margin-left:5%; text-align: center;" *ngIf="disponible; else noDisponible">
+    <mat-card class="example-card">
+      <table mat-table [dataSource]="dataSource" *ngIf="fotometroSelected.length > 0; else noData">
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="time">
+          <th mat-header-cell *matHeaderCellDef  style="text-align: center; color: black;">
+            <b>Time</b>
+          </th>
+          <td mat-cell *matCellDef="let element"> {{element?.time}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="battery">
+          <th mat-header-cell *matHeaderCellDef  style="text-align: center; color: black;"> <b>Battery</b> </th>
+          <td mat-cell *matCellDef="let element"> {{element?.battery}} </td>
+        </ng-container>
+        <!-- Name Column -->
+        <ng-container matColumnDef="fail">
+          <th mat-header-cell *matHeaderCellDef   style="text-align: center; color: black;"> <b>Fail</b> </th>
+          <td mat-cell *matCellDef="let element"> {{element?.fail}} </td>
+        </ng-container>
+        <!-- Weight Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef  style="text-align: center; color: black;"> <b>Id</b> </th>
+          <td mat-cell *matCellDef="let element"> {{element?.id }} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="mag">
+          <th mat-header-cell *matHeaderCellDef   style="text-align: center; color: black;"> <b>Mag</b> </th>
+          <td mat-cell *matCellDef="let element"> {{element?.mag>=10.5 ? element?.mag : 0}} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="mag_err">
+          <th mat-header-cell *matHeaderCellDef  style="text-align: center; color: black;"> <b>Mag Err</b> </th>
+          <td mat-cell *matCellDef="let element"> {{element?.mag_err}} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef   style="text-align: center; color: black;"> <b>Name</b> </th>
+          <td mat-cell *matCellDef="let element"> {{element?.name}} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="reset">
+          <th mat-header-cell *matHeaderCellDef  style="text-align: center; color: black;"> <b>Reset</b> </th>
+          <td mat-cell *matCellDef="let element"> {{element?.reset}} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="signal">
+          <th mat-header-cell *matHeaderCellDef  style="text-align: center; color: black;"> <b>Signal</b> </th>
+          <td mat-cell *matCellDef="let element"> {{element?.signal}} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="tamb">
+          <th mat-header-cell *matHeaderCellDef sortActionDescription="Sort by Tamb" style="text-align: center; color: black;"> <b>Tamb</b> </th>
+          <td mat-cell *matCellDef="let element"> {{element?.tamb}} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="tsky">
+          <th mat-header-cell *matHeaderCellDef  style="text-align: center; color: black;"> <b>Tsky</b> </th>
+          <td mat-cell *matCellDef="let element"> {{element?.tsky}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <ng-template #noData style="text-align:center">
+        <div class="example-card">
+          <mat-spinner [diameter]="150" [ngStyle]="{'margin-left': '45%'}"></mat-spinner>
+        </div>
+      </ng-template>
+      <mat-paginator [pageSizeOptions]="[5, 10, 15]"
+                    showFirstLastButtons
+                    aria-label="Select page of periodic elements">
+      </mat-paginator>
+      <grafica-linear [datosGrafica]="datosGrafica" *ngIf="itemsGrafica.length>0"></grafica-linear>
+  </mat-card>
+  </div>
 </div>
+<ng-template #noDisponible>
+  <div class="mat-elevation-z8" style="width:90%; margin-left:5%; text-align: center;">
+    <mat-card class="example-card">
+    <p style="color: red">No disponible</p>
+</mat-card>
+  </div>
+</ng-template>
+
+<mat-card class="example-card" style="margin-top: 100px; visibility: hidden"></mat-card>
