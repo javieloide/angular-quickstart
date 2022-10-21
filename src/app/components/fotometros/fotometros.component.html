@@ -104,11 +104,11 @@
       </ng-template>
     </mat-card>
   </div>
-  <div class="mat-elevation-z8" style="width:90%; margin-left:5%; text-align: center; margin-top:50px" *ngIf="!loading && disponible">
+  <div class="mat-elevation-z8" style="width:90%; margin-left:5%; text-align: center; margin-top:50px" *ngIf="disponible">
     <mat-card class="example-card">
       <h2>Magnitud</h2>
       <mat-spinner [diameter]="150" [ngStyle]="{'margin-left': '45%'}" *ngIf="loading || !disponible || itemsGrafica?.length==0"></mat-spinner>
-      <grafica-linear [datosGrafica]="datosGrafica" *ngIf="!loading && disponible && itemsGrafica.length>0"></grafica-linear>
+      <grafica-linear [datosGrafica]="datosGrafica" *ngIf="disponible && itemsGrafica.length>0"></grafica-linear>
   </mat-card>
   </div>
 <mat-card class="example-card" style="margin-top: 100px; visibility: hidden"></mat-card>

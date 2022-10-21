@@ -55,7 +55,7 @@ export class FotometrosComponent implements OnInit,AfterViewInit {
         this.itemsGrafica.push(
           {
             "value":  res?.result?.data[index][3]>=10.5 ? res?.result?.data[index][3] : 0,
-            "name": moment(res?.result?.data[index][0]).format('YYYY-MM-DD HH:mm')
+            "name": moment(res?.result?.data[index][0]).format('HH:mm')
           }
         )
 
@@ -98,7 +98,7 @@ export class FotometrosComponent implements OnInit,AfterViewInit {
         this.itemsGrafica.push(
           {
             "value": res?.result?.data[index][3]>=10.5 ? res?.result?.data[index][3] : 0,
-            "name": moment(res?.result?.data[index][0]).format('YYYY-MM-DD HH:mm')
+            "name": moment(res?.result?.data[index][0]).format('HH:mm')
           }
         )
 
@@ -140,7 +140,7 @@ export class FotometrosComponent implements OnInit,AfterViewInit {
         this.itemsGrafica.push(
           {
             "value": res?.result?.data[index][3]>=10.5 ? res?.result?.data[index][3] : 0,
-            "name": moment(res?.result?.data[index][0]).format('YYYY-MM-DD HH:mm')
+            "name": moment(res?.result?.data[index][0]).format('HH:mm')
           }
         )
 
@@ -184,7 +184,7 @@ export class FotometrosComponent implements OnInit,AfterViewInit {
         this.itemsGrafica.push(
           {
             "value":  res?.result?.data[index][4]>=10.5 ? res?.result?.data[index][4] : 0,
-            "name": moment(res?.result?.data[index][0]).format('YYYY-MM-DD HH:mm')
+            "name": moment(res?.result?.data[index][0]).format('HH:mm')
           }
         )
         this.fotometroSelected.push(fotoItem);
@@ -228,7 +228,7 @@ export class FotometrosComponent implements OnInit,AfterViewInit {
         this.itemsGrafica.push(
           {
             "value": res?.result?.data[index][4]>=10.5 ? res?.result?.data[index][4] : 0,
-            "name": moment(res?.result?.data[index][0]).format('YYYY-MM-DD HH:mm')
+            "name": moment(res?.result?.data[index][0]).format('HH:mm')
           }
         )
         this.fotometroSelected.push(fotoItem);
