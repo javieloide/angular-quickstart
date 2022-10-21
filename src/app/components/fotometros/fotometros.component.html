@@ -18,9 +18,9 @@
     </mat-select>
   </mat-form-field>
 
-  <div class="example-container mat-elevation-z8" style="width:90%; margin-left:5%;text-align:center" *ngIf="disponible; else noDisponible">
+  <div class="example-container mat-elevation-z8" style="width:90%; margin-left:5%;text-align:center">
       <mat-card class="example-card">
-        <mat-table mat-table [dataSource]="dataSource" *ngIf="fotometroSelected.length > 0; else noData">
+        <mat-table mat-table [dataSource]="dataSource" *ngIf="!loading && fotometroSelected?.length>0; else noData">
 
         <!-- Position Column -->
         <ng-container matColumnDef="time">
@@ -88,32 +88,28 @@
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
       </mat-table>
-      <ng-template #noData style="text-align:center">
-        <div class="example-card">
-          <mat-spinner [diameter]="150" [ngStyle]="{'margin-left': '45%'}"></mat-spinner>
-        </div>
-      </ng-template>
       <mat-paginator [pageSizeOptions]="[5, 10, 15]"
                     showFirstLastButtons
                     aria-label="Select page of periodic elements">
       </mat-paginator>
+      <ng-template #noData style="text-align:center">
+        <div class="example-card" *ngIf="disponible">
+          <mat-spinner [diameter]="150" [ngStyle]="{'margin-left': '45%'}"></mat-spinner>
+        </div>
+        <div class="example-card" *ngIf="!disponible">
+          <p style="color: red">No disponible</p>
+        </div>
+      </ng-template>
     </mat-card>
   </div>
-  <div class="mat-elevation-z8" style="width:90%; margin-left:5%; text-align: center; margin-top:50px">
+  <div class="mat-elevation-z8" style="width:90%; margin-left:5%; text-align: center; margin-top:50px" *ngIf="!loading && disponible">
     <mat-card class="example-card">
       <h2>Magnitud</h2>
-      <mat-spinner [diameter]="150" [ngStyle]="{'margin-left': '45%'}" *ngIf="itemsGrafica.length==0"></mat-spinner>
-      <grafica-linear [datosGrafica]="datosGrafica" *ngIf="itemsGrafica.length>0"></grafica-linear>
+      <mat-spinner [diameter]="150" [ngStyle]="{'margin-left': '45%'}" *ngIf="loading || !disponible || itemsGrafica?.length==0"></mat-spinner>
+      <grafica-linear [datosGrafica]="datosGrafica" *ngIf="!loading && disponible && itemsGrafica.length>0"></grafica-linear>
   </mat-card>
   </div>
-<ng-template #noDisponible>
-  <div class="mat-elevation-z8" style="width:90%; margin-left:5%; text-align: center;">
-    <mat-card class="example-card">
-    <p style="color: red">No disponible</p>
-</mat-card>
-  </div>
-</ng-template>
-
 <mat-card class="example-card" style="margin-top: 100px; visibility: hidden"></mat-card>
 </div>

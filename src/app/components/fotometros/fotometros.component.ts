@@ -21,6 +21,7 @@ export class FotometrosComponent implements OnInit,AfterViewInit {
   itemsGrafica:any[]=[]
   dataSource=new MatTableDataSource<FotometroItem>([]);
   datosGrafica: any;
+  loading: boolean;
   disponible: boolean;
   constructor(private weatherService: WeatherService) {}
 
@@ -35,8 +36,9 @@ export class FotometrosComponent implements OnInit,AfterViewInit {
   getFotometroZarza(){
     this.fotometroSelected=[];
     this.itemsGrafica=[];
+    this.displayedColumns = [];
     this.weatherService.getFotometroZarzaLaMayor().subscribe(res => {
-      this.displayedColumns = res?.result?.columns;
+      this.displayedColumns = ['time', 'battery', 'mag', 'mag_err', 'name', 'tamb', 'tsky'];
       for (let index = 0; index < res?.result?.data?.length; index++) {
 
         const fotoItem:FotometroItem = {
@@ -67,6 +69,7 @@ export class FotometrosComponent implements OnInit,AfterViewInit {
       ]
       console.log('FotometroZarza',this.fotometroSelected);
       this.dataSource.data = this.fotometroSelected;
+      this.loading=false
     })
   }
 
@@ -76,7 +79,8 @@ export class FotometrosComponent implements OnInit,AfterViewInit {
     this.itemsGrafica=[];
 
     this.weatherService.getFotometroHerreruela().subscribe(res => {
-      this.displayedColumns = res?.result?.columns;
+      this.displayedColumns = ['time', 'battery', 'mag', 'mag_err', 'name', 'tamb', 'tsky'];
+
       for (let index = 0; index < res?.result?.data?.length; index++) {
 
         const fotoItem:FotometroItem = {
@@ -109,6 +113,7 @@ export class FotometrosComponent implements OnInit,AfterViewInit {
       ]
       console.log('FotometroHerreruela',this.fotometroSelected);
       this.dataSource.data = this.fotometroSelected;
+      this.loading=false
     })
   }
 
@@ -118,10 +123,9 @@ export class FotometrosComponent implements OnInit,AfterViewInit {
     this.itemsGrafica=[];
 
     this.weatherService.getFotometroValenciaAlcantara().subscribe(res => {
-      console.log(res);
-      this.displayedColumns = res?.result?.columns;
+      this.displayedColumns = ['time', 'battery', 'mag', 'mag_err', 'name', 'tamb', 'tsky'];
+
       for (let index = 0; index < res?.result?.data?.length; index++) {
-        console.log('ID' ,res?.result?.data[index]);
         const fotoItem:FotometroItem = {
           time: res?.result?.data[index][0],
           battery: res?.result?.data[index][1],
@@ -150,9 +154,7 @@ export class FotometrosComponent implements OnInit,AfterViewInit {
       ]
       console.log('FotometroValenciaAlcantara',this.fotometroSelected);
       this.dataSource.data = this.fotometroSelected;
-    }, err=> {
-      console.log('err',err);
-
+      this.loading=false
     })
   }
 
@@ -162,7 +164,9 @@ export class FotometrosComponent implements OnInit,AfterViewInit {
     this.itemsGrafica=[];
 
     this.weatherService.getFotometroSantiagoAlcantara().subscribe(res => {
-      this.displayedColumns = res?.result?.columns;
+
+      this.displayedColumns = ['time', 'battery', 'mag', 'mag_err', 'tamb', 'tsky'];
+
       console.log('getFotometroSantiagoAlcantara',res)
       for (let index = 0; index < res?.result?.data?.length; index++) {
         console.log(res?.result?.data[index][2]);
@@ -171,14 +175,11 @@ export class FotometrosComponent implements OnInit,AfterViewInit {
           time: res?.result?.data[index][0],
           battery: res?.result?.data[index][1],
           fail: res?.result?.data[index][2],
-          id: res?.result?.data[index][3],
           mag: res?.result?.data[index][4],
           mag_err: res?.result?.data[index][5],
           name: res?.result?.data[index][6],
-          reset: res?.result?.data[index][7],
-          signal: res?.result?.data[index][8],
-          tamb: res?.result?.data[index][9],
-          tsky: res?.result?.data[index][10]
+          tamb: res?.result?.data[index][7],
+          tsky: res?.result?.data[index][8]
         }
         this.itemsGrafica.push(
           {
@@ -196,6 +197,7 @@ export class FotometrosComponent implements OnInit,AfterViewInit {
       ]
       console.log('FotometroSantiagoAlcantara',this.fotometroSelected);
       this.dataSource.data = this.fotometroSelected;
+      this.loading=false
     })
   }
 
@@ -207,7 +209,7 @@ export class FotometrosComponent implements OnInit,AfterViewInit {
     this.weatherService.getFotometroBadajoz().subscribe(res => {
       console.log('getFotometroBadajoz',res);
 
-      this.displayedColumns = res?.result?.columns;
+      this.displayedColumns = ['time', 'battery', 'mag', 'mag_err', 'tamb', 'tsky'];
       for (let index = 0; index < res?.result?.data?.length; index++) {
 
         const fotoItem:FotometroItem = {
@@ -239,10 +241,12 @@ export class FotometrosComponent implements OnInit,AfterViewInit {
       ]
       console.log('FotometroBadajoz',this.fotometroSelected);
       this.dataSource.data = this.fotometroSelected;
+      this.loading=false
     })
   }
 
   onChangeFotometro(){
+    this.loading=true;
     if(this.selectedValue){
       switch(this.selectedValue){
         case 'zarza':
@@ -264,6 +268,9 @@ export class FotometrosComponent implements OnInit,AfterViewInit {
         break;
         case 'membrio':
           this.disponible=false;
+          this.fotometroSelected=[];
+          this.displayedColumns=[];
+          this.itemsGrafica=[];
         break;
         case 'valenciaA':
           this.disponible=true;
