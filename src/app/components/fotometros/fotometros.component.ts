@@ -38,11 +38,11 @@ export class FotometrosComponent implements OnInit,AfterViewInit {
     this.itemsGrafica=[];
     this.displayedColumns = [];
     this.weatherService.getFotometroZarzaLaMayor().subscribe(res => {
-      this.displayedColumns = ['time', 'battery', 'mag', 'mag_err', 'name', 'tamb', 'tsky'];
+      this.displayedColumns = ['time', 'battery', 'mag', 'mag_err', 'tamb', 'tsky'];
       for (let index = 0; index < res?.result?.data?.length; index++) {
 
         const fotoItem:FotometroItem = {
-          time: res?.result?.data[index][0],
+          time: moment(res?.result?.data[index][0]).format('YYYY-MM-DD HH:mm'),
           battery: res?.result?.data[index][1],
           id: res?.result?.data[index][2],
           mag: res?.result?.data[index][3],
@@ -55,7 +55,7 @@ export class FotometrosComponent implements OnInit,AfterViewInit {
         this.itemsGrafica.push(
           {
             "value":  res?.result?.data[index][3]>=10.5 ? res?.result?.data[index][3] : 0,
-            "name": res?.result?.data[index][0]
+            "name": moment(res?.result?.data[index][0]).format('YYYY-MM-DD HH:mm')
           }
         )
 
@@ -79,12 +79,12 @@ export class FotometrosComponent implements OnInit,AfterViewInit {
     this.itemsGrafica=[];
 
     this.weatherService.getFotometroHerreruela().subscribe(res => {
-      this.displayedColumns = ['time', 'battery', 'mag', 'mag_err', 'name', 'tamb', 'tsky'];
+      this.displayedColumns = ['time', 'battery', 'mag', 'mag_err', 'tamb', 'tsky'];
 
       for (let index = 0; index < res?.result?.data?.length; index++) {
 
         const fotoItem:FotometroItem = {
-          time: res?.result?.data[index][0],
+          time: moment(res?.result?.data[index][0]).format('YYYY-MM-DD HH:mm'),
           battery: res?.result?.data[index][1],
           id: res?.result?.data[index][2],
           mag: res?.result?.data[index][3],
@@ -98,7 +98,7 @@ export class FotometrosComponent implements OnInit,AfterViewInit {
         this.itemsGrafica.push(
           {
             "value": res?.result?.data[index][3]>=10.5 ? res?.result?.data[index][3] : 0,
-            "name": res?.result?.data[index][0]
+            "name": moment(res?.result?.data[index][0]).format('YYYY-MM-DD HH:mm')
           }
         )
 
@@ -123,11 +123,11 @@ export class FotometrosComponent implements OnInit,AfterViewInit {
     this.itemsGrafica=[];
 
     this.weatherService.getFotometroValenciaAlcantara().subscribe(res => {
-      this.displayedColumns = ['time', 'battery', 'mag', 'mag_err', 'name', 'tamb', 'tsky'];
+      this.displayedColumns = ['time', 'battery', 'mag', 'mag_err', 'tamb', 'tsky'];
 
       for (let index = 0; index < res?.result?.data?.length; index++) {
         const fotoItem:FotometroItem = {
-          time: res?.result?.data[index][0],
+          time: moment(res?.result?.data[index][0]).format('YYYY-MM-DD HH:mm'),
           battery: res?.result?.data[index][1],
           id: res?.result?.data[index][2],
           mag: res?.result?.data[index][3],
@@ -140,7 +140,7 @@ export class FotometrosComponent implements OnInit,AfterViewInit {
         this.itemsGrafica.push(
           {
             "value": res?.result?.data[index][3]>=10.5 ? res?.result?.data[index][3] : 0,
-            "name": res?.result?.data[index][0]
+            "name": moment(res?.result?.data[index][0]).format('YYYY-MM-DD HH:mm')
           }
         )
 
@@ -172,7 +172,7 @@ export class FotometrosComponent implements OnInit,AfterViewInit {
         console.log(res?.result?.data[index][2]);
 
         const fotoItem:FotometroItem = {
-          time: res?.result?.data[index][0],
+          time: moment(res?.result?.data[index][0]).format('YYYY-MM-DD HH:mm'),
           battery: res?.result?.data[index][1],
           fail: res?.result?.data[index][2],
           mag: res?.result?.data[index][4],
@@ -184,7 +184,7 @@ export class FotometrosComponent implements OnInit,AfterViewInit {
         this.itemsGrafica.push(
           {
             "value":  res?.result?.data[index][4]>=10.5 ? res?.result?.data[index][4] : 0,
-            "name": res?.result?.data[index][0]
+            "name": moment(res?.result?.data[index][0]).format('YYYY-MM-DD HH:mm')
           }
         )
         this.fotometroSelected.push(fotoItem);
@@ -213,7 +213,7 @@ export class FotometrosComponent implements OnInit,AfterViewInit {
       for (let index = 0; index < res?.result?.data?.length; index++) {
 
         const fotoItem:FotometroItem = {
-          time: res?.result?.data[index][0],
+          time: moment(res?.result?.data[index][0]).format('YYYY-MM-DD HH:mm'),
           battery: res?.result?.data[index][1],
           fail: res?.result?.data[index][2],
           id: res?.result?.data[index][3],
@@ -228,7 +228,7 @@ export class FotometrosComponent implements OnInit,AfterViewInit {
         this.itemsGrafica.push(
           {
             "value": res?.result?.data[index][4]>=10.5 ? res?.result?.data[index][4] : 0,
-            "name": res?.result?.data[index][0]
+            "name": moment(res?.result?.data[index][0]).format('YYYY-MM-DD HH:mm')
           }
         )
         this.fotometroSelected.push(fotoItem);
@@ -268,9 +268,6 @@ export class FotometrosComponent implements OnInit,AfterViewInit {
         break;
         case 'membrio':
           this.disponible=false;
-          this.fotometroSelected=[];
-          this.displayedColumns=[];
-          this.itemsGrafica=[];
         break;
         case 'valenciaA':
           this.disponible=true;
