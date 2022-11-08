@@ -14,8 +14,8 @@
   <mat-card class="example-card" style="margin-top: 50px; margin-bottom: 50px;">
     <mat-card-title>Temperatura</mat-card-title>
     <mat-card-subtitle style="color:red" *ngIf="message"><mat-icon [inline]="true">thumb_down</mat-icon>{{message}}</mat-card-subtitle>
-    <grafica-barras [datosGrafica]="datosGraficaBarChart2" *ngIf="datosGraficaBarChart2 && seriesTempBadajoz && seriesTempBadajoz.length > 0"></grafica-barras>
-    <mat-spinner [diameter]="200" *ngIf="!datosGraficaBarChart2 || !seriesTempBadajoz || !(seriesTempBadajoz.length > 0)" ></mat-spinner><br>
+    <grafica-barras [datosGrafica]="datosGraficaBarChart2" *ngIf="datosGraficaBarChart2 && seriesTempBadajoz && seriesTempBadajoz?.length > 0"></grafica-barras>
+    <mat-spinner [diameter]="200" *ngIf="!datosGraficaBarChart2 || !seriesTempBadajoz || !(seriesTempBadajoz?.length > 0)" ></mat-spinner><br>
   </mat-card>
 
   <mat-card class="example-card" style="margin-top: 50px; margin-bottom: 50px;">
@@ -28,9 +28,24 @@
 <mat-card class="example-card" style="margin-top: 50px; margin-bottom: 50px;">
   <mat-card-title>Temperatura/Humedad en el interior</mat-card-title>
   <mat-card-subtitle style="color:red" *ngIf="message"><mat-icon [inline]="true">thumb_down</mat-icon>{{message}}</mat-card-subtitle>
-  <grafica-barras [datosGrafica]="datosGraficaBarChart" *ngIf="datosGraficaBarChart && seriesTempInBadajoz && seriesTempInBadajoz.length > 0"></grafica-barras>
-  <mat-spinner [diameter]="200" *ngIf="!datosGraficaBarChart || !seriesTempInBadajoz || !(seriesTempInBadajoz.length > 0)"></mat-spinner><br>
+  <grafica-barras [datosGrafica]="datosGraficaBarChart" *ngIf="datosGraficaBarChart && seriesTempInBadajoz && seriesTempInBadajoz?.length > 0"></grafica-barras>
+  <mat-spinner [diameter]="200" *ngIf="!datosGraficaBarChart || !seriesTempInBadajoz || !(seriesTempInBadajoz?.length > 0)"></mat-spinner><br>
 </mat-card>
+
+<mat-card class="example-card" style="margin-top: 50px; margin-bottom: 50px;">
+  <mat-card-title>Lluvia total</mat-card-title>
+  <mat-card-subtitle style="color:red" *ngIf="message"><mat-icon [inline]="true">thumb_down</mat-icon>{{message}}</mat-card-subtitle>
+  <grafica-barras [datosGrafica]="datosGraficaBarChart3" *ngIf="datosGraficaBarChart3 && seriesRainYearBadajoz && seriesRainYearBadajoz?.length > 0"></grafica-barras>
+  <mat-spinner [diameter]="200" *ngIf="!datosGraficaBarChart3 || !seriesRainYearBadajoz || !(seriesRainYearBadajoz?.length > 0)"></mat-spinner><br>
+</mat-card>
+
+<mat-card class="example-card" style="margin-top: 50px; margin-bottom: 50px;">
+  <mat-card-title>Lluvia actual</mat-card-title>
+  <mat-card-subtitle style="color:red" *ngIf="message"><mat-icon [inline]="true">thumb_down</mat-icon>{{message}}</mat-card-subtitle>
+  <grafica-barras [datosGrafica]="datosGraficaBarChart4" *ngIf="datosGraficaBarChart4 && seriesRainStormBadajoz && seriesRainStormBadajoz?.length > 0"></grafica-barras>
+  <mat-spinner [diameter]="200" *ngIf="!datosGraficaBarChart4 || !seriesRainStormBadajoz || !(seriesRainStormBadajoz?.length > 0)"></mat-spinner><br>
+</mat-card>
+
 <mat-card class="example-card" style="margin-top: 150px; visibility: hidden"></mat-card>
 
 </div>

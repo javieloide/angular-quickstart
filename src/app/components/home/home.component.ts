@@ -50,6 +50,11 @@ export class HomeComponent implements OnInit,OnDestroy {
   seriesHeatIndexBadajoz:any[]=[];
   seriesDewPointBadajoz: any[]=[];
   seriesWetBulbBadajoz: any[]=[];
+  seriesRainYearBadajoz: any[]=[];
+  seriesRainMonthBadajoz: any[]=[];
+  seriesRainStormBadajoz: any[]=[];
+  seriesRainRateBadajoz: any[]=[];
+  seriesRainDailyBadajoz: any[]=[];
 
   seriesTempInZarza: any[]=[];
   seriesHumInZarza: any[]=[];
@@ -59,6 +64,11 @@ export class HomeComponent implements OnInit,OnDestroy {
   seriesHeatIndexZarza:any[]=[];
   seriesDewPointZarza: any[]=[];
   seriesWetBulbZarza: any[]=[];
+  seriesRainYearZarza: any[]=[];
+  seriesRainMonthZarza: any[]=[];
+  seriesRainStormZarza: any[]=[];
+  seriesRainRateZarza: any[]=[];
+  seriesRainDailyZarza: any[]=[];
 
   seriesTempInCedillo: any[]=[];
   seriesHumInCedillo: any[]=[];
@@ -68,6 +78,11 @@ export class HomeComponent implements OnInit,OnDestroy {
   seriesHeatIndexCedillo:any[]=[];
   seriesDewPointCedillo: any[]=[];
   seriesWetBulbCedillo: any[]=[];
+  seriesRainYearCedillo: any[]=[];
+  seriesRainMonthCedillo: any[]=[];
+  seriesRainStormCedillo: any[]=[];
+  seriesRainRateCedillo: any[]=[];
+  seriesRainDailyCedillo: any[]=[];
 
   seriesTempInValenciaA: any[]=[];
   seriesHumInValenciaA: any[]=[];
@@ -77,12 +92,19 @@ export class HomeComponent implements OnInit,OnDestroy {
   seriesHeatIndexValenciaA:any[]=[];
   seriesDewPointValenciaA: any[]=[];
   seriesWetBulbValenciaA: any[]=[];
+  seriesRainYearValenciaA: any[]=[];
+  seriesRainMonthValenciaA: any[]=[];
+  seriesRainStormValenciaA: any[]=[];
+  seriesRainRateValenciaA: any[]=[];
+  seriesRainDailyValenciaA: any[]=[];
 
   datosGrafica:any[] = []
   datosGraficaBar:any[] = []
 
   datosGraficaBarChart:any[]=[];
   datosGraficaBarChart2:any[]=[];
+  datosGraficaBarChart3:any[]=[];
+  datosGraficaBarChart4:any[]=[];
   message: any;
 
   selectedValue:any = 'badajoz';
@@ -270,6 +292,56 @@ export class HomeComponent implements OnInit,OnDestroy {
     let seriesJsonLocalStorageWetBulb= JSON.parse(localStorage.getItem('seriesWetBulbBadajoz')!)
     this.seriesWetBulbBadajoz = seriesJsonLocalStorageWetBulb
 
+    let seriesJsonLocalStorageRainYear= JSON.parse(localStorage.getItem('seriesRainYearBadajoz')!)
+    this.seriesRainYearBadajoz = seriesJsonLocalStorageRainYear
+
+    let seriesJsonLocalStorageRainMonth= JSON.parse(localStorage.getItem('seriesRainMonthBadajoz')!)
+    this.seriesRainMonthBadajoz = seriesJsonLocalStorageRainMonth
+
+    let seriesJsonLocalStorageRainStorm= JSON.parse(localStorage.getItem('seriesRainStormBadajoz')!)
+    this.seriesRainStormBadajoz = seriesJsonLocalStorageRainStorm
+
+    let seriesJsonLocalStorageRainRate= JSON.parse(localStorage.getItem('seriesRainRateBadajoz')!)
+    this.seriesRainRateBadajoz = seriesJsonLocalStorageRainRate
+
+    let seriesJsonLocalStorageRainDaily= JSON.parse(localStorage.getItem('seriesRainDailyBadajoz')!)
+    this.seriesRainDailyBadajoz = seriesJsonLocalStorageRainDaily
+    this.datosGraficaBarChart4 =
+    [
+      {
+        "name": "",
+        "series": [
+          {
+            "name": "Diario("+this.seriesRainDailyBadajoz[this.seriesRainDailyBadajoz?.length - 1]?.value+" mm)" ,
+            "value": this.seriesRainDailyBadajoz[this.seriesRainDailyBadajoz?.length - 1]?.value
+          },
+          {
+            "name": "Tormenta("+this.seriesRainStormBadajoz[this.seriesRainStormBadajoz?.length - 1]?.value+" mm)"  ,
+            "value": this.seriesRainStormBadajoz[this.seriesRainStormBadajoz?.length - 1]?.value
+          },
+          {
+            "name": "Tasa("+this.seriesRainRateBadajoz[this.seriesRainRateBadajoz?.length - 1]?.value+" mm)" ,
+            "value": this.seriesRainRateBadajoz[this.seriesRainRateBadajoz?.length - 1]?.value
+          },
+        ]
+      },
+    ]
+    this.datosGraficaBarChart3 =
+    [
+      {
+        "name": "",
+        "series": [
+          {
+            "name": "Luvia anual("+this.seriesRainYearBadajoz[this.seriesRainYearBadajoz?.length - 1]?.value+" mm)"  ,
+            "value": this.seriesRainYearBadajoz[this.seriesRainYearBadajoz?.length - 1]?.value
+          },
+          {
+            "name": "Luvia mensual("+this.seriesRainMonthBadajoz[this.seriesRainMonthBadajoz?.length - 1]?.value+" mm)" ,
+            "value": this.seriesRainMonthBadajoz[this.seriesRainMonthBadajoz?.length - 1]?.value
+          },
+        ]
+      },
+    ]
     this.datosGraficaBarChart =
     [
       {
@@ -315,6 +387,7 @@ export class HomeComponent implements OnInit,OnDestroy {
         ]
       },
     ]
+
   }
 
   obtenerDatosToGraficaBarrasZarza(){
@@ -338,6 +411,56 @@ export class HomeComponent implements OnInit,OnDestroy {
     let seriesJsonLocalStorageWetBulb= JSON.parse(localStorage.getItem('seriesWetBulbZarza')!)
     this.seriesWetBulbZarza = seriesJsonLocalStorageWetBulb
 
+    let seriesJsonLocalStorageRainYear= JSON.parse(localStorage.getItem('seriesRainYearZarza')!)
+    this.seriesRainYearZarza = seriesJsonLocalStorageRainYear
+
+    let seriesJsonLocalStorageRainMonth= JSON.parse(localStorage.getItem('seriesRainMonthZarza')!)
+    this.seriesRainMonthZarza = seriesJsonLocalStorageRainMonth
+
+    let seriesJsonLocalStorageRainStorm= JSON.parse(localStorage.getItem('seriesRainStormZarza')!)
+    this.seriesRainStormZarza = seriesJsonLocalStorageRainStorm
+
+    let seriesJsonLocalStorageRainRate= JSON.parse(localStorage.getItem('seriesRainRateZarza')!)
+    this.seriesRainRateZarza = seriesJsonLocalStorageRainRate
+
+    let seriesJsonLocalStorageRainDaily= JSON.parse(localStorage.getItem('seriesRainDailyZarza')!)
+    this.seriesRainDailyZarza = seriesJsonLocalStorageRainDaily
+    this.datosGraficaBarChart4 =
+    [
+      {
+        "name": "",
+        "series": [
+          {
+            "name": "Diario("+this.seriesRainDailyZarza[this.seriesRainDailyZarza?.length - 1]?.value+" mm)" ,
+            "value": this.seriesRainDailyZarza[this.seriesRainDailyZarza?.length - 1]?.value
+          },
+          {
+            "name": "Tormenta("+this.seriesRainStormZarza[this.seriesRainStormZarza?.length - 1]?.value+" mm)"  ,
+            "value": this.seriesRainStormZarza[this.seriesRainStormZarza?.length - 1]?.value
+          },
+          {
+            "name": "Tasa("+this.seriesRainRateZarza[this.seriesRainRateZarza?.length - 1]?.value+" mm)" ,
+            "value": this.seriesRainRateZarza[this.seriesRainRateZarza?.length - 1]?.value
+          },
+        ]
+      },
+    ]
+    this.datosGraficaBarChart3 =
+    [
+      {
+        "name": "",
+        "series": [
+          {
+            "name": "Luvia anual("+this.seriesRainYearZarza[this.seriesRainYearZarza?.length - 1]?.value+" mm)" ,
+            "value": this.seriesRainYearZarza[this.seriesRainYearZarza?.length - 1]?.value
+          },
+          {
+            "name": "Luvia mensual("+this.seriesRainMonthZarza[this.seriesRainMonthZarza?.length - 1]?.value+" mm)",
+            "value": this.seriesRainMonthZarza[this.seriesRainMonthZarza?.length - 1]?.value
+          },
+        ]
+      },
+    ]
     this.datosGraficaBarChart =
     [
       {
@@ -417,6 +540,58 @@ export class HomeComponent implements OnInit,OnDestroy {
 
     let seriesJsonLocalStorageWetBulb= JSON.parse(localStorage.getItem('seriesWetBulbCedillo')!)
     this.seriesWetBulbCedillo = seriesJsonLocalStorageWetBulb
+
+    let seriesJsonLocalStorageRainYear= JSON.parse(localStorage.getItem('seriesRainYearCedillo')!)
+    this.seriesRainYearCedillo = seriesJsonLocalStorageRainYear
+
+    let seriesJsonLocalStorageRainMonth= JSON.parse(localStorage.getItem('seriesRainMonthCedillo')!)
+    this.seriesRainMonthCedillo = seriesJsonLocalStorageRainMonth
+
+    let seriesJsonLocalStorageRainStorm= JSON.parse(localStorage.getItem('seriesRainStormCedillo')!)
+    this.seriesRainStormCedillo = seriesJsonLocalStorageRainStorm
+
+    let seriesJsonLocalStorageRainRate= JSON.parse(localStorage.getItem('seriesRainRateCedillo')!)
+    this.seriesRainRateCedillo = seriesJsonLocalStorageRainRate
+
+    let seriesJsonLocalStorageRainDaily= JSON.parse(localStorage.getItem('seriesRainDailyCedillo')!)
+    this.seriesRainDailyCedillo = seriesJsonLocalStorageRainDaily
+
+    this.datosGraficaBarChart4 =
+    [
+      {
+        "name": "",
+        "series": [
+          {
+            "name": "Diario("+this.seriesRainDailyCedillo[this.seriesRainDailyCedillo?.length - 1]?.value+" mm)" ,
+            "value": this.seriesRainDailyCedillo[this.seriesRainDailyCedillo?.length - 1]?.value
+          },
+          {
+            "name": "Tormenta("+this.seriesRainStormCedillo[this.seriesRainStormCedillo?.length - 1]?.value+" mm)"  ,
+            "value": this.seriesRainStormCedillo[this.seriesRainStormCedillo?.length - 1]?.value
+          },
+          {
+            "name": "Tasa("+this.seriesRainRateCedillo[this.seriesRainRateCedillo?.length - 1]?.value+" mm)" ,
+            "value": this.seriesRainRateCedillo[this.seriesRainRateCedillo?.length - 1]?.value
+          },
+        ]
+      },
+    ]
+    this.datosGraficaBarChart3 =
+    [
+      {
+        "name": "",
+        "series": [
+          {
+            "name": "Luvia anual("+this.seriesRainYearCedillo[this.seriesRainYearCedillo?.length - 1]?.value+" mm)" ,
+            "value": this.seriesRainYearCedillo[this.seriesRainYearCedillo?.length - 1]?.value
+          },
+          {
+            "name": "Luvia mensual("+this.seriesRainMonthCedillo[this.seriesRainMonthCedillo?.length - 1]?.value+" mm)",
+            "value": this.seriesRainMonthCedillo[this.seriesRainMonthCedillo?.length - 1]?.value
+          },
+        ]
+      },
+    ]
 
     this.datosGraficaBarChart =
     [
@@ -559,6 +734,64 @@ export class HomeComponent implements OnInit,OnDestroy {
     localStorage.setItem('seriesBarBadajoz', JSON.stringify(a));
   }
 
+  guardarLocalStorageRainMonthBadajoz(serieVal:any){
+    var a = []
+    if(localStorage.getItem('seriesRainMonthBadajoz')){
+      a = JSON.parse(localStorage.getItem('seriesRainMonthBadajoz')!)
+    }
+    while(a.length >= 5){
+      a.shift()
+    }
+    a.push(serieVal);
+    localStorage.setItem('seriesRainMonthBadajoz', JSON.stringify(a));
+  }
+
+  guardarLocalStorageRainStormBadajoz(serieVal:any){
+    var a = []
+    if(localStorage.getItem('seriesRainStormBadajoz')){
+      a = JSON.parse(localStorage.getItem('seriesRainStormBadajoz')!)
+    }
+    while(a.length >= 5){
+      a.shift()
+    }
+    a.push(serieVal);
+    localStorage.setItem('seriesRainStormBadajoz', JSON.stringify(a));
+  }
+  guardarLocalStorageRainRateBadajoz(serieVal:any){
+    var a = []
+    if(localStorage.getItem('seriesRainRateBadajoz')){
+      a = JSON.parse(localStorage.getItem('seriesRainRateBadajoz')!)
+    }
+    while(a.length >= 5){
+      a.shift()
+    }
+    a.push(serieVal);
+    localStorage.setItem('seriesRainRateBadajoz', JSON.stringify(a));
+  }
+  guardarLocalStorageRainDailyBadajoz(serieVal:any){
+    var a = []
+    if(localStorage.getItem('seriesRainDailyBadajoz')){
+      a = JSON.parse(localStorage.getItem('seriesRainDailyBadajoz')!)
+    }
+    while(a.length >= 5){
+      a.shift()
+    }
+    a.push(serieVal);
+    localStorage.setItem('seriesRainDailyBadajoz', JSON.stringify(a));
+  }
+
+  guardarLocalStorageRainYearBadajoz(serieVal:any){
+    var a = []
+    if(localStorage.getItem('seriesRainYearBadajoz')){
+      a = JSON.parse(localStorage.getItem('seriesRainYearBadajoz')!)
+    }
+    while(a.length >= 5){
+      a.shift()
+    }
+    a.push(serieVal);
+    localStorage.setItem('seriesRainYearBadajoz', JSON.stringify(a));
+  }
+
   guardarLocalStorageTempInZarza(serieVal:any){
     var a = []
     if(localStorage.getItem('seriesTempInZarza')){
@@ -651,6 +884,65 @@ export class HomeComponent implements OnInit,OnDestroy {
     }
     a.push(serieVal);
     localStorage.setItem('seriesBarZarza', JSON.stringify(a));
+  }
+
+  guardarLocalStorageRainMonthZarza(serieVal:any){
+    var a = []
+    if(localStorage.getItem('seriesRainMonthZarza')){
+      a = JSON.parse(localStorage.getItem('seriesRainMonthZarza')!)
+    }
+    while(a.length >= 5){
+      a.shift()
+    }
+    a.push(serieVal);
+    localStorage.setItem('seriesRainMonthZarza', JSON.stringify(a));
+  }
+
+
+  guardarLocalStorageRainYearZarza(serieVal:any){
+    var a = []
+    if(localStorage.getItem('seriesRainYearZarza')){
+      a = JSON.parse(localStorage.getItem('seriesRainYearZarza')!)
+    }
+    while(a.length >= 5){
+      a.shift()
+    }
+    a.push(serieVal);
+    localStorage.setItem('seriesRainYearZarza', JSON.stringify(a));
+  }
+
+  guardarLocalStorageRainStormZarza(serieVal:any){
+    var a = []
+    if(localStorage.getItem('seriesRainStormZarza')){
+      a = JSON.parse(localStorage.getItem('seriesRainStormZarza')!)
+    }
+    while(a.length >= 5){
+      a.shift()
+    }
+    a.push(serieVal);
+    localStorage.setItem('seriesRainStormZarza', JSON.stringify(a));
+  }
+  guardarLocalStorageRainRateZarza(serieVal:any){
+    var a = []
+    if(localStorage.getItem('seriesRainRateZarza')){
+      a = JSON.parse(localStorage.getItem('seriesRainRateZarza')!)
+    }
+    while(a.length >= 5){
+      a.shift()
+    }
+    a.push(serieVal);
+    localStorage.setItem('seriesRainRateZarza', JSON.stringify(a));
+  }
+  guardarLocalStorageRainDailyZarza(serieVal:any){
+    var a = []
+    if(localStorage.getItem('seriesRainDailyZarza')){
+      a = JSON.parse(localStorage.getItem('seriesRainDailyZarza')!)
+    }
+    while(a.length >= 5){
+      a.shift()
+    }
+    a.push(serieVal);
+    localStorage.setItem('seriesRainDailyZarza', JSON.stringify(a));
   }
 
   guardarLocalStorageTempInValenciaA(serieVal:any){
@@ -747,6 +1039,65 @@ export class HomeComponent implements OnInit,OnDestroy {
     localStorage.setItem('seriesHumInValenciaA', JSON.stringify(a));
   }
 
+  guardarLocalStorageRainMonthValenciaA(serieVal:any){
+    var a = []
+    if(localStorage.getItem('seriesRainMonthValenciaA')){
+      a = JSON.parse(localStorage.getItem('seriesRainMonthValenciaA')!)
+    }
+    while(a.length >= 5){
+      a.shift()
+    }
+    a.push(serieVal);
+    localStorage.setItem('seriesRainMonthValenciaA', JSON.stringify(a));
+  }
+
+
+  guardarLocalStorageRainYearValenciaA(serieVal:any){
+    var a = []
+    if(localStorage.getItem('seriesRainYearValenciaA')){
+      a = JSON.parse(localStorage.getItem('seriesRainYearValenciaA')!)
+    }
+    while(a.length >= 5){
+      a.shift()
+    }
+    a.push(serieVal);
+    localStorage.setItem('seriesRainYearValenciaA', JSON.stringify(a));
+  }
+
+  guardarLocalStorageRainStormValenciaA(serieVal:any){
+    var a = []
+    if(localStorage.getItem('seriesRainStormValenciaA')){
+      a = JSON.parse(localStorage.getItem('seriesRainStormValenciaA')!)
+    }
+    while(a.length >= 5){
+      a.shift()
+    }
+    a.push(serieVal);
+    localStorage.setItem('seriesRainStormValenciaA', JSON.stringify(a));
+  }
+  guardarLocalStorageRainRateValenciaA(serieVal:any){
+    var a = []
+    if(localStorage.getItem('seriesRainRateValenciaA')){
+      a = JSON.parse(localStorage.getItem('seriesRainRateValenciaA')!)
+    }
+    while(a.length >= 5){
+      a.shift()
+    }
+    a.push(serieVal);
+    localStorage.setItem('seriesRainRateValenciaA', JSON.stringify(a));
+  }
+  guardarLocalStorageRainDailyValenciaA(serieVal:any){
+    var a = []
+    if(localStorage.getItem('seriesRainDailyValenciaA')){
+      a = JSON.parse(localStorage.getItem('seriesRainDailyValenciaA')!)
+    }
+    while(a.length >= 5){
+      a.shift()
+    }
+    a.push(serieVal);
+    localStorage.setItem('seriesRainDailyValenciaA', JSON.stringify(a));
+  }
+
   guardarLocalStorageTempInCedillo(serieVal:any){
     var a = []
     if(localStorage.getItem('seriesTempInCedillo')){
@@ -840,6 +1191,65 @@ export class HomeComponent implements OnInit,OnDestroy {
     localStorage.setItem('seriesBarCedillo', JSON.stringify(a));
   }
 
+  guardarLocalStorageRainMonthCedillo(serieVal:any){
+    var a = []
+    if(localStorage.getItem('seriesRainMonthCedillo')){
+      a = JSON.parse(localStorage.getItem('seriesRainMonthCedillo')!)
+    }
+    while(a.length >= 5){
+      a.shift()
+    }
+    a.push(serieVal);
+    localStorage.setItem('seriesRainMonthCedillo', JSON.stringify(a));
+  }
+
+
+  guardarLocalStorageRainYearCedillo(serieVal:any){
+    var a = []
+    if(localStorage.getItem('seriesRainYearVCedillo')){
+      a = JSON.parse(localStorage.getItem('seriesRainYearCedillo')!)
+    }
+    while(a.length >= 5){
+      a.shift()
+    }
+    a.push(serieVal);
+    localStorage.setItem('seriesRainYearCedillo', JSON.stringify(a));
+  }
+
+  guardarLocalStorageRainStormCedillo(serieVal:any){
+    var a = []
+    if(localStorage.getItem('seriesRainStormCedillo')){
+      a = JSON.parse(localStorage.getItem('seriesRainStormCedillo')!)
+    }
+    while(a.length >= 5){
+      a.shift()
+    }
+    a.push(serieVal);
+    localStorage.setItem('seriesRainStormCedillo', JSON.stringify(a));
+  }
+  guardarLocalStorageRainRateCedillo(serieVal:any){
+    var a = []
+    if(localStorage.getItem('seriesRainRateCedillo')){
+      a = JSON.parse(localStorage.getItem('seriesRainRateCedillo')!)
+    }
+    while(a.length >= 5){
+      a.shift()
+    }
+    a.push(serieVal);
+    localStorage.setItem('seriesRainRateCedillo', JSON.stringify(a));
+  }
+  guardarLocalStorageRainDailyCedillo(serieVal:any){
+    var a = []
+    if(localStorage.getItem('seriesRainDailyCedillo')){
+      a = JSON.parse(localStorage.getItem('seriesRainDailyCedillo')!)
+    }
+    while(a.length >= 5){
+      a.shift()
+    }
+    a.push(serieVal);
+    localStorage.setItem('seriesRainDailyCedillo', JSON.stringify(a));
+  }
+
   obtenerBadajozDatos() {
     console.log('obtenerBadajozDatos');
 
@@ -889,6 +1299,28 @@ export class HomeComponent implements OnInit,OnDestroy {
       this.guardarLocalStorageBarBadajoz({
         "name": date,
         "value": this.convertirPulgadasMercurioToHPa(this.estacionBadajoz.sensor2?.bar_absolute) ?? 0
+      })
+
+      this.guardarLocalStorageRainYearBadajoz({
+        "name": date,
+        "value":this.estacionBadajoz.sensor0.rainfall_year_mm
+      })
+
+      this.guardarLocalStorageRainMonthBadajoz({
+        "name": date,
+        "value":this.estacionBadajoz.sensor0.rainfall_monthly_mm
+      })
+      this.guardarLocalStorageRainStormBadajoz({
+        "name": date,
+        "value":this.estacionBadajoz.sensor0.rain_storm_mm
+      })
+      this.guardarLocalStorageRainRateBadajoz({
+        "name": date,
+        "value":this.estacionBadajoz.sensor0.rain_rate_hi_mm
+      })
+      this.guardarLocalStorageRainDailyBadajoz({
+        "name": date,
+        "value":this.estacionBadajoz.sensor0.rainfall_daily_mm
       })
 
       this.obtenerDatosGraficaLocalStorageBadajoz();
@@ -944,7 +1376,27 @@ export class HomeComponent implements OnInit,OnDestroy {
         "name": date,
         "value": this.convertirPulgadasMercurioToHPa(this.estacionZarzaLaMayor.sensor2?.bar_absolute) ?? 0
       })
+      this.guardarLocalStorageRainYearZarza({
+        "name": date,
+        "value":this.estacionZarzaLaMayor.sensor0.rainfall_year_mm
+      })
+      this.guardarLocalStorageRainMonthZarza({
+        "name": date,
+        "value":this.estacionZarzaLaMayor.sensor0.rainfall_monthly_mm
+      })
 
+      this.guardarLocalStorageRainStormZarza({
+        "name": date,
+        "value":this.estacionZarzaLaMayor.sensor0.rain_storm_mm
+      })
+      this.guardarLocalStorageRainRateZarza({
+        "name": date,
+        "value":this.estacionZarzaLaMayor.sensor0.rain_rate_hi_mm
+      })
+      this.guardarLocalStorageRainDailyZarza({
+        "name": date,
+        "value":this.estacionZarzaLaMayor.sensor0.rainfall_daily_mm
+      })
       this.obtenerDatosGraficaLocalStorageZarza();
       this.obtenerDatosToGraficaBarrasZarza()
     })
@@ -1004,6 +1456,28 @@ export class HomeComponent implements OnInit,OnDestroy {
         "name": date,
         "value": this.convertirPulgadasMercurioToHPa(this.estacionValenciaA.sensor2?.bar_absolute) ?? 0
       })
+      this.guardarLocalStorageRainYearValenciaA({
+        "name": date,
+        "value":this.estacionValenciaA.sensor0.rainfall_year_mm
+      })
+      this.guardarLocalStorageRainMonthValenciaA({
+        "name": date,
+        "value":this.estacionValenciaA.sensor0.rainfall_monthly_mm
+      })
+
+
+      this.guardarLocalStorageRainStormValenciaA({
+        "name": date,
+        "value":this.estacionValenciaA.sensor0.rain_storm_mm
+      })
+      this.guardarLocalStorageRainRateValenciaA({
+        "name": date,
+        "value":this.estacionValenciaA.sensor0.rain_rate_hi_mm
+      })
+      this.guardarLocalStorageRainDailyValenciaA({
+        "name": date,
+        "value":this.estacionValenciaA.sensor0.rainfall_daily_mm
+      })
 
       this.obtenerDatosGraficaLocalStorageValenciaA();
       this.obtenerDatosToGraficaBarrasValenciaA();
@@ -1060,7 +1534,27 @@ export class HomeComponent implements OnInit,OnDestroy {
         "name": date,
         "value": this.convertirPulgadasMercurioToHPa(this.estacionCedillo.sensor2?.bar_absolute) ?? 0
       })
+      this.guardarLocalStorageRainYearCedillo({
+        "name": date,
+        "value":this.estacionCedillo.sensor0.rainfall_year_mm
+      })
+      this.guardarLocalStorageRainMonthCedillo({
+        "name": date,
+        "value":this.estacionCedillo.sensor0.rainfall_monthly_mm
+      })
 
+      this.guardarLocalStorageRainStormCedillo({
+        "name": date,
+        "value":this.estacionCedillo.sensor0.rain_storm_mm
+      })
+      this.guardarLocalStorageRainRateCedillo({
+        "name": date,
+        "value":this.estacionCedillo.sensor0.rain_rate_hi_mm
+      })
+      this.guardarLocalStorageRainDailyCedillo({
+        "name": date,
+        "value":this.estacionCedillo.sensor0.rainfall_daily_mm
+      })
       this.obtenerDatosGraficaLocalStorageCedillo();
       this.obtenerDatosToGraficaBarrasCedillo();
     })
