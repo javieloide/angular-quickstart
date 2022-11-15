@@ -4,6 +4,7 @@ import { FotometrosComponent } from './components/fotometros/fotometros.componen
 import { HomeComponent } from './components/home/home.component';
 import { PrediccionesComponent } from './components/predicciones/predicciones.component';
 
+// Estan son las diferentes rutas de la aplicacion
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'estaciones-meteorologicas', component: HomeComponent},
